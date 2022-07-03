@@ -22,9 +22,7 @@ return [
 		'pattern' => 'logout',
 		'auth'    => false,
 		'action'  => function () {
-			if ($user = App::instance()->user()) {
-				$user->logout();
-			}
+			App::instance()->user()?->logout();
 			Panel::go('login');
 		},
 	],
