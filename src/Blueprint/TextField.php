@@ -52,7 +52,7 @@ class TextField extends InputField
 
 		$this->after     = new Translated($after);
 		$this->before    = new Translated($before);
-		$this->converter = new Enumeration($converter, ['lower', 'slug', 'ucfirst', 'upper']);
+		$this->converter = new Enumeration($converter, [null, 'lower', 'slug', 'ucfirst', 'upper']);
 		$this->counter   = $counter;
 		$this->default   = $default;
 		$this->icon      = $icon;

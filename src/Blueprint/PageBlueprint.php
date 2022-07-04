@@ -14,7 +14,8 @@ class PageBlueprint extends Blueprint
 		/** Parent */
 		ModelWithContent $model,
 		string $id,
-		string|array|null $title,
+		string $type,
+		string|array|null $title = null,
 		array $tabs = [],
 
 		/** Custom **/
@@ -26,7 +27,8 @@ class PageBlueprint extends Blueprint
 			model: $model,
 			id: $id,
 			title: $title,
-			tabs: $tabs
+			tabs: $tabs,
+			type: $type
 		);
 
 		$this->num     = $num;

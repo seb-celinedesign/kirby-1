@@ -16,9 +16,13 @@ class InfoField extends Field
 		string|array|null $text = null,
 		string|null $theme = null,
 	) {
-		parent::__construct($section, $id, $type);
+		parent::__construct(
+			section: $section,
+			id: $id,
+			type: $type
+		);
 
-		$this->label = new Label($label, $id);
+		$this->label = new Label($this, $label);
 		$this->text  = new Text($text, $this->model);
 		$this->theme = new Theme($theme);
 	}

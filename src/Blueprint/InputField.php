@@ -29,10 +29,10 @@ class InputField extends Field
 			type: $type
 		);
 
-		$this->autofocus = $autofocus;
-		$this->label = new Label($label, $id);
-		$this->help = new Text($help, $this->model);
-		$this->required = $required;
+		$this->autofocus  = $autofocus;
+		$this->label      = new Label($this, $label);
+		$this->help       = new Text($help, $this->model);
+		$this->required   = $required;
 		$this->spellcheck = $spellcheck;
 	}
 }

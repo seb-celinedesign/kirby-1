@@ -4,23 +4,55 @@ namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
 
-class Blueprint
+/**
+ * The main blueprint class
+ *
+ * @package   Kirby Blueprint
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
+ */
+class Blueprint extends Node
 {
+	/**
+	 * @var \Kirby\Cms\ModelWithContent
+	 */
 	public ModelWithContent $model;
-	public string $id;
+
+	/**
+	 * @var \Kirby\Blueprint\Tabs
+	 */
 	public Tabs $tabs;
+
+	/**
+	 * @var \Kirby\Blueprint\Label
+	 */
 	public Label $title;
 
+	/**
+	 * @var string
+	 */
+	public string $type;
+
+	/**
+	 * @param \Kirby\Cms\ModelWithContent $model
+	 * @param string $id
+	 * @param string|array|null|null $title
+	 * @param array $tabs
+	 */
 	public function __construct(
 		ModelWithContent $model,
 		string $id,
-		string|array|null $title,
+		string $type,
+		string|array|null $title = null,
 		array $tabs = []
 	) {
-		$this->id    = $id;
-		$this->model = $model;
-		$this->title = new Label($title, $id);
-		$this->tabs  = new Tabs($this, $tabs);
-	}
+		parent::__construct($id);
 
+		$this->model = $model;
+		$this->title = new Label($this, $title);
+		$this->tabs  = new Tabs($this, $tabs);
+		$this->type  = $type;
+	}
 }

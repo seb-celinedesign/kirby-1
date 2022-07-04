@@ -22,7 +22,7 @@ class InfoSection extends Section
 			type: $type
 		);
 
-		$this->label = new Label($label, $id);
+		$this->label = new Label($this, $label);
 		$this->text  = new Text($text, $this->model);
 		$this->theme = new Theme($theme);
 	}

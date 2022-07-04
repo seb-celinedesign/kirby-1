@@ -2,11 +2,23 @@
 
 namespace Kirby\Blueprint;
 
+/**
+ * Options
+ *
+ * @package   Kirby Blueprint
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
+ */
 class Options extends Collection
 {
 	const TYPE = Option::class;
 
-	public function __construct(array|string $options)
+	/**
+	 * @param array $options
+	 */
+	public function __construct(array $options = [])
 	{
 		foreach ($options as $key => $option) {
 
