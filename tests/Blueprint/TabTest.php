@@ -27,14 +27,29 @@ class TabTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 */
-	public function testConstructWithTitle()
+	public function testIcon()
 	{
-		$blueprint = new Blueprint(
-			model: $this->model(),
+		$tab = new Tab(
+			blueprint: $this->blueprint(),
 			id: 'test',
-			title: 'My blueprint'
+			icon: 'edit',
 		);
 
-		$this->assertSame('My blueprint', $blueprint->title->value);
+		$this->assertSame('edit', $tab->icon);
 	}
+
+	/**
+	 * @covers ::__construct
+	 */
+	public function testLabel()
+	{
+		$tab = new Tab(
+			blueprint: $this->blueprint(),
+			id: 'test',
+			label: 'My Tab',
+		);
+
+		$this->assertSame('My Tab', $tab->label->value);
+	}
+
 }
