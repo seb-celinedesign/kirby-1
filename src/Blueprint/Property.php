@@ -13,18 +13,18 @@ namespace Kirby\Blueprint;
  */
 abstract class Property
 {
-    public function __toString(): string
-    {
-        return $this->toString();
-    }
+	public function __toString(): string
+	{
+		return $this->toString();
+	}
 
-    public function toString(): string
-    {
-        return (string)$this->value() ?? '';
-    }
+	public function toString(): string
+	{
+		return (string)$this->value() ?? '';
+	}
 
-    public function value()
-    {
-        return $this->value;
-    }
+	public function value()
+	{
+		return $this->value;
+	}
 }

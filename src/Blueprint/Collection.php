@@ -7,15 +7,15 @@ use TypeError;
 
 class Collection extends BaseCollection
 {
-    const TYPE = 'stdClass';
+	const TYPE = 'stdClass';
 
-    public function __set(string $key, $value)
-    {
-        if (is_a($value, static::TYPE) === false) {
-            throw new TypeError('Each value in the collection must be an instance of ' . static::TYPE);
-        }
+	public function __set(string $key, $value)
+	{
+		if (is_a($value, static::TYPE) === false) {
+			throw new TypeError('Each value in the collection must be an instance of ' . static::TYPE);
+		}
 
-        parent::__set($key, $value);
-    }
+		parent::__set($key, $value);
+	}
 
 }
