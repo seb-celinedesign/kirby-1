@@ -7,7 +7,7 @@ namespace Kirby\Blueprint;
  */
 class WidthTest extends EnumerationTestCase
 {
-	const CLASSNAME = Width::class;
+	public const CLASSNAME = Width::class;
 
 	protected $allowed = [
 		'1/1',

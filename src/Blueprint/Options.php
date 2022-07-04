@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Options extends Collection
 {
-	const TYPE = Option::class;
+	public const TYPE = Option::class;
 
 	/**
 	 * @param array $options
@@ -21,7 +21,6 @@ class Options extends Collection
 	public function __construct(array $options = [])
 	{
 		foreach ($options as $key => $option) {
-
 			if (is_string($option) === true) {
 				if (is_string($key) === true) {
 					$option = ['value' => $key, 'text' => $option];

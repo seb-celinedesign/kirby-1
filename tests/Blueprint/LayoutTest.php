@@ -7,7 +7,7 @@ namespace Kirby\Blueprint;
  */
 class LayoutTest extends EnumerationTestCase
 {
-	const CLASSNAME = Layout::class;
+	public const CLASSNAME = Layout::class;
 
 	protected $allowed = [
 		'cards',

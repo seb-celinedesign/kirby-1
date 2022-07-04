@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Sections extends Collection
 {
-	const TYPE = Section::class;
+	public const TYPE = Section::class;
 
 	/**
 	 * @param \Kirby\Blueprint\Column $column

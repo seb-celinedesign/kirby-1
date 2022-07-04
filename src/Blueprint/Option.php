@@ -19,12 +19,12 @@ class Option
 	public Translated $text;
 
 	/**
-	 * @var string|integer|float|null
+	 * @var string|int|float|null
 	 */
 	public string|int|float|null $value;
 
 	/**
-	 * @param string|integer|float|null|null $value
+	 * @param string|int|float|null|null $value
 	 * @param string|array|null|null $text
 	 */
 	public function __construct(string|int|float|null $value = null, string|array|null $text = null)

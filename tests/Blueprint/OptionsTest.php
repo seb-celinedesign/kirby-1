@@ -54,5 +54,4 @@ class OptionsTest extends TestCase
 		$this->assertSame('b', $options->last()->value);
 		$this->assertSame('Option B', $options->last()->text->value);
 	}
-
 }

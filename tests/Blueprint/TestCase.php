@@ -28,7 +28,8 @@ class TestCase extends BaseTestCase
 					'id'    => 'test',
 					'type'  => 'test'
 				],
-			$props)
+				$props
+			)
 		);
 	}
 
@@ -40,7 +41,8 @@ class TestCase extends BaseTestCase
 					'tab' => $this->tab(),
 					'id'  => 'test'
 				],
-			$props)
+				$props
+			)
 		);
 	}
 
@@ -58,7 +60,8 @@ class TestCase extends BaseTestCase
 					'id'     => 'test',
 					'type'   => 'fields'
 				],
-			$props)
+				$props
+			)
 		);
 	}
 
@@ -75,8 +78,8 @@ class TestCase extends BaseTestCase
 					'blueprint' => $this->blueprint(),
 					'id'        => 'test'
 				],
-			$props)
+				$props
+			)
 		);
 	}
-
 }

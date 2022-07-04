@@ -11,8 +11,7 @@ class FieldsSection extends Section
 		public string $id,
 		string $type,
 		array $fields = [],
-	)
-	{
+	) {
 		parent::__construct(
 			column: $column,
 			id: $id,

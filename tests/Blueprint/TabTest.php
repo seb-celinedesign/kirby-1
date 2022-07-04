@@ -51,5 +51,4 @@ class TabTest extends TestCase
 
 		$this->assertSame('My Tab', $tab->label->value);
 	}
-
 }

@@ -19,12 +19,12 @@ class Image
 	public string $back;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	public bool $cover;
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	public bool $disabled;
 

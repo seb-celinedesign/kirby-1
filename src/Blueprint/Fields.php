@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Fields extends Collection
 {
-	const TYPE = Field::class;
+	public const TYPE = Field::class;
 
 	/**
 	 * @param \Kirby\Blueprint\Section $section

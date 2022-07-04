@@ -7,7 +7,6 @@ namespace Kirby\Blueprint;
  */
 class AutoloadTest extends TestCase
 {
-
 	public function testBlueprint()
 	{
 		$blueprint = Autoload::blueprint([
@@ -51,5 +50,4 @@ class AutoloadTest extends TestCase
 
 		$this->assertInstanceOf(InfoSection::class, $section);
 	}
-
 }

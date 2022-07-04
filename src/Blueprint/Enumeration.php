@@ -15,7 +15,6 @@ use Kirby\Exception\InvalidArgumentException;
  */
 class Enumeration extends Property
 {
-
 	/**
 	 * @var array
 	 */

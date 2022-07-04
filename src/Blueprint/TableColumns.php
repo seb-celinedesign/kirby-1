@@ -4,5 +4,4 @@ namespace Kirby\Blueprint;
 
 class TableColumns
 {
-
 }

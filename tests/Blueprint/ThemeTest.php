@@ -7,7 +7,7 @@ namespace Kirby\Blueprint;
  */
 class ThemeTest extends EnumerationTestCase
 {
-	const CLASSNAME = Theme::class;
+	public const CLASSNAME = Theme::class;
 
 	protected $allowed = [
 		'info',

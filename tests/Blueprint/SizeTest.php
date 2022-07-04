@@ -7,7 +7,7 @@ namespace Kirby\Blueprint;
  */
 class SizeTest extends EnumerationTestCase
 {
-	const CLASSNAME = Size::class;
+	public const CLASSNAME = Size::class;
 
 	protected $allowed = [
 		'auto',

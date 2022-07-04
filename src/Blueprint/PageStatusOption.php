@@ -16,12 +16,11 @@ class PageStatusOption
 		string $id,
 		string|array|bool|null $option = null
 	) {
-
 		if (in_array($id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new ValueError('The status must be draft, unlisted or listed');
 		}
 
-		$option = match($option) {
+		$option = match ($option) {
 			// disabled
 			false => [
 				'disabled' => true
@@ -42,5 +41,4 @@ class PageStatusOption
 		$this->label       = new Translated($option['label'] ?? $id);
 		$this->description = new Translated($option['description'] ?? null);
 	}
-
 }

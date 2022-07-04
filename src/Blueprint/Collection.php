@@ -19,7 +19,7 @@ class Collection extends BaseCollection
 	/**
 	 * The expected object type
 	 */
-	const TYPE = 'stdClass';
+	public const TYPE = 'stdClass';
 
 	/**
 	 * @param string $key
@@ -34,5 +34,4 @@ class Collection extends BaseCollection
 
 		parent::__set($key, $value);
 	}
-
 }

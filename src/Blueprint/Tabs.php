@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Tabs extends Collection
 {
-	const TYPE = Tab::class;
+	public const TYPE = Tab::class;
 
 	/**
 	 * @param \Kirby\Blueprint\Blueprint $blueprint

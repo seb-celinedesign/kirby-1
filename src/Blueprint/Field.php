@@ -15,7 +15,6 @@ use Kirby\Cms\ModelWithContent;
  */
 class Field extends Node
 {
-
 	/**
 	 * @var \Kirby\Cms\ModelWithContent
 	 */

@@ -15,8 +15,8 @@ class CollectionTest extends TestCase
 	public function testConstruct()
 	{
 		$collection = new Collection([
-			$a = new stdClass,
-			$b = new stdClass,
+			$a = new stdClass(),
+			$b = new stdClass(),
 		]);
 
 		$this->assertCount(2, $collection);

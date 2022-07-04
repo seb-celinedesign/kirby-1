@@ -18,7 +18,7 @@ class PageBlueprint extends Blueprint
 		string|array|null $title = null,
 		array $tabs = [],
 
-		/** Custom **/
+		/** Custom */
 		string|int|null $num = null,
 		array $options = [],
 		array $status = []

@@ -32,8 +32,7 @@ class ModelsSection extends Section
 		public bool $sortable = true,
 		public string|null $sortBy = null,
 		string|array|null $text = null
-	)
-	{
+	) {
 		parent::__construct($tab, $id, $label);
 
 		$this->columns = new TableColumns($columns);

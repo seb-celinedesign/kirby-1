@@ -4,7 +4,7 @@ namespace Kirby\Blueprint;
 
 class EnumerationTestCase extends TestCase
 {
-	const CLASSNAME = Enumeration::class;
+	public const CLASSNAME = Enumeration::class;
 
 	protected $default = null;
 	protected $allowed = [];

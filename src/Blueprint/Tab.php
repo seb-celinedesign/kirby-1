@@ -13,7 +13,6 @@ namespace Kirby\Blueprint;
  */
 class Tab extends Node
 {
-
 	/**
 	 * @var \Kirby\Blueprint\Blueprint
 	 */
@@ -56,5 +55,4 @@ class Tab extends Node
 		$this->id        = $id;
 		$this->label     = new Label($this, $label);
 	}
-
 }
