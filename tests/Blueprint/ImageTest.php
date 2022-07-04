@@ -7,39 +7,38 @@ namespace Kirby\Blueprint;
  */
 class ImageTest extends TestCase
 {
-    /**
-     * @covers ::__construct
-     */
-    public function testConstruct()
-    {
-        $image = new Image;
+	/**
+	 * @covers ::__construct
+	 */
+	public function testConstruct()
+	{
+		$image = new Image();
 
-        $this->assertSame('black', $image->back);
-        $this->assertFalse($image->cover);
-        $this->assertFalse($image->disabled);
-        $this->assertNull($image->query);
-        $this->assertSame('1/1', $image->ratio);
-    }
+		$this->assertSame('black', $image->back);
+		$this->assertFalse($image->cover);
+		$this->assertFalse($image->disabled);
+		$this->assertNull($image->query);
+		$this->assertSame('1/1', $image->ratio);
+	}
 
-    /**
-     * @covers ::__construct
-     */
-    public function testConstructWithBool()
-    {
-        $image = new Image(false);
-        $this->assertTrue($image->disabled);
+	/**
+	 * @covers ::__construct
+	 */
+	public function testConstructWithBool()
+	{
+		$image = new Image(false);
+		$this->assertTrue($image->disabled);
 
-        $image = new Image(true);
-        $this->assertFalse($image->disabled);
-    }
+		$image = new Image(true);
+		$this->assertFalse($image->disabled);
+	}
 
-    /**
-     * @covers ::__construct
-     */
-    public function testConstructWithString()
-    {
-        $image = new Image('page.cover');
-        $this->assertSame('page.cover', $image->query);
-    }
-
+	/**
+	 * @covers ::__construct
+	 */
+	public function testConstructWithString()
+	{
+		$image = new Image('page.cover');
+		$this->assertSame('page.cover', $image->query);
+	}
 }
