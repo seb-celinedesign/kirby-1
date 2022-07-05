@@ -6,13 +6,37 @@ use Kirby\Cms\ModelWithContent;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\NotFoundException;
 
+/**
+ * Related model option
+ *
+ * @package   Kirby Blueprint
+ * @author    Bastian Allgeier <bastian@getkirby.com>
+ * @link      https://getkirby.com
+ * @copyright Bastian Allgeier
+ * @license   https://opensource.org/licenses/MIT
+ */
 class Related
 {
+	/**
+	 * @var string|null
+	 */
 	public string|null $query;
+
+	/**
+	 * @var \Kirby\Cms\ModelWithContent
+	 */
 	public ModelWithContent $model;
+
+	/**
+	 * @var \Kirby\Cms\ModelWithContent
+	 */
 	public ModelWithContent $related;
 
-	public function __construct(ModelWithContent $model, ?string $query = null)
+	/**
+	 * @param \Kirby\Cms\ModelWithContent $model
+	 * @param string|null $query
+	 */
+	public function __construct(ModelWithContent $model, string|null $query = null)
 	{
 		$this->model = $model;
 		$this->query = $query;
@@ -22,14 +46,16 @@ class Related
 			return;
 		}
 
-		$this->related = $this->model->query($query);
+		$related = $this->model->query($query);
 
-		if (empty($this->related) === true) {
-			throw new NotFoundException('The parent for the query "' . $this->query . '" cannot be found');
+		if (empty($related) === true) {
+			throw new NotFoundException('The result for the query "' . $this->query . '" is empty');
 		}
 
-		if (is_a($this->related, 'Kirby\Cms\ModelWithContent') === false) {
-			throw new InvalidArgumentException('The parent is invalid. You must choose the site, a page, a file or user as parent.');
+		if (is_a($related, ModelWithContent::class) === false) {
+			throw new InvalidArgumentException('The result for the query "' . $this->query . '" is invalid. You must choose the site, a page, a file or a user.');
 		}
+
+		$this->related = $related;
 	}
 }

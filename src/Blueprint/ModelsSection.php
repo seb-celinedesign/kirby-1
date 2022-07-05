@@ -5,9 +5,9 @@ namespace Kirby\Blueprint;
 class ModelsSection extends Section
 {
 	public TableColumns $columns;
-	public Translated $empty;
-	public Translated $help;
-	public Translated $label;
+	public Text $empty;
+	public Help $help;
+	public Label $label;
 	public Layout $layout;
 	public Related $parent;
 
@@ -36,14 +36,14 @@ class ModelsSection extends Section
 		parent::__construct($tab, $id, $label);
 
 		$this->columns = new TableColumns($columns);
-		$this->empty   = new Translated($empty);
-		$this->help    = new Translated($help);
+		$this->empty   = new Text($this->model, $empty);
+		$this->help    = new Help($this, $help);
 		$this->image   = new Image($image);
-		$this->info    = new Translated($info);
-		$this->label   = new Translated($label);
+		$this->info    = new Text($this->model, $info);
+		$this->label   = new Label($this, $label);
 		$this->layout  = new Layout($layout);
 		$this->parent  = new Related($this->model, $parent);
 		$this->size    = new Size($size);
-		$this->text    = new Translated($text);
+		$this->text    = new Text($this->model, $text);
 	}
 }
