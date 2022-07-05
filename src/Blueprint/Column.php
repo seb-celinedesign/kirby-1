@@ -40,7 +40,10 @@ class Column extends Node
 		string|null $width = null,
 		array $sections = []
 	) {
-		parent::__construct($id);
+		parent::__construct(
+			id: $id,
+			model: $tab->model
+		);
 
 		$this->tab      = $tab;
 		$this->sections = new Sections($this, $sections);

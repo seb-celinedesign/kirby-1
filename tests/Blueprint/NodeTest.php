@@ -12,7 +12,12 @@ class NodeTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$node = new Node('test');
+		$node = new Node(
+			id: 'test',
+			model: $model = $this->model()
+		);
+
 		$this->assertSame('test', $node->id);
+		$this->assertSame($model, $node->model);
 	}
 }

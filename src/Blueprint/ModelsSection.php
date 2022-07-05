@@ -6,7 +6,7 @@ class ModelsSection extends Section
 {
 	public TableColumns $columns;
 	public Text $empty;
-	public Help $help;
+	public Kirbytext $help;
 	public Label $label;
 	public Layout $layout;
 	public Related $parent;
@@ -37,7 +37,7 @@ class ModelsSection extends Section
 
 		$this->columns = new TableColumns($columns);
 		$this->empty   = new Text($this->model, $empty);
-		$this->help    = new Help($this, $help);
+		$this->help    = new Kirbytext($this->model, $help);
 		$this->image   = new Image($image);
 		$this->info    = new Text($this->model, $info);
 		$this->label   = new Label($this, $label);

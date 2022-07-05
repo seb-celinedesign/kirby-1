@@ -2,6 +2,7 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
 use Kirby\Toolkit\Str;
 
 /**
@@ -13,18 +14,19 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Label extends Translated
+class Label extends Text
 {
 	/**
 	 * @param \Kirby\Blueprint\Node $node
-	 * @param string|array|null|null $translations
+	 * @param string|array|null $value
 	 */
 	public function __construct(
 		Node $node,
-		string|array|null $translations = null,
+		string|array|null $value = null
 	) {
 		parent::__construct(
-			translations: $translations,
+			model: $node->model,
+			value: $value,
 			default: Str::ucfirst($node->id)
 		);
 	}

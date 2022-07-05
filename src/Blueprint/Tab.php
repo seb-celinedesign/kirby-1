@@ -47,7 +47,10 @@ class Tab extends Node
 		string|null $icon = null,
 		array $columns = []
 	) {
-		parent::__construct($id);
+		parent::__construct(
+			id: $id,
+			model: $blueprint->model,
+		);
 
 		$this->blueprint = $blueprint;
 		$this->columns   = new Columns($this, $columns);

@@ -14,9 +14,9 @@ namespace Kirby\Blueprint;
 class InfoField extends Field
 {
 	/**
-	 * @var \Kirby\Blueprint\Help
+	 * @var \Kirby\Blueprint\Kirbytext
 	 */
-	public Help $help;
+	public Kirbytext $help;
 
 	/**
 	 * @var \Kirby\Blueprint\Label
@@ -24,9 +24,9 @@ class InfoField extends Field
 	public Label $label;
 
 	/**
-	 * @var \Kirby\Blueprint\Text
+	 * @var \Kirby\Blueprint\Kirbytext
 	 */
-	public Text $text;
+	public Kirbytext $text;
 
 	/**
 	 * @var \Kirby\Blueprint\Theme
@@ -57,15 +57,9 @@ class InfoField extends Field
 			type: $type
 		);
 
-		$this->help  = new Help($this, $help);
+		$this->help  = new Kirbytext($this->model, $help);
 		$this->label = new Label($this, $label);
+		$this->text  = new Kirbytext($this->model, $text);
 		$this->theme = new Theme($theme);
-
-		// info field text
-		$this->text = new Text(
-			model: $this->model,
-			value: $text,
-			kirbytext: true
-		);
 	}
 }

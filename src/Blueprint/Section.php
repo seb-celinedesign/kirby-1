@@ -21,11 +21,6 @@ class Section extends Node
 	public Column $column;
 
 	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
-	public ModelWithContent $model;
-
-	/**
 	 * @var string
 	 */
 	public string $type;
@@ -40,10 +35,12 @@ class Section extends Node
 		string $id,
 		string $type,
 	) {
-		parent::__construct($id);
+		parent::__construct(
+			id: $id,
+			model: $column->model
+		);
 
 		$this->column = $column;
-		$this->model  = $this->column->tab->blueprint->model;
 		$this->type   = $type;
 	}
 }

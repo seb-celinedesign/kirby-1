@@ -7,7 +7,7 @@ class InputField extends Field
 	public bool $autofocus;
 	public bool $disabled;
 	public Label $label;
-	public Help $help;
+	public Kirbytext $help;
 	public bool $required;
 	public bool $spellcheck;
 
@@ -31,7 +31,7 @@ class InputField extends Field
 
 		$this->autofocus  = $autofocus;
 		$this->label      = new Label($this, $label);
-		$this->help       = new Help($this, $help);
+		$this->help       = new Kirbytext($this->model, $help);
 		$this->required   = $required;
 		$this->spellcheck = $spellcheck;
 	}

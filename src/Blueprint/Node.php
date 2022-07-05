@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Base element for all blueprint features
  *
@@ -19,10 +21,16 @@ class Node
 	public string $id;
 
 	/**
+	 * @var \Kirby\Cms\ModelWithContent
+	 */
+	public ModelWithContent $model;
+
+	/**
 	 * @param string $id
 	 */
-	public function __construct(string $id)
+	public function __construct(string $id, ModelWithContent $model)
 	{
-		$this->id = $id;
+		$this->id    = $id;
+		$this->model = $model;
 	}
 }

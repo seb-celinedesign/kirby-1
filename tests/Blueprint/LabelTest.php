@@ -12,7 +12,7 @@ class LabelTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$node  = new Node('test');
+		$node  = new Node(id: 'test', model: $this->model());
 		$label = new Label($node);
 
 		$this->assertSame('Test', $label->value);
@@ -21,11 +21,22 @@ class LabelTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 */
-	public function testConstructWithLabel()
+	public function testConstructWithString()
 	{
-		$node  = new Node('test');
+		$node  = new Node(id: 'test', model: $this->model());
 		$label = new Label($node, 'My Label');
 
 		$this->assertSame('My Label', $label->value);
+	}
+
+	/**
+	 * @covers ::__construct
+	 */
+	public function testConstructWithQuery()
+	{
+		$node  = new Node(id: 'test', model: $this->model());
+		$label = new Label($node, '{{ page.slug }}');
+
+		$this->assertSame('test', $label->value);
 	}
 }

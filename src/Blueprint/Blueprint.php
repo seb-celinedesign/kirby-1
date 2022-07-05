@@ -16,11 +16,6 @@ use Kirby\Cms\ModelWithContent;
 class Blueprint extends Node
 {
 	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
-	public ModelWithContent $model;
-
-	/**
 	 * @var \Kirby\Blueprint\Tabs
 	 */
 	public Tabs $tabs;
@@ -48,9 +43,11 @@ class Blueprint extends Node
 		string|array|null $title = null,
 		array $tabs = []
 	) {
-		parent::__construct($id);
+		parent::__construct(
+			id: $id,
+			model: $model
+		);
 
-		$this->model = $model;
 		$this->title = new Label($this, $title);
 		$this->tabs  = new Tabs($this, $tabs);
 		$this->type  = $type;

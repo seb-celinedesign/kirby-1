@@ -4,8 +4,8 @@ namespace Kirby\Blueprint;
 
 class TextField extends InputField
 {
-	public Translated $after;
-	public Translated $before;
+	public Text $after;
+	public Text $before;
 	public string|null $converter;
 	public bool $counter;
 	public string|null $default;
@@ -50,8 +50,8 @@ class TextField extends InputField
 			spellcheck: $spellcheck
 		);
 
-		$this->after     = new Translated($after);
-		$this->before    = new Translated($before);
+		$this->after     = new Text($this->model, $after);
+		$this->before    = new Text($this->model, $before);
 		$this->converter = new Enumeration($converter, [null, 'lower', 'slug', 'ucfirst', 'upper']);
 		$this->counter   = $counter;
 		$this->default   = $default;

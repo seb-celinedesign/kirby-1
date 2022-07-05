@@ -16,11 +16,6 @@ use Kirby\Cms\ModelWithContent;
 class Field extends Node
 {
 	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
-	public ModelWithContent $model;
-
-	/**
 	 * @var \Kirby\Blueprint\Section
 	 */
 	public Section $section;
@@ -40,9 +35,11 @@ class Field extends Node
 		string $id,
 		string $type,
 	) {
-		parent::__construct($id);
+		parent::__construct(
+			id: $id,
+			model: $section->model
+		);
 
-		$this->model   = $section->model;
 		$this->section = $section;
 		$this->type    = $type;
 	}
