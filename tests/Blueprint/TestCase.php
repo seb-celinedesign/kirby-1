@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\App;
+use Kirby\Cms\File;
 use Kirby\Cms\Page;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
@@ -15,6 +16,12 @@ class TestCase extends BaseTestCase
 		return $this->app = new App(array_replace_recursive([
 			'roots' => [
 				'index' => '/dev/null'
+			],
+			'users' => [
+				[
+					'email' => 'test@getkirby.com',
+					'role'  => 'admin'
+				]
 			]
 		], $props));
 	}
@@ -46,6 +53,14 @@ class TestCase extends BaseTestCase
 		);
 	}
 
+	public function file()
+	{
+		return new File([
+			'filename' => 'test.jpg',
+			'parent'   => $this->model()
+		]);
+	}
+
 	public function model()
 	{
 		return new Page(['slug' => 'test']);
@@ -70,6 +85,11 @@ class TestCase extends BaseTestCase
 		$this->app();
 	}
 
+	public function site()
+	{
+		return $this->app->site();
+	}
+
 	public function tab(array $props = [])
 	{
 		return new Tab(
@@ -81,5 +101,10 @@ class TestCase extends BaseTestCase
 				$props
 			)
 		);
+	}
+
+	public function user()
+	{
+		return $this->app->user('test@getkirby.com');
 	}
 }

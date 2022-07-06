@@ -13,11 +13,11 @@ class TableColumnTest extends TestCase
 	public function testConstruct()
 	{
 		$column = new TableColumn(
-			model: $model = $this->model(),
+			parent: $section = $this->section(),
 			id: 'test'
 		);
 
-		$this->assertSame($model, $column->model);
+		$this->assertSame($section, $column->parent);
 		$this->assertSame('test', $column->id);
 		$this->assertSame('Test', $column->label->value);
 		$this->assertFalse($column->mobile);

@@ -2,10 +2,10 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\Page;
+use Kirby\Cms\User;
 
 /**
- * Page blueprint
+ * User blueprint
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -13,26 +13,20 @@ use Kirby\Cms\Page;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PageBlueprint extends Blueprint
+class UserBlueprint extends Blueprint
 {
 	public Image $image;
-	public PageNavigation $navigation;
-	public string|null $num;
-	public PageOptions $options;
-	public PageStatus $status;
+	public UserOptions $options;
 
 	public function __construct(
 		/** required */
-		Page $model,
+		User $model,
 		string $id,
 		string $type,
 
 		/** optional */
 		string|array|bool|null $image = null,
-		array $navigation = [],
-		string|int|null $num = null,
 		array $options = [],
-		array $status = [],
 		array $tabs = [],
 		string|array|null $title = null,
 	) {
@@ -44,10 +38,7 @@ class PageBlueprint extends Blueprint
 			type: $type
 		);
 
-		$this->image      = new Image($image);
-		$this->navigation = new PageNavigation($model, ...$navigation);
-		$this->num        = $num;
-		$this->options    = new PageOptions(...$options);
-		$this->status     = new PageStatus($model, ...$status);
+		$this->image   = new Image($image);
+		$this->options = new UserOptions(...$options);
 	}
 }
