@@ -14,29 +14,39 @@ namespace Kirby\Blueprint;
 class Image
 {
 	public string $back;
+	public string|null $color;
 	public bool $cover;
 	public bool $disabled;
+	public string|null $icon;
 	public string|null $query;
 	public string $ratio;
 
-	public function __construct(array|string|bool $image = [])
+	public function __construct(array|string|bool|null $image = null)
 	{
-		if ($image === false) {
-			$image = ['disabled' => true];
-		}
+		$image = match (true) {
+			// default image setup
+			$image === true, $image === null => [],
 
-		if ($image === true) {
-			$image = [];
-		}
+			// disabled image
+			$image === false => [
+				'disabled' => true
+			],
 
-		if (is_string($image) === true) {
-			$image = ['query' => $image];
-		}
+			// image query
+			is_string($image) === true => [
+				'query' => $image
+			],
 
-		$this->back     = $image['back'] ?? 'black';
-		$this->cover    = $image['cover'] ?? false;
+			// array definition
+			default => $image
+		};
+
+		$this->back     = $image['back']     ?? 'black';
+		$this->color    = $image['color']    ?? null;
+		$this->cover    = $image['cover']    ?? false;
 		$this->disabled = $image['disabled'] ?? false;
-		$this->query    = $image['query'] ?? null;
-		$this->ratio    = $image['ratio'] ?? '1/1';
+		$this->icon     = $image['icon']     ?? null;
+		$this->query    = $image['query']    ?? null;
+		$this->ratio    = $image['ratio']    ?? '1/1';
 	}
 }

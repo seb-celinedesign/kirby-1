@@ -15,8 +15,10 @@ class ImageTest extends TestCase
 		$image = new Image();
 
 		$this->assertSame('black', $image->back);
+		$this->assertNull($image->color);
 		$this->assertFalse($image->cover);
 		$this->assertFalse($image->disabled);
+		$this->assertNull($image->icon);
 		$this->assertNull($image->query);
 		$this->assertSame('1/1', $image->ratio);
 	}

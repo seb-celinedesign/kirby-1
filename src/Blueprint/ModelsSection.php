@@ -12,8 +12,12 @@ class ModelsSection extends Section
 	public Related $parent;
 
 	public function __construct(
-		public Tab $tab,
+		/* required */
+		public Column $column,
 		public string $id,
+		string $type,
+
+		/* optional */
 		string|array|null $label = null,
 		array $columns = [],
 		string|array|null $empty = null,
@@ -33,7 +37,11 @@ class ModelsSection extends Section
 		public string|null $sortBy = null,
 		string|array|null $text = null
 	) {
-		parent::__construct($tab, $id, $label);
+		parent::__construct(
+			column: $column,
+			id: $id,
+			type: $type
+		);
 
 		$this->columns = new TableColumns($columns);
 		$this->empty   = new Text($this->model, $empty);
