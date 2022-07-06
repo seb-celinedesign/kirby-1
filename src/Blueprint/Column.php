@@ -13,27 +13,10 @@ namespace Kirby\Blueprint;
  */
 class Column extends Node
 {
-	/**
-	 * @var \Kirby\Blueprint\Sections
-	 */
 	public Sections $sections;
-
-	/**
-	 * @var \Kirby\Blueprint\Tab
-	 */
 	public Tab $tab;
-
-	/**
-	 * @var \Kirby\Blueprint\Width
-	 */
 	public Width $width;
 
-	/**
-	 * @param \Kirby\Blueprint\Tab $tab
-	 * @param string $id
-	 * @param string|null|null $width
-	 * @param array $sections
-	 */
 	public function __construct(
 		Tab $tab,
 		string $id,

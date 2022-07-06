@@ -19,13 +19,8 @@ class Collection extends BaseCollection
 	/**
 	 * The expected object type
 	 */
-	public const TYPE = 'stdClass';
+	public const TYPE = Node::class;
 
-	/**
-	 * @param string $key
-	 * @param mixed $value
-	 * @return void
-	 */
 	public function __set(string $key, $value): void
 	{
 		if (is_a($value, static::TYPE) === false) {

@@ -16,10 +16,6 @@ use Kirby\Toolkit\Str;
  */
 class Label extends Text
 {
-	/**
-	 * @param \Kirby\Blueprint\Node $node
-	 * @param string|array|null $value
-	 */
 	public function __construct(
 		Node $node,
 		string|array|null $value = null

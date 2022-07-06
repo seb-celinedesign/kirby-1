@@ -13,10 +13,6 @@ namespace Kirby\Blueprint;
  */
 class Layout extends Enumeration
 {
-	/**
-	 * @param string|null $value
-	 * @param string $default
-	 */
 	public function __construct(string|null $value = null, string $default = 'list')
 	{
 		parent::__construct(

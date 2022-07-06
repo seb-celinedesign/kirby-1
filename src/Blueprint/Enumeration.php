@@ -15,26 +15,10 @@ use Kirby\Exception\InvalidArgumentException;
  */
 class Enumeration extends Property
 {
-	/**
-	 * @var array
-	 */
 	public array $allowed = [];
-
-	/**
-	 * @var string|null
-	 */
 	public string|null $default = null;
-
-	/**
-	 * @var string|null
-	 */
 	public string|null $value;
 
-	/**
-	 * @param string|null $value
-	 * @param array $allowed
-	 * @param string|null $default
-	 */
 	public function __construct(string|null $value = null, array $allowed = [], string|null $default = null)
 	{
 		$this->allowed = $allowed;

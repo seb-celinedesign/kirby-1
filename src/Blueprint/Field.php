@@ -16,31 +16,44 @@ use Kirby\Cms\ModelWithContent;
 class Field extends Node
 {
 	/**
-	 * @var \Kirby\Blueprint\Section
+	 * The parent section
 	 */
 	public Section $section;
 
 	/**
-	 * @var string
+	 * The field type
 	 */
 	public string $type;
 
 	/**
-	 * @param \Kirby\Blueprint\Section $section
-	 * @param string $id
-	 * @param string $type
+	 * Conditions when the field will be shown
+	 *
+	 * @since 3.1.0
 	 */
+	public array|null $when;
+
+	/**
+	 * The width of the field in the field grid. Available widths: 1/1, 1/2, 1/3, 1/4, 2/3, 3/4
+	 */
+	public Width $width;
+
 	public function __construct(
 		Section $section,
 		string $id,
 		string $type,
+		array|null $when = null,
+		string|null $width = null,
+		bool $translate = true,
 	) {
 		parent::__construct(
 			id: $id,
 			model: $section->model
 		);
 
-		$this->section = $section;
-		$this->type    = $type;
+		$this->section   = $section;
+		$this->translate = $translate;
+		$this->type      = $type;
+		$this->when      = $when;
+		$this->width     = new Width($width);
 	}
 }

@@ -15,8 +15,8 @@ class CollectionTest extends TestCase
 	public function testConstruct()
 	{
 		$collection = new Collection([
-			$a = new stdClass(),
-			$b = new stdClass(),
+			$a = new Node(id: 'a', model: $this->model()),
+			$b = new Node(id: 'b', model: $this->model()),
 		]);
 
 		$this->assertCount(2, $collection);
@@ -30,10 +30,10 @@ class CollectionTest extends TestCase
 	public function testConstructWithInvalidObject()
 	{
 		$this->expectException('TypeError');
-		$this->expectExceptionMessage('Each value in the collection must be an instance of stdClass');
+		$this->expectExceptionMessage('Each value in the collection must be an instance of Kirby\Blueprint\Node');
 
 		new Collection([
-			$this->blueprint(),
+			new \stdClass,
 		]);
 	}
 }

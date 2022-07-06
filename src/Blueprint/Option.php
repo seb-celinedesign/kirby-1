@@ -13,29 +13,15 @@ namespace Kirby\Blueprint;
  */
 class Option
 {
-	/**
-	 * @var \Kirby\Blueprint\Translated
-	 */
 	public Translated $text;
-
-	/**
-	 * @var string|int|float|null
-	 */
 	public string|int|float|null $value;
 
-	/**
-	 * @param string|int|float|null|null $value
-	 * @param string|array|null|null $text
-	 */
 	public function __construct(string|int|float|null $value = null, string|array|null $text = null)
 	{
 		$this->value = $value;
 		$this->text  = new Translated($text ?? $value);
 	}
 
-	/**
-	 * @return array
-	 */
 	public function toArray(): array
 	{
 		return [

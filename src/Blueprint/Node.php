@@ -15,19 +15,9 @@ use Kirby\Cms\ModelWithContent;
  */
 class Node
 {
-	/**
-	 * @var string
-	 */
 	public string $id;
-
-	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
 	public ModelWithContent $model;
 
-	/**
-	 * @param string $id
-	 */
 	public function __construct(string $id, ModelWithContent $model)
 	{
 		$this->id    = $id;

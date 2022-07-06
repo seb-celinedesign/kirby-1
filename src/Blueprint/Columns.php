@@ -15,10 +15,6 @@ class Columns extends Collection
 {
 	public const TYPE = Column::class;
 
-	/**
-	 * @param \Kirby\Blueprint\Tab $tab
-	 * @param array $columns
-	 */
 	public function __construct(Tab $tab, array $columns = [])
 	{
 		foreach ($columns as $id => $column) {

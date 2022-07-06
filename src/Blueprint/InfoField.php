@@ -13,35 +13,11 @@ namespace Kirby\Blueprint;
  */
 class InfoField extends Field
 {
-	/**
-	 * @var \Kirby\Blueprint\Kirbytext
-	 */
 	public Kirbytext $help;
-
-	/**
-	 * @var \Kirby\Blueprint\Label
-	 */
 	public Label $label;
-
-	/**
-	 * @var \Kirby\Blueprint\Kirbytext
-	 */
 	public Kirbytext $text;
-
-	/**
-	 * @var \Kirby\Blueprint\Theme
-	 */
 	public Theme $theme;
 
-	/**
-	 * @param \Kirby\Blueprint\Section $section
-	 * @param string $id
-	 * @param string $type
-	 * @param string|array|null|null $help
-	 * @param string|array|null|null $label
-	 * @param string|array|null|null $text
-	 * @param string|null|null $theme
-	 */
 	public function __construct(
 		Section $section,
 		string $id,

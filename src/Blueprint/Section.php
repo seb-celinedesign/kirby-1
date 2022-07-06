@@ -15,21 +15,9 @@ use Kirby\Cms\ModelWithContent;
  */
 class Section extends Node
 {
-	/**
-	 * @var \Kirby\Blueprint\Column
-	 */
 	public Column $column;
-
-	/**
-	 * @var string
-	 */
 	public string $type;
 
-	/**
-	 * @param \Kirby\Blueprint\Column $column
-	 * @param string $id
-	 * @param string $type
-	 */
 	public function __construct(
 		Column $column,
 		string $id,

@@ -15,10 +15,6 @@ class Fields extends Collection
 {
 	public const TYPE = Field::class;
 
-	/**
-	 * @param \Kirby\Blueprint\Section $section
-	 * @param array $fields
-	 */
 	public function __construct(Section $section, array $fields = [])
 	{
 		foreach ($fields as $id => $field) {

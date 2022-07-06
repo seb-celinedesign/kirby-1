@@ -15,10 +15,6 @@ class Sections extends Collection
 {
 	public const TYPE = Section::class;
 
-	/**
-	 * @param \Kirby\Blueprint\Column $column
-	 * @param array $sections
-	 */
 	public function __construct(Column $column, array $sections = [])
 	{
 		foreach ($sections as $id => $section) {

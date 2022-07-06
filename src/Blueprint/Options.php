@@ -15,9 +15,6 @@ class Options extends Collection
 {
 	public const TYPE = Option::class;
 
-	/**
-	 * @param array $options
-	 */
 	public function __construct(array $options = [])
 	{
 		foreach ($options as $key => $option) {

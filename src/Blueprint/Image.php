@@ -13,34 +13,12 @@ namespace Kirby\Blueprint;
  */
 class Image
 {
-	/**
-	 * @var string
-	 */
 	public string $back;
-
-	/**
-	 * @var bool
-	 */
 	public bool $cover;
-
-	/**
-	 * @var bool
-	 */
 	public bool $disabled;
-
-	/**
-	 * @var string|null
-	 */
 	public string|null $query;
-
-	/**
-	 * @var string
-	 */
 	public string $ratio;
 
-	/**
-	 * @param array $image
-	 */
 	public function __construct(array|string|bool $image = [])
 	{
 		if ($image === false) {

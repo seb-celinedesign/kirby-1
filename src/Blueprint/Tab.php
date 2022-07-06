@@ -13,33 +13,11 @@ namespace Kirby\Blueprint;
  */
 class Tab extends Node
 {
-	/**
-	 * @var \Kirby\Blueprint\Blueprint
-	 */
 	public Blueprint $blueprint;
-
-	/**
-	 * @var \Kirby\Blueprint\Columns
-	 */
 	public Columns $columns;
-
-	/**
-	 * @var string|null
-	 */
 	public string|null $icon;
-
-	/**
-	 * @var \Kirby\Blueprint\Translated
-	 */
 	public Translated $label;
 
-	/**
-	 * @param \Kirby\Blueprint\Blueprint $blueprint
-	 * @param string $id
-	 * @param string|array|null|null $label
-	 * @param string|null|null $icon
-	 * @param array $columns
-	 */
 	public function __construct(
 		Blueprint $blueprint,
 		string $id,

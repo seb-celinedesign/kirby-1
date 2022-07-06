@@ -15,10 +15,6 @@ use Kirby\Cms\ModelWithContent;
  */
 class Kirbytext extends Text
 {
-	/**
-	 * @param \Kirby\Cms\ModelWithContent $model
-	 * @param string|array|null|null $value
-	 */
 	public function __construct(ModelWithContent $model, string|array|null $value = null)
 	{
 		parent::__construct(

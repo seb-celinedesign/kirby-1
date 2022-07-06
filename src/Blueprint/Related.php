@@ -17,25 +17,10 @@ use Kirby\Exception\NotFoundException;
  */
 class Related
 {
-	/**
-	 * @var string|null
-	 */
 	public string|null $query;
-
-	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
 	public ModelWithContent $model;
-
-	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
 	public ModelWithContent $related;
 
-	/**
-	 * @param \Kirby\Cms\ModelWithContent $model
-	 * @param string|null $query
-	 */
 	public function __construct(ModelWithContent $model, string|null $query = null)
 	{
 		$this->model = $model;

@@ -11,17 +11,17 @@ class PageBlueprint extends Blueprint
 	public PageStatus $status;
 
 	public function __construct(
-		/** Parent */
+		/** required */
 		ModelWithContent $model,
 		string $id,
 		string $type,
-		string|array|null $title = null,
-		array $tabs = [],
 
-		/** Custom */
+		/** optional */
 		string|int|null $num = null,
 		array $options = [],
-		array $status = []
+		array $status = [],
+		array $tabs = [],
+		string|array|null $title = null,
 	) {
 		parent::__construct(
 			model: $model,

@@ -15,10 +15,6 @@ class Tabs extends Collection
 {
 	public const TYPE = Tab::class;
 
-	/**
-	 * @param \Kirby\Blueprint\Blueprint $blueprint
-	 * @param array $tabs
-	 */
 	public function __construct(Blueprint $blueprint, array $tabs = [])
 	{
 		foreach ($tabs as $id => $tab) {

@@ -13,34 +13,11 @@ namespace Kirby\Blueprint;
  */
 class InfoSection extends Section
 {
-	/**
-	 * @var \Kirby\Blueprint\Kirbytext
-	 */
 	public Kirbytext $help;
-
-	/**
-	 * @var \Kirby\Blueprint\Label
-	 */
 	public Label $label;
-
-	/**
-	 * @var \Kirby\Blueprint\Kirbytext
-	 */
 	public Kirbytext $text;
-
-	/**
-	 * @var \Kirby\Blueprint\Theme
-	 */
 	public Theme $theme;
 
-	/**
-	 * @param \Kirby\Blueprint\Column $column
-	 * @param string $id
-	 * @param string $type
-	 * @param string|array|null|null $label
-	 * @param string|array|null|null $text
-	 * @param string|null|null $theme
-	 */
 	public function __construct(
 		Column $column,
 		string $id,

@@ -15,27 +15,10 @@ use Kirby\Cms\ModelWithContent;
  */
 class Blueprint extends Node
 {
-	/**
-	 * @var \Kirby\Blueprint\Tabs
-	 */
 	public Tabs $tabs;
-
-	/**
-	 * @var \Kirby\Blueprint\Label
-	 */
 	public Label $title;
-
-	/**
-	 * @var string
-	 */
 	public string $type;
 
-	/**
-	 * @param \Kirby\Cms\ModelWithContent $model
-	 * @param string $id
-	 * @param string|array|null|null $title
-	 * @param array $tabs
-	 */
 	public function __construct(
 		ModelWithContent $model,
 		string $id,

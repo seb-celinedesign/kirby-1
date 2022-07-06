@@ -15,16 +15,8 @@ use Kirby\Cms\ModelWithContent;
  */
 class Text extends Translated
 {
-	/**
-	 * @var \Kirby\Cms\ModelWithContent
-	 */
 	public ModelWithContent $model;
 
-	/**
-	 * @param \Kirby\Cms\ModelWithContent $model
-	 * @param string|array|null $value
-	 * @param string|null $default
-	 */
 	public function __construct(ModelWithContent $model, string|array|null $value = null, string|null $default = null)
 	{
 		parent::__construct($value, $default);

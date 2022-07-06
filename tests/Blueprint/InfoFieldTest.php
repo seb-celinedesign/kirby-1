@@ -12,15 +12,15 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$section = new InfoField(
+		$info = new InfoField(
 			section: $this->section(['type' => 'fields']),
 			id: 'test',
 			type: 'info'
 		);
 
-		$this->assertSame('Test', $section->label->value);
-		$this->assertNull($section->text->value);
-		$this->assertSame('plain', $section->theme->value);
+		$this->assertSame('Test', $info->label->value);
+		$this->assertNull($info->text->value);
+		$this->assertSame('plain', $info->theme->value);
 	}
 
 	/**
@@ -28,14 +28,14 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testHelp()
 	{
-		$section = new InfoField(
+		$info = new InfoField(
 			section: $this->section(['type' => 'fields']),
 			id: 'test',
 			help: '{{ page.slug }}',
 			type: 'info'
 		);
 
-		$this->assertSame('<p>test</p>', $section->help->value);
+		$this->assertSame('<p>test</p>', $info->help->value);
 	}
 
 	/**
@@ -43,14 +43,14 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testLabel()
 	{
-		$section = new InfoField(
+		$info = new InfoField(
 			section: $this->section(['type' => 'fields']),
 			id: 'test',
 			label: 'My Info Section',
 			type: 'info'
 		);
 
-		$this->assertSame('My Info Section', $section->label->value);
+		$this->assertSame('My Info Section', $info->label->value);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testText()
 	{
-		$section = new InfoField(
+		$info = new InfoField(
 			section: $this->section(['type' => 'fields']),
 			id: 'test',
 			label: 'My Info Section',
@@ -66,7 +66,7 @@ class InfoFieldTest extends TestCase
 			type: 'info'
 		);
 
-		$this->assertSame('<p>test</p>', $section->text->value);
+		$this->assertSame('<p>test</p>', $info->text->value);
 	}
 
 	/**
@@ -74,13 +74,13 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testTheme()
 	{
-		$section = new InfoField(
+		$info = new InfoField(
 			section: $this->section(['type' => 'fields']),
 			id: 'test',
 			theme: 'negative',
 			type: 'info'
 		);
 
-		$this->assertSame('negative', $section->theme->value);
+		$this->assertSame('negative', $info->theme->value);
 	}
 }

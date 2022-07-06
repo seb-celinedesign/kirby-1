@@ -13,17 +13,8 @@ namespace Kirby\Blueprint;
  */
 class FieldsSection extends Section
 {
-	/**
-	 * @var \Kirby\Blueprint\Fields
-	 */
 	public Fields $fields;
 
-	/**
-	 * @param \Kirby\Blueprint\Column $column
-	 * @param string $id
-	 * @param string $type
-	 * @param array $fields
-	 */
 	public function __construct(
 		public Column $column,
 		public string $id,
