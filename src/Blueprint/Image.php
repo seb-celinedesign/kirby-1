@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class Image
 {
+	use ArrayConverter;
+
 	public function __construct(
 		public string|null $back = 'black',
 		public string|null $color = null,

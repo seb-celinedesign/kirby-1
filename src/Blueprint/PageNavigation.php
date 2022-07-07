@@ -15,6 +15,8 @@ use Kirby\Cms\Page;
  */
 class PageNavigation
 {
+	use ArrayConverter;
+
 	public Page $page;
 	public string|null $sortBy;
 	public array $status;

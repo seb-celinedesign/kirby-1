@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use Throwable;
 
 /**
  * Base element for all blueprint features
@@ -15,6 +16,8 @@ use Kirby\Cms\ModelWithContent;
  */
 class Node
 {
+	use ArrayConverter;
+
 	public function __construct(
 		public ModelWithContent $model,
 		public string $id

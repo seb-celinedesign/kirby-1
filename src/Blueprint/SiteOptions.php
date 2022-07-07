@@ -11,7 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class SiteOptions
+class SiteOptions extends ModelOptions
 {
 	public ModelOption $changeTitle;
 	public ModelOption $update;

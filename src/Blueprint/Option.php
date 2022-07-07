@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class Option
 {
+	use ArrayConverter;
+
 	public Translated $text;
 	public string|int|float|null $value;
 
@@ -20,13 +22,5 @@ class Option
 	{
 		$this->value = $value;
 		$this->text  = new Translated($text ?? $value);
-	}
-
-	public function toArray(): array
-	{
-		return [
-			'text'  => $this->text->value,
-			'value' => $this->value
-		];
 	}
 }

@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class Permissions
 {
+	use ArrayConverter;
+
 	public AccessPermissions $access;
 	public AccountPermissions $account;
 	public FilesPermissions $files;

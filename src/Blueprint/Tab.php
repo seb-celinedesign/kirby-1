@@ -36,4 +36,5 @@ class Tab extends Node
 		$this->id        = $id;
 		$this->label     = new Label($this, $label);
 	}
+
 }

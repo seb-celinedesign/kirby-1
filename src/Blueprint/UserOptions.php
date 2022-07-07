@@ -11,7 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class UserOptions
+class UserOptions extends ModelOptions
 {
 	public ModelOption $changeEmail;
 	public ModelOption $changeLanguage;

@@ -13,7 +13,7 @@ use Kirby\Cms\Page;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PageOptions
+class PageOptions extends ModelOptions
 {
 	public ModelOption $changeSlug;
 	public ModelOption $changeStatus;

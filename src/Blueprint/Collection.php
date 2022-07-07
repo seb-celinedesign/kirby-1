@@ -2,7 +2,7 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Toolkit\Collection as BaseCollection;
+use Kirby\Cms\Collection as BaseCollection;
 use TypeError;
 
 /**
@@ -20,6 +20,11 @@ class Collection extends BaseCollection
 	 * The expected object type
 	 */
 	public const TYPE = Node::class;
+
+	public function __construct(array $data = [])
+	{
+		$this->set($data);
+	}
 
 	public function __set(string $key, $value): void
 	{

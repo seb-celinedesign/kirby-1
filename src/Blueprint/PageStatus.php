@@ -15,6 +15,8 @@ use Kirby\Cms\Page;
  */
 class PageStatus
 {
+	use ArrayConverter;
+
 	public PageStatusOption $draft;
 	public PageStatusOption $unlisted;
 	public PageStatusOption $listed;

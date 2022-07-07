@@ -51,4 +51,23 @@ class TabTest extends TestCase
 
 		$this->assertSame('My Tab', $tab->label->value);
 	}
+
+	public function testToArray()
+	{
+		$tab = new Tab(
+			blueprint: $this->blueprint(),
+			id: 'test',
+			label: 'My Tab'
+		);
+
+		$expected = [
+			'columns' => [],
+			'icon'    => null,
+			'id'      => 'test',
+			'label'   => 'My Tab'
+		];
+
+		$this->assertSame($expected, $tab->toArray());
+	}
+
 }

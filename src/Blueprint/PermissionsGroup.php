@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class PermissionsGroup
 {
+	use ArrayConverter;
+
 	/**
 	 * Creates a new instance either from an
 	 * array or a boolean

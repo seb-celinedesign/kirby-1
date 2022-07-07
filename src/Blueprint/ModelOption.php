@@ -31,4 +31,9 @@ class ModelOption
 			default => $permissions
 		});
 	}
+
+	public function toArray(): array
+	{
+		return $this->permissions;
+	}
 }

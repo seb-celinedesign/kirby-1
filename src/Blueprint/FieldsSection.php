@@ -28,4 +28,5 @@ class FieldsSection extends Section
 
 		$this->fields = new Fields($this, $fields);
 	}
+
 }

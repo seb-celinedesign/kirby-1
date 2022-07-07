@@ -15,11 +15,13 @@ use Kirby\Toolkit\Str;
  */
 class Accept
 {
+	use ArrayConverter;
+
 	public array $extension;
-	public array $mime;
 	public int|null $maxheight;
 	public int|null $maxsize;
 	public int|null $maxwidth;
+	public array $mime;
 	public int|null $minheight;
 	public int|null $minsize;
 	public int|null $minwidth;
@@ -28,10 +30,10 @@ class Accept
 
 	public function __construct(
 		array|string|null $extension = null,
-		array|string|null $mime = null,
 		int|null $maxheight = null,
 		int|null $maxsize = null,
 		int|null $maxwidth = null,
+		array|string|null $mime = null,
 		int|null $minheight = null,
 		int|null $minsize = null,
 		int|null $minwidth = null,

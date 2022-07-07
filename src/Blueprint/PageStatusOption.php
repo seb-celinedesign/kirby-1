@@ -17,6 +17,8 @@ use Kirby\Toolkit\Str;
  */
 class PageStatusOption
 {
+	use ArrayConverter;
+
 	public Translated $description;
 	public bool $disabled;
 	public string $id;

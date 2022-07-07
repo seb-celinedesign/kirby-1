@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Section
+ * Model options
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,21 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Section extends Node
+class ModelOptions
 {
-	public Column $column;
-	public string $type;
-
-	public function __construct(
-		Column $column,
-		string $id
-	) {
-		parent::__construct(
-			id: $id,
-			model: $column->model
-		);
-
-		$this->column = $column;
-	}
-
+	use ArrayConverter;
 }

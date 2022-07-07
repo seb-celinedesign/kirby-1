@@ -41,6 +41,12 @@ class AcceptTest extends TestCase
 		$this->assertSame(['jpg', 'gif'], $accept->extension);
 	}
 
+	public function testFactory()
+	{
+		$accept = Accept::factory('image/*');
+		$this->assertSame(['image/*'], $accept->mime);
+	}
+
 	public function testMime()
 	{
 		// string: single
@@ -54,6 +60,37 @@ class AcceptTest extends TestCase
 		// array
 		$accept = new Accept(mime: ['image/*', 'application/*']);
 		$this->assertSame(['image/*', 'application/*'], $accept->mime);
+	}
+
+	public function testToArray()
+	{
+		$accept = new Accept(
+			extension: 'jpg',
+			maxheight: 23,
+			maxsize: 11,
+			maxwidth: 15,
+			mime: 'image/*',
+			minheight: 50,
+			minsize: 100,
+			minwidth: 10,
+			orientation: 'sqaure',
+			type: 'image'
+		);
+
+		$expected = [
+			'extension'   => ['jpg'],
+			'maxheight'   => 23,
+			'maxsize'     => 11,
+			'maxwidth'    => 15,
+			'mime'        => ['image/*'],
+			'minheight'   => 50,
+			'minsize'     => 100,
+			'minwidth'    => 10,
+			'orientation' => 'sqaure',
+			'type'        => ['image']
+		];
+
+		$this->assertSame($expected, $accept->toArray());
 	}
 
 	public function testType()
@@ -70,4 +107,5 @@ class AcceptTest extends TestCase
 		$accept = new Accept(type: ['image', 'document']);
 		$this->assertSame(['image', 'document'], $accept->type);
 	}
+
 }

@@ -11,7 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class FileOptions
+class FileOptions extends ModelOptions
 {
 	public ModelOption $changeName;
 	public ModelOption $create;
