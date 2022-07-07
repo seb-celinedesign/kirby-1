@@ -12,7 +12,7 @@ class FileOptionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$options = new FileOptions;
+		$options = new FileOptions();
 
 		$this->assertInstanceOf(ModelOption::class, $options->changeName);
 		$this->assertInstanceOf(ModelOption::class, $options->create);

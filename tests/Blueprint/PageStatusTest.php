@@ -12,15 +12,10 @@ class PageStatusTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$status = new PageStatus(
-			page: $page = $this->model()
-		);
-
-		$this->assertSame($page, $status->page);
+		$status = new PageStatus();
 
 		$this->assertInstanceOf(PageStatusOption::class, $status->draft);
 		$this->assertInstanceOf(PageStatusOption::class, $status->unlisted);
 		$this->assertInstanceOf(PageStatusOption::class, $status->listed);
 	}
-
 }

@@ -24,12 +24,24 @@ class PageStatusOption
 
 	public function __construct(
 		string $id,
-		string|array|bool|null $option = null
+		string|array|null $description = null,
+		bool $disabled = false,
+		string|array|null $label = null,
 	) {
 		if (in_array($id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new InvalidArgumentException('The status must be draft, unlisted or listed');
 		}
 
+		$this->id          = $id;
+		$this->disabled    = $disabled;
+		$this->label       = new Translated($label ?? Str::ucfirst($id));
+		$this->description = new Translated($description);
+	}
+
+	public static function factory(
+		string $id,
+		string|array|bool|null $option = null
+	): static {
 		$option = match (true) {
 			// disabled
 			$option === false => [
@@ -48,9 +60,6 @@ class PageStatusOption
 			default => $option
 		};
 
-		$this->id          = $id;
-		$this->disabled    = $option['disabled'] ?? false;
-		$this->label       = new Translated($option['label'] ?? Str::ucfirst($id));
-		$this->description = new Translated($option['description'] ?? null);
+		return new static($id, ...$option);
 	}
 }

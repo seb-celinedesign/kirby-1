@@ -12,12 +12,11 @@ class ModelsSection extends Section
 	public Related $parent;
 
 	public function __construct(
-		/* required */
+		// required
 		public Column $column,
 		public string $id,
-		string $type,
 
-		/* optional */
+		// optional
 		string|array|null $label = null,
 		array $columns = [],
 		string|array|null $empty = null,
@@ -39,14 +38,13 @@ class ModelsSection extends Section
 	) {
 		parent::__construct(
 			column: $column,
-			id: $id,
-			type: $type
+			id: $id
 		);
 
 		$this->columns = new TableColumns($this, $columns);
 		$this->empty   = new Text($this->model, $empty);
 		$this->help    = new Kirbytext($this->model, $help);
-		$this->image   = new Image($image);
+		$this->image   = Image::factory($image);
 		$this->info    = new Text($this->model, $info);
 		$this->label   = new Label($this, $label);
 		$this->layout  = new Layout($layout);

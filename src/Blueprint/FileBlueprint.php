@@ -18,17 +18,19 @@ class FileBlueprint extends Blueprint
 	public Accept $accept;
 	public Image $image;
 	public FileOptions $options;
+	public Url $preview;
+	public string $type = 'file';
 
 	public function __construct(
 		/** required */
 		File $model,
 		string $id,
-		string $type,
 
 		/** optional */
-		array $accept = [],
+		string|array $accept = [],
 		string|array|bool|null $image = null,
 		array $options = [],
+		string|bool|null $preview = null,
 		array $tabs = [],
 		string|array|null $title = null,
 	) {
@@ -36,12 +38,12 @@ class FileBlueprint extends Blueprint
 			model: $model,
 			id: $id,
 			title: $title,
-			tabs: $tabs,
-			type: $type
+			tabs: $tabs
 		);
 
-		$this->accept  = new Accept(...$accept);
-		$this->image   = new Image($image);
+		$this->accept  = Accept::factory($accept);
+		$this->image   = Image::factory($image);
 		$this->options = new FileOptions(...$options);
+		$this->preview = Url::factory($model, $preview);
 	}
 }

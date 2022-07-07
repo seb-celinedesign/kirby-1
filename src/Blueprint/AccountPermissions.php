@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Section
+ * Account permissions
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,20 +11,6 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Section extends Node
+class AccountPermissions extends UsersPermissions
 {
-	public Column $column;
-	public string $type;
-
-	public function __construct(
-		Column $column,
-		string $id
-	) {
-		parent::__construct(
-			id: $id,
-			model: $column->model
-		);
-
-		$this->column = $column;
-	}
 }

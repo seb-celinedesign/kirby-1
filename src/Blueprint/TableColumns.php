@@ -17,5 +17,4 @@ class TableColumns extends Collection
 			$this->__set($column->id, $column);
 		}
 	}
-
 }

@@ -16,26 +16,25 @@ use Kirby\Cms\Site;
 class SiteBlueprint extends Blueprint
 {
 	public SiteOptions $options;
+	public Url $preview;
+	public string $type = 'site';
 
 	public function __construct(
-		/** required */
 		Site $model,
 		string $id,
-		string $type,
-
-		/** optional */
 		array $options = [],
+		string|bool|null $preview = null,
 		array $tabs = [],
 		string|array|null $title = null,
 	) {
 		parent::__construct(
-			model: $model,
 			id: $id,
-			title: $title,
+			model: $model,
 			tabs: $tabs,
-			type: $type
+			title: $title,
 		);
 
 		$this->options = new SiteOptions(...$options);
+		$this->preview = Url::factory($model, $preview);
 	}
 }

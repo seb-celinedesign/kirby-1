@@ -79,5 +79,4 @@ class PageNavigationTest extends TestCase
 		$navigation = new PageNavigation(page: $this->model(), template: ['article', 'video']);
 		$this->assertSame(['article', 'video'], $navigation->template);
 	}
-
 }

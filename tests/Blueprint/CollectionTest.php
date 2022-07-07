@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use stdClass;
-
 /**
  * @covers \Kirby\Blueprint\Collection
  */
@@ -33,7 +31,7 @@ class CollectionTest extends TestCase
 		$this->expectExceptionMessage('Each value in the collection must be an instance of Kirby\Blueprint\Node');
 
 		new Collection([
-			new \stdClass,
+			new \stdClass(),
 		]);
 	}
 }

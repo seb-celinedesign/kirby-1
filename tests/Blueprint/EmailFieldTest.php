@@ -13,14 +13,13 @@ class EmailFieldTest extends TestCase
 	public function testConstruct()
 	{
 		$field = new EmailField(
-			section: $this->section(['type' => 'fields']),
-			id: 'test',
-			type: 'text'
+			section: $this->section(),
+			id: 'test'
 		);
 
+		$this->assertSame('email', $field->type);
 		$this->assertSame('email', $field->autocomplete);
 		$this->assertSame('email', $field->icon);
 		$this->assertSame('email.placeholder', $field->placeholder->value);
 	}
-
 }

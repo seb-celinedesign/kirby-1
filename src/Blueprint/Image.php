@@ -13,15 +13,18 @@ namespace Kirby\Blueprint;
  */
 class Image
 {
-	public string $back;
-	public string|null $color;
-	public bool $cover;
-	public bool $disabled;
-	public string|null $icon;
-	public string|null $query;
-	public string $ratio;
+	public function __construct(
+		public string|null $back = 'black',
+		public string|null $color = null,
+		public bool $cover = false,
+		public bool $disabled = false,
+		public string|null $icon = null,
+		public string|null $query = null,
+		public string|null $ratio = null
+	) {
+	}
 
-	public function __construct(array|string|bool|null $image = null)
+	public static function factory(array|string|bool|null $image = null): static
 	{
 		$image = match (true) {
 			// default image setup
@@ -41,12 +44,6 @@ class Image
 			default => $image
 		};
 
-		$this->back     = $image['back']     ?? 'black';
-		$this->color    = $image['color']    ?? null;
-		$this->cover    = $image['cover']    ?? false;
-		$this->disabled = $image['disabled'] ?? false;
-		$this->icon     = $image['icon']     ?? null;
-		$this->query    = $image['query']    ?? null;
-		$this->ratio    = $image['ratio']    ?? '1/1';
+		return new static(...$image);
 	}
 }

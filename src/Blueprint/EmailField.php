@@ -13,11 +13,12 @@ namespace Kirby\Blueprint;
  */
 class EmailField extends TextField
 {
+	public string $type = 'email';
+
 	public function __construct(
 		/**	required */
 		Section $section,
 		string $id,
-		string $type,
 
 		/** optional */
 		string|array|null $after = null,
@@ -38,8 +39,7 @@ class EmailField extends TextField
 		string|null $value = null,
 		array|null $when = null,
 		string|null $width = null,
-	)
-	{
+	) {
 		parent::__construct(
 			after: $after,
 			autocomplete: $autocomplete,
@@ -58,7 +58,6 @@ class EmailField extends TextField
 			required: $required,
 			section: $section,
 			translate: $translate,
-			type: $type,
 			value: $value,
 			when: $when,
 			width: $width

@@ -32,8 +32,7 @@ class TestCase extends BaseTestCase
 			...array_merge(
 				[
 					'model' => $this->model(),
-					'id'    => 'test',
-					'type'  => 'test'
+					'id'    => 'test'
 				],
 				$props
 			)
@@ -73,7 +72,6 @@ class TestCase extends BaseTestCase
 				[
 					'column' => $this->column(),
 					'id'     => 'test',
-					'type'   => 'fields'
 				],
 				$props
 			)

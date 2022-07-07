@@ -2,7 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
 use Kirby\Toolkit\Str;
 
 /**

@@ -17,11 +17,11 @@ class InfoField extends Field
 	public Label $label;
 	public Kirbytext $text;
 	public Theme $theme;
+	public string $type = 'info';
 
 	public function __construct(
 		Section $section,
 		string $id,
-		string $type,
 		string|array|null $help = null,
 		string|array|null $label = null,
 		string|array|null $text = null,
@@ -29,8 +29,7 @@ class InfoField extends Field
 	) {
 		parent::__construct(
 			section: $section,
-			id: $id,
-			type: $type
+			id: $id
 		);
 
 		$this->help  = new Kirbytext($this->model, $help);

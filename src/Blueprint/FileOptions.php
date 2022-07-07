@@ -28,11 +28,11 @@ class FileOptions
 		bool|array|null $replace = null,
 		bool|array|null $update = null,
 	) {
-		$this->changeName = new ModelOption($changeName);
-		$this->create     = new ModelOption($create);
-		$this->delete     = new ModelOption($delete);
-		$this->read       = new ModelOption($read);
-		$this->replace    = new ModelOption($replace);
-		$this->update     = new ModelOption($update);
+		$this->changeName = ModelOption::factory($changeName);
+		$this->create     = ModelOption::factory($create);
+		$this->delete     = ModelOption::factory($delete);
+		$this->read       = ModelOption::factory($read);
+		$this->replace    = ModelOption::factory($replace);
+		$this->update     = ModelOption::factory($update);
 	}
 }

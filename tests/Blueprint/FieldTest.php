@@ -15,12 +15,10 @@ class FieldTest extends TestCase
 		$field = new Field(
 			section: $section = $this->section(),
 			id: 'test',
-			type: 'test'
 		);
 
 		$this->assertSame($section, $field->section);
 		$this->assertInstanceOf('Kirby\Cms\Page', $field->model);
 		$this->assertSame('test', $field->id);
-		$this->assertSame('test', $field->type);
 	}
 }

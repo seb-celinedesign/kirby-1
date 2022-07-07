@@ -17,11 +17,11 @@ class InfoSection extends Section
 	public Label $label;
 	public Kirbytext $text;
 	public Theme $theme;
+	public string $type = 'info';
 
 	public function __construct(
 		Column $column,
 		string $id,
-		string $type,
 		string|array|null $help = null,
 		string|array|null $label = null,
 		string|array|null $text = null,
@@ -29,8 +29,7 @@ class InfoSection extends Section
 	) {
 		parent::__construct(
 			column: $column,
-			id: $id,
-			type: $type
+			id: $id
 		);
 
 		$this->help  = new Kirbytext($this->model, $help);

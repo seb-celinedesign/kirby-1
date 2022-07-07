@@ -25,8 +25,7 @@ class PageNavigation
 		string|null $sortBy = null,
 		string|array|null $status = null,
 		string|array|null $template = null
-	)
-	{
+	) {
 		$this->sortBy   = $sortBy;
 		$this->status   = $this->option($status, $page->status());
 		$this->template = $this->option($template, $page->intendedTemplate()->name());

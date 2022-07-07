@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
-
 class TableColumn extends Node
 {
 	public Enumeration $align;
@@ -26,8 +24,7 @@ class TableColumn extends Node
 		string|null $type = null,
 		string|null $value = null,
 		string|null $width = null
-	)
-	{
+	) {
 		parent::__construct(
 			model: $parent->model,
 			id: $id
@@ -41,5 +38,4 @@ class TableColumn extends Node
 		$this->value  = $value;
 		$this->width  = $width;
 	}
-
 }

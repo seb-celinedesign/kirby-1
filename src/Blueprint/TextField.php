@@ -74,7 +74,12 @@ class TextField extends InputField
 	public bool $spellcheck;
 
 	/**
-	 *
+	 * The field type is used to load the right component
+	 */
+	public string $type = 'text';
+
+	/**
+	 * The string value for the field
 	 */
 	public string|null $value;
 
@@ -82,7 +87,6 @@ class TextField extends InputField
 		/**	required */
 		Section $section,
 		string $id,
-		string $type,
 
 		/** optional */
 		string|array|null $after = null,
@@ -116,7 +120,6 @@ class TextField extends InputField
 			required: $required,
 			section: $section,
 			translate: $translate,
-			type: $type,
 			when: $when,
 			width: $width
 		);

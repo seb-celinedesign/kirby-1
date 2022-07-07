@@ -14,17 +14,16 @@ namespace Kirby\Blueprint;
 class FieldsSection extends Section
 {
 	public Fields $fields;
+	public string $type = 'fields';
 
 	public function __construct(
 		public Column $column,
 		public string $id,
-		string $type,
 		array $fields = [],
 	) {
 		parent::__construct(
 			column: $column,
-			id: $id,
-			type: $type
+			id: $id
 		);
 
 		$this->fields = new Fields($this, $fields);

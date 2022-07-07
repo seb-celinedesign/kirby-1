@@ -13,11 +13,11 @@ class InfoFieldTest extends TestCase
 	public function testConstruct()
 	{
 		$info = new InfoField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
-			type: 'info'
 		);
 
+		$this->assertSame('info', $info->type);
 		$this->assertSame('Test', $info->label->value);
 		$this->assertNull($info->text->value);
 		$this->assertSame('plain', $info->theme->value);
@@ -29,10 +29,9 @@ class InfoFieldTest extends TestCase
 	public function testHelp()
 	{
 		$info = new InfoField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
 			help: '{{ page.slug }}',
-			type: 'info'
 		);
 
 		$this->assertSame('<p>test</p>', $info->help->value);
@@ -44,10 +43,9 @@ class InfoFieldTest extends TestCase
 	public function testLabel()
 	{
 		$info = new InfoField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
 			label: 'My Info Section',
-			type: 'info'
 		);
 
 		$this->assertSame('My Info Section', $info->label->value);
@@ -59,11 +57,10 @@ class InfoFieldTest extends TestCase
 	public function testText()
 	{
 		$info = new InfoField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
 			label: 'My Info Section',
 			text: '{{ page.slug }}',
-			type: 'info'
 		);
 
 		$this->assertSame('<p>test</p>', $info->text->value);
@@ -75,10 +72,9 @@ class InfoFieldTest extends TestCase
 	public function testTheme()
 	{
 		$info = new InfoField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
 			theme: 'negative',
-			type: 'info'
 		);
 
 		$this->assertSame('negative', $info->theme->value);

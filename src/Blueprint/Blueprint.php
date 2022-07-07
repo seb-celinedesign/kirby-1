@@ -22,7 +22,6 @@ class Blueprint extends Node
 	public function __construct(
 		ModelWithContent $model,
 		string $id,
-		string $type,
 		string|array|null $title = null,
 		array $tabs = []
 	) {
@@ -33,6 +32,5 @@ class Blueprint extends Node
 
 		$this->title = new Label($this, $title);
 		$this->tabs  = new Tabs($this, $tabs);
-		$this->type  = $type;
 	}
 }

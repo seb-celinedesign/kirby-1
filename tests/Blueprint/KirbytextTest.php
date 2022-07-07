@@ -42,5 +42,4 @@ class KirbytextTest extends TestCase
 		$text = new Kirbytext($this->model(), ['en' => 'Test']);
 		$this->assertSame('<p>Test</p>', $text->value);
 	}
-
 }

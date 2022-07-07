@@ -47,7 +47,6 @@ class InputField extends Field
 		/** required */
 		Section $section,
 		string $id,
-		string $type,
 
 		/** optional */
 		bool $autofocus = false,
@@ -62,7 +61,6 @@ class InputField extends Field
 		parent::__construct(
 			id: $id,
 			section: $section,
-			type: $type,
 			when: $when,
 			width: $width
 		);
@@ -74,5 +72,4 @@ class InputField extends Field
 		$this->required   = $required;
 		$this->translate  = $translate;
 	}
-
 }

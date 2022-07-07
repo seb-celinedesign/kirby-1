@@ -32,13 +32,13 @@ class UserOptions
 		bool|array|null $delete = null,
 		bool|array|null $update = null,
 	) {
-		$this->changeEmail    = new ModelOption($changeEmail);
-		$this->changeLanguage = new ModelOption($changeLanguage);
-		$this->changeName     = new ModelOption($changeName);
-		$this->changePassword = new ModelOption($changePassword);
-		$this->changeRole     = new ModelOption($changeRole);
-		$this->create         = new ModelOption($create);
-		$this->delete         = new ModelOption($delete);
-		$this->update         = new ModelOption($update);
+		$this->changeEmail    = ModelOption::factory($changeEmail);
+		$this->changeLanguage = ModelOption::factory($changeLanguage);
+		$this->changeName     = ModelOption::factory($changeName);
+		$this->changePassword = ModelOption::factory($changePassword);
+		$this->changeRole     = ModelOption::factory($changeRole);
+		$this->create         = ModelOption::factory($create);
+		$this->delete         = ModelOption::factory($delete);
+		$this->update         = ModelOption::factory($update);
 	}
 }

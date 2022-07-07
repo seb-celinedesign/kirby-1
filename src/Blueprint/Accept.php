@@ -5,7 +5,7 @@ namespace Kirby\Blueprint;
 use Kirby\Toolkit\Str;
 
 /**
- * Accept
+ * Accept rules for uploaded files
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -36,9 +36,8 @@ class Accept
 		int|null $minsize = null,
 		int|null $minwidth = null,
 		string|null $orientation = null,
-		array $type = []
-	)
-	{
+		array|string|null $type = null
+	) {
 		$this->extension   = Str::split($extension);
 		$this->mime        = Str::split($mime);
 		$this->maxheight   = $maxheight;
@@ -48,7 +47,15 @@ class Accept
 		$this->minsize     = $minsize;
 		$this->minwidth    = $minwidth;
 		$this->orientation = $orientation;
-		$this->type        = $type;
+		$this->type        = Str::split($type);
 	}
 
+	public static function factory(string|array $accept = [])
+	{
+		if (is_string($accept) === true) {
+			$accept = ['mime' => $accept];
+		}
+
+		return new static(...$accept);
+	}
 }

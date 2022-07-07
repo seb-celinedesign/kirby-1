@@ -20,27 +20,27 @@ class ImageTest extends TestCase
 		$this->assertFalse($image->disabled);
 		$this->assertNull($image->icon);
 		$this->assertNull($image->query);
-		$this->assertSame('1/1', $image->ratio);
+		$this->assertNull($image->ratio);
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers ::factory
 	 */
-	public function testConstructWithBool()
+	public function testFactoryWithBool()
 	{
-		$image = new Image(false);
+		$image = Image::factory(false);
 		$this->assertTrue($image->disabled);
 
-		$image = new Image(true);
+		$image = Image::factory(true);
 		$this->assertFalse($image->disabled);
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers ::factory
 	 */
-	public function testConstructWithString()
+	public function testFactoryWithString()
 	{
-		$image = new Image('page.cover');
+		$image = Image::factory('page.cover');
 		$this->assertSame('page.cover', $image->query);
 	}
 }

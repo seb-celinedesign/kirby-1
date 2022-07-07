@@ -15,9 +15,9 @@ class InfoSectionTest extends TestCase
 		$section = new InfoSection(
 			column: $this->column(),
 			id: 'test',
-			type: 'info'
 		);
 
+		$this->assertSame('info', $section->type);
 		$this->assertSame('Test', $section->label->value);
 		$this->assertNull($section->text->value);
 		$this->assertSame('plain', $section->theme->value);
@@ -32,7 +32,6 @@ class InfoSectionTest extends TestCase
 			column: $this->column(),
 			id: 'test',
 			help: '{{ page.slug }}',
-			type: 'info'
 		);
 
 		$this->assertSame('<p>test</p>', $section->help->value);
@@ -47,7 +46,6 @@ class InfoSectionTest extends TestCase
 			column: $this->column(),
 			id: 'test',
 			label: 'My Info Section',
-			type: 'info'
 		);
 
 		$this->assertSame('My Info Section', $section->label->value);
@@ -63,7 +61,6 @@ class InfoSectionTest extends TestCase
 			id: 'test',
 			label: 'My Info Section',
 			text: '{{ page.slug }}',
-			type: 'info'
 		);
 
 		$this->assertSame('<p>test</p>', $section->text->value);
@@ -78,7 +75,6 @@ class InfoSectionTest extends TestCase
 			column: $this->column(),
 			id: 'test',
 			theme: 'negative',
-			type: 'info'
 		);
 
 		$this->assertSame('negative', $section->theme->value);

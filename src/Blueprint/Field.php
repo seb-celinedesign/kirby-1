@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
-
 /**
  * Base field class
  *
@@ -40,7 +38,6 @@ class Field extends Node
 	public function __construct(
 		Section $section,
 		string $id,
-		string $type,
 		array|null $when = null,
 		string|null $width = null,
 		bool $translate = true,
@@ -52,7 +49,6 @@ class Field extends Node
 
 		$this->section   = $section;
 		$this->translate = $translate;
-		$this->type      = $type;
 		$this->when      = $when;
 		$this->width     = new Width($width);
 	}

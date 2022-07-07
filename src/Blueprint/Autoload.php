@@ -41,6 +41,11 @@ class Autoload
 			throw new TypeError('The ' . $group . ' type "' . $type . '" does not exist');
 		}
 
+		// remove the type prop
+		// the classes take care of defining
+		// their type attribute
+		unset($props['type']);
+
 		return new $class(...$props);
 	}
 }

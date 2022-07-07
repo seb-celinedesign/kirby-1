@@ -15,7 +15,6 @@ class FieldsSectionTest extends TestCase
 		$section = new FieldsSection(
 			column: $this->column(),
 			id: 'test',
-			type: 'fields',
 			fields: [
 				'info' => [
 					'type' => 'info'
@@ -23,6 +22,7 @@ class FieldsSectionTest extends TestCase
 			]
 		);
 
+		$this->assertSame('fields', $section->type);
 		$this->assertInstanceOf('Kirby\Blueprint\Fields', $section->fields);
 		$this->assertInstanceOf('Kirby\Blueprint\InfoField', $section->fields->first());
 	}

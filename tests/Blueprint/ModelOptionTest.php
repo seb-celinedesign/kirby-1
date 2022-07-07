@@ -15,17 +15,27 @@ class ModelOptionTest extends TestCase
 		// nothing specified
 		$option = new ModelOption();
 		$this->assertSame(['*' => null], $option->permissions);
+	}
+
+	/**
+	 * @covers ::factory
+	 */
+	public function testFactory()
+	{
+		// nothing specified
+		$option = ModelOption::factory();
+		$this->assertSame(['*' => null], $option->permissions);
 
 		// true for all roles
-		$option = new ModelOption(true);
+		$option = ModelOption::factory(true);
 		$this->assertSame(['*' => true], $option->permissions);
 
 		// false for all roles
-		$option = new ModelOption(false);
+		$option = ModelOption::factory(false);
 		$this->assertSame(['*' => false], $option->permissions);
 
 		// specific rules
-		$option = new ModelOption($input = ['*' => false, 'admin' => true]);
+		$option = ModelOption::factory($input = ['*' => false, 'admin' => true]);
 		$this->assertSame($input, $option->permissions);
 	}
 }

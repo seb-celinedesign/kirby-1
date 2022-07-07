@@ -38,15 +38,15 @@ class PageOptions
 		bool|array|null $read = null,
 		bool|array|null $update = null,
 	) {
-		$this->changeSlug     = new ModelOption($changeSlug);
-		$this->changeStatus   = new ModelOption($changeStatus);
-		$this->changeTemplate = new ModelOption($changeTemplate);
-		$this->changeTitle    = new ModelOption($changeTitle);
-		$this->create         = new ModelOption($create);
-		$this->delete         = new ModelOption($delete);
-		$this->duplicate      = new ModelOption($duplicate);
-		$this->preview        = new ModelOption($preview);
-		$this->read           = new ModelOption($read);
-		$this->update         = new ModelOption($update);
+		$this->changeSlug     = ModelOption::factory($changeSlug);
+		$this->changeStatus   = ModelOption::factory($changeStatus);
+		$this->changeTemplate = ModelOption::factory($changeTemplate);
+		$this->changeTitle    = ModelOption::factory($changeTitle);
+		$this->create         = ModelOption::factory($create);
+		$this->delete         = ModelOption::factory($delete);
+		$this->duplicate      = ModelOption::factory($duplicate);
+		$this->preview        = ModelOption::factory($preview);
+		$this->read           = ModelOption::factory($read);
+		$this->update         = ModelOption::factory($update);
 	}
 }

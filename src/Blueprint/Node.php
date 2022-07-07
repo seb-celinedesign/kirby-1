@@ -15,12 +15,9 @@ use Kirby\Cms\ModelWithContent;
  */
 class Node
 {
-	public string $id;
-	public ModelWithContent $model;
-
-	public function __construct(string $id, ModelWithContent $model)
-	{
-		$this->id    = $id;
-		$this->model = $model;
+	public function __construct(
+		public ModelWithContent $model,
+		public string $id
+	) {
 	}
 }

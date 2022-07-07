@@ -13,14 +13,14 @@ namespace Kirby\Blueprint;
  */
 class ModelOption
 {
-	public array $permissions;
+	public function __construct(public array $permissions = ['*' => null])
+	{
+	}
 
-	public function __construct(
-		bool|array|null $permissions = null
-	)
+	public static function factory(array|bool|null $permissions = null)
 	{
 		// sanitize permissions
-		$this->permissions = match (true) {
+		return new static(match (true) {
 			// allow for all
 			$permissions === true  => ['*' => true],
 			// block for all
@@ -29,6 +29,6 @@ class ModelOption
 			$permissions === null  => ['*' => null],
 			// custom array definition per role
 			default => $permissions
-		};
+		});
 	}
 }

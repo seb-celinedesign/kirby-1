@@ -15,24 +15,17 @@ use Kirby\Cms\Page;
  */
 class PageStatus
 {
-	public Page $page;
 	public PageStatusOption $draft;
 	public PageStatusOption $unlisted;
 	public PageStatusOption $listed;
 
 	public function __construct(
-		Page $page,
 		string|array|bool|null $draft = null,
 		string|array|bool|null $unlisted = null,
 		string|array|bool|null $listed = null
 	) {
-		$this->page     = $page;
-		$this->draft    = new PageStatusOption('draft', $draft);
-		$this->unlisted = new PageStatusOption('unlisted', $unlisted);
-		$this->listed   = new PageStatusOption('listed', $listed);
-
-		if ($this->page->isHomeOrErrorPage() === true) {
-			$this->draft->disabled = true;
-		}
+		$this->draft    = PageStatusOption::factory('draft', $draft);
+		$this->unlisted = PageStatusOption::factory('unlisted', $unlisted);
+		$this->listed   = PageStatusOption::factory('listed', $listed);
 	}
 }

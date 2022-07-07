@@ -19,19 +19,21 @@ class PageBlueprint extends Blueprint
 	public PageNavigation $navigation;
 	public string|null $num;
 	public PageOptions $options;
+	public Url $preview;
 	public PageStatus $status;
+	public string $type = 'page';
 
 	public function __construct(
 		/** required */
 		Page $model,
 		string $id,
-		string $type,
 
 		/** optional */
 		string|array|bool|null $image = null,
 		array $navigation = [],
 		string|int|null $num = null,
 		array $options = [],
+		string|bool|null $preview = null,
 		array $status = [],
 		array $tabs = [],
 		string|array|null $title = null,
@@ -40,14 +42,18 @@ class PageBlueprint extends Blueprint
 			model: $model,
 			id: $id,
 			title: $title,
-			tabs: $tabs,
-			type: $type
+			tabs: $tabs
 		);
 
-		$this->image      = new Image($image);
+		$this->image      = Image::factory($image);
 		$this->navigation = new PageNavigation($model, ...$navigation);
 		$this->num        = $num;
 		$this->options    = new PageOptions(...$options);
-		$this->status     = new PageStatus($model, ...$status);
+		$this->preview    = Url::factory($model, $preview);
+		$this->status     = new PageStatus(...$status);
+
+		if ($model->isHomeOrErrorPage() === true) {
+			$this->status->draft->disabled = true;
+		}
 	}
 }

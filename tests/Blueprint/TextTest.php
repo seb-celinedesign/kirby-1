@@ -42,5 +42,4 @@ class TextTest extends TestCase
 		$text = new Text($this->model(), ['en' => 'Test']);
 		$this->assertSame('Test', $text->value);
 	}
-
 }

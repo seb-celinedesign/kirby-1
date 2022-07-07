@@ -12,7 +12,7 @@ class UserOptionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$options = new UserOptions;
+		$options = new UserOptions();
 
 		$this->assertInstanceOf(ModelOption::class, $options->changeEmail);
 		$this->assertInstanceOf(ModelOption::class, $options->changeLanguage);

@@ -13,11 +13,11 @@ class TextFieldTest extends TestCase
 	public function testConstruct()
 	{
 		$field = new TextField(
-			section: $this->section(['type' => 'fields']),
+			section: $this->section(),
 			id: 'test',
-			type: 'text'
 		);
 
+		$this->assertSame('text', $field->type);
 		$this->assertInstanceOf(Text::class, $field->after);
 		$this->assertNull($field->after->value);
 
@@ -42,5 +42,4 @@ class TextFieldTest extends TestCase
 		$this->assertFalse($field->spellcheck);
 		$this->assertNull($field->value);
 	}
-
 }

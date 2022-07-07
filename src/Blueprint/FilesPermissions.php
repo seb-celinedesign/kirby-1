@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Site options
+ * Files permissions
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,16 +11,14 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class SiteOptions
+class FilesPermissions extends PermissionsGroup
 {
-	public ModelOption $changeTitle;
-	public ModelOption $update;
-
 	public function __construct(
-		bool|array|null $changeTitle = null,
-		bool|array|null $update = null,
+		public bool $changeName = true,
+		public bool $create = true,
+		public bool $delete = true,
+		public bool $replace = true,
+		public bool $update = true,
 	) {
-		$this->changeTitle = ModelOption::factory($changeTitle);
-		$this->update      = ModelOption::factory($update);
 	}
 }

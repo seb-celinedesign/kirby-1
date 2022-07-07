@@ -14,8 +14,7 @@ class BlueprintTest extends TestCase
 	{
 		$blueprint = new Blueprint(
 			model: $model = $this->model(),
-			id: 'test',
-			type: 'test'
+			id: 'test'
 		);
 
 		$this->assertSame($model, $blueprint->model);
@@ -34,7 +33,6 @@ class BlueprintTest extends TestCase
 			model: $this->model(),
 			id: 'test',
 			title: 'My blueprint',
-			type: 'test'
 		);
 
 		$this->assertSame('My blueprint', $blueprint->title->value);

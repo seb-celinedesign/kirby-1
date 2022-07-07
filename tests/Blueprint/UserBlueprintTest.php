@@ -14,14 +14,14 @@ class UserBlueprintTest extends TestCase
 	{
 		$blueprint = new UserBlueprint(
 			model: $user = $this->user(),
-			id: 'test',
-			type: 'user'
+			id: 'test'
 		);
 
 		$this->assertSame($user, $blueprint->model);
+		$this->assertSame('user', $blueprint->type);
 
 		$this->assertInstanceOf(Image::class, $blueprint->image);
 		$this->assertInstanceOf(UserOptions::class, $blueprint->options);
+		$this->assertInstanceOf(Permissions::class, $blueprint->permissions);
 	}
-
 }

@@ -14,8 +14,7 @@ class ModelsSectionTest extends TestCase
 	{
 		$section = new ModelsSection(
 			column: $this->column(),
-			id: 'test',
-			type: 'test'
+			id: 'test'
 		);
 
 		$this->assertInstanceOf(TableColumns::class, $section->columns);

@@ -12,7 +12,7 @@ class PageOptionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$options = new PageOptions;
+		$options = new PageOptions();
 
 		$this->assertInstanceOf(ModelOption::class, $options->changeSlug);
 		$this->assertInstanceOf(ModelOption::class, $options->changeStatus);
