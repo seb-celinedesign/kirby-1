@@ -41,7 +41,7 @@ class ModelsSection extends Section
 			id: $id
 		);
 
-		$this->columns = new TableColumns($this, $columns);
+		$this->columns = TableColumns::factory($this, $columns);
 		$this->empty   = new Text($this->model, $empty);
 		$this->help    = new Kirbytext($this->model, $help);
 		$this->image   = Image::factory($image);

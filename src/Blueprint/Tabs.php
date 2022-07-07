@@ -15,13 +15,17 @@ class Tabs extends Collection
 {
 	public const TYPE = Tab::class;
 
-	public function __construct(Blueprint $blueprint, array $tabs = [])
+	public static function factory(Blueprint $blueprint, array $tabs = []): static
 	{
+		$collection = new static;
+
 		foreach ($tabs as $id => $tab) {
 			$tab['blueprint'] = $blueprint;
 			$tab['id']      ??= $id;
 
-			$this->__set($tab['id'], new Tab(...$tab));
+			$collection->__set($tab['id'], new Tab(...$tab));
 		}
+
+		return $collection;
 	}
 }

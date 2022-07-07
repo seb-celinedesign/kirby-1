@@ -31,10 +31,41 @@ class Tab extends Node
 		);
 
 		$this->blueprint = $blueprint;
-		$this->columns   = new Columns($this, $columns);
+		$this->columns   = Columns::factory($this, $columns);
 		$this->icon      = $icon;
 		$this->id        = $id;
 		$this->label     = new Label($this, $label);
+	}
+
+	public function fields(): Fields
+	{
+		$fields = new Fields;
+
+		foreach ($this->sections() as $section) {
+
+			if ($section->type !== 'fields') {
+				continue;
+			}
+
+			foreach ($section->fields as $field) {
+				$fields->__set($field->id, $field);
+			}
+		}
+
+		return $fields;
+	}
+
+	public function sections(): Sections
+	{
+		$sections = new Sections;
+
+		foreach ($this->columns as $column) {
+			foreach ($column->sections as $section) {
+				$sections->__set($section->id, $section);
+			}
+		}
+
+		return $sections;
 	}
 
 }

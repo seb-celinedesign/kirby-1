@@ -12,7 +12,7 @@ class SectionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$sections = new Sections($column = $this->column(), [
+		$sections = Sections::factory($column = $this->column(), [
 			'a' => [
 				'type' => 'info'
 			],

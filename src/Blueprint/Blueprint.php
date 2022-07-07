@@ -31,6 +31,50 @@ class Blueprint extends Node
 		);
 
 		$this->title = new Label($this, $title);
-		$this->tabs  = new Tabs($this, $tabs);
+		$this->tabs  = Tabs::factory($this, $tabs);
+	}
+
+	public function columns(): Columns
+	{
+		$columns = new Columns;
+
+		foreach ($this->tabs as $tab) {
+			foreach ($tab->columns as $column) {
+				$columns->__set($column->id, $column);
+			}
+		}
+
+		return $columns;
+	}
+
+	public function fields(): Fields
+	{
+		$fields = new Fields;
+
+		foreach ($this->sections() as $section) {
+
+			if ($section->type !== 'fields') {
+				continue;
+			}
+
+			foreach ($section->fields as $field) {
+				$fields->__set($field->id, $field);
+			}
+		}
+
+		return $fields;
+	}
+
+	public function sections(): Sections
+	{
+		$sections = new Sections;
+
+		foreach ($this->tabs as $tab) {
+			foreach ($tab->sections() as $section) {
+				$sections->__set($section->id, $section);
+			}
+		}
+
+		return $sections;
 	}
 }

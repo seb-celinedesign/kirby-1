@@ -15,13 +15,17 @@ class Columns extends Collection
 {
 	public const TYPE = Column::class;
 
-	public function __construct(Tab $tab, array $columns = [])
+	public static function factory(Tab $tab, array $columns = []): Columns
 	{
+		$collection = new static;
+
 		foreach ($columns as $id => $column) {
 			$column['tab']  = $tab;
 			$column['id'] ??= $id;
 
-			$this->__set($column['id'], new Column(...$column));
+			$collection->__set($column['id'], new Column(...$column));
 		}
+
+		return $collection;
 	}
 }

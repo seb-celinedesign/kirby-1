@@ -26,7 +26,7 @@ class FieldsSection extends Section
 			id: $id
 		);
 
-		$this->fields = new Fields($this, $fields);
+		$this->fields = Fields::factory($this, $fields);
 	}
 
 }

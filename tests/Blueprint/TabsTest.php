@@ -12,7 +12,7 @@ class TabsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$tabs = new Tabs($blueprint = $this->blueprint(), [
+		$tabs = Tabs::factory($blueprint = $this->blueprint(), [
 			'a' => [],
 			'b' => []
 		]);
@@ -31,7 +31,7 @@ class TabsTest extends TestCase
 	 */
 	public function testConstructWithProps()
 	{
-		$tabs = new Tabs($this->blueprint(), [
+		$tabs = Tabs::factory($this->blueprint(), [
 			'a' => [
 				'label' => 'Tab A',
 				'icon'  => 'edit'

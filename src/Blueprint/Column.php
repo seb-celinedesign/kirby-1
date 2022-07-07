@@ -29,7 +29,7 @@ class Column extends Node
 		);
 
 		$this->tab      = $tab;
-		$this->sections = new Sections($this, $sections);
+		$this->sections = Sections::factory(column: $this, sections: $sections);
 		$this->width    = new Width($width);
 	}
 }

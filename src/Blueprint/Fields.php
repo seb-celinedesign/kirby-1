@@ -15,15 +15,19 @@ class Fields extends Collection
 {
 	public const TYPE = Field::class;
 
-	public function __construct(Section $section, array $fields = [])
+	public static function factory(Section $section, array $fields = []): static
 	{
+		$collection = new static;
+
 		foreach ($fields as $id => $field) {
 			$field['section'] = $section;
 			$field['id']    ??= $id;
 
 			$field = Autoload::field($field);
 
-			$this->__set($field->id, $field);
+			$collection->__set($field->id, $field);
 		}
+
+		return $collection;
 	}
 }

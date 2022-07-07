@@ -12,7 +12,7 @@ class ColumnsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$columns = new Columns($tab = $this->tab(), [
+		$columns = Columns::factory($tab = $this->tab(), [
 			'a' => [],
 			'b' => [],
 		]);

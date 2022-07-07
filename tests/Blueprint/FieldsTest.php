@@ -12,7 +12,7 @@ class FieldsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$fields = new Fields($section = $this->section(), [
+		$fields = Fields::factory($section = $this->section(), [
 			'a' => [
 				'type' => 'info'
 			],

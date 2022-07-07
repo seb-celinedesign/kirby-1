@@ -15,8 +15,10 @@ class Options extends Collection
 {
 	public const TYPE = Option::class;
 
-	public function __construct(array $options = [])
+	public static function factory(array $options = []): static
 	{
+		$collection = new static;
+
 		foreach ($options as $key => $option) {
 			if (is_string($option) === true) {
 				if (is_string($key) === true) {
@@ -27,7 +29,9 @@ class Options extends Collection
 			}
 
 			$option = new Option(...$option);
-			$this->__set($option->value, $option);
+			$collection->__set($option->value, $option);
 		}
+
+		return $collection;
 	}
 }

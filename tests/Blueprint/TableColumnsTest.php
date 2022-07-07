@@ -12,7 +12,7 @@ class TableColumnsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$columns = new TableColumns($parent = $this->section(), [
+		$columns = TableColumns::factory($parent = $this->section(), [
 			'a' => []
 		]);
 

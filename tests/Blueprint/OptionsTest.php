@@ -12,7 +12,7 @@ class OptionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$options = new Options(['a', 'b']);
+		$options = Options::factory(['a', 'b']);
 
 		$this->assertSame('a', $options->first()->value);
 		$this->assertSame('a', $options->first()->text->value);
@@ -26,7 +26,7 @@ class OptionsTest extends TestCase
 	 */
 	public function testConstructWithAssocArray()
 	{
-		$options = new Options([
+		$options = Options::factory([
 			'a' => 'Option A',
 			'b' => 'Option B'
 		]);
@@ -43,7 +43,7 @@ class OptionsTest extends TestCase
 	 */
 	public function testConstructWithOptionArray()
 	{
-		$options = new Options([
+		$options = Options::factory([
 			['value' => 'a', 'text' => 'Option A'],
 			['value' => 'b', 'text' => 'Option B']
 		]);
