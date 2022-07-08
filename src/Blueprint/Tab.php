@@ -16,7 +16,7 @@ class Tab extends Node
 	public Blueprint $blueprint;
 	public Columns $columns;
 	public string|null $icon;
-	public Translated $label;
+	public Label $label;
 
 	public function __construct(
 		Blueprint $blueprint,
