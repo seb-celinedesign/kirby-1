@@ -107,5 +107,4 @@ class AcceptTest extends TestCase
 		$accept = new Accept(type: ['image', 'document']);
 		$this->assertSame(['image', 'document'], $accept->type);
 	}
-
 }

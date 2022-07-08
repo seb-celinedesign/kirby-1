@@ -17,7 +17,7 @@ class Fields extends Collection
 
 	public static function factory(Section $section, array $fields = []): static
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($fields as $id => $field) {
 			$field['section'] = $section;

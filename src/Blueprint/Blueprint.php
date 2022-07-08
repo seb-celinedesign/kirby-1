@@ -34,9 +34,12 @@ class Blueprint extends Node
 		$this->tabs  = Tabs::factory($this, $tabs);
 	}
 
+	/**
+	 * Collects all columns from all tabs
+	 */
 	public function columns(): Columns
 	{
-		$columns = new Columns;
+		$columns = new Columns();
 
 		foreach ($this->tabs as $tab) {
 			foreach ($tab->columns as $column) {
@@ -47,12 +50,14 @@ class Blueprint extends Node
 		return $columns;
 	}
 
+	/**
+	 * Collects all fields from all tabs
+	 */
 	public function fields(): Fields
 	{
-		$fields = new Fields;
+		$fields = new Fields();
 
 		foreach ($this->sections() as $section) {
-
 			if ($section->type !== 'fields') {
 				continue;
 			}
@@ -65,9 +70,12 @@ class Blueprint extends Node
 		return $fields;
 	}
 
+	/**
+	 * Collects all sections from all tabs
+	 */
 	public function sections(): Sections
 	{
-		$sections = new Sections;
+		$sections = new Sections();
 
 		foreach ($this->tabs as $tab) {
 			foreach ($tab->sections() as $section) {

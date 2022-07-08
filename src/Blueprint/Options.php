@@ -17,7 +17,7 @@ class Options extends Collection
 
 	public static function factory(array $options = []): static
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($options as $key => $option) {
 			if (is_string($option) === true) {

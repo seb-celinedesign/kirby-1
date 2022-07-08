@@ -37,4 +37,119 @@ class BlueprintTest extends TestCase
 
 		$this->assertSame('My blueprint', $blueprint->title->value);
 	}
+
+	/**
+	 * @covers ::columns
+	 */
+	public function testColumns()
+	{
+		$blueprint = new Blueprint(
+			model: $this->model(),
+			id: 'test',
+			tabs: [
+				'content' => [
+					'columns' => [
+						'a' => []
+					]
+				],
+				'seo' => [
+					'columns' => [
+						'b' => []
+					]
+				]
+			]
+		);
+
+		$this->assertCount(2, $blueprint->columns());
+		$this->assertSame('a', $blueprint->columns()->first()->id);
+		$this->assertSame('b', $blueprint->columns()->last()->id);
+	}
+
+	/**
+	 * @covers ::fields
+	 */
+	public function testFields()
+	{
+		$blueprint = new Blueprint(
+			model: $this->model(),
+			id: 'test',
+			tabs: [
+				'content' => [
+					'columns' => [
+						[
+							'sections' => [
+								'a' => [
+									'type' => 'fields',
+									'fields' => [
+										'a' => [
+											'type' => 'text'
+										]
+									]
+								]
+							]
+						]
+					]
+				],
+				'seo' => [
+					'columns' => [
+						[
+							'sections' => [
+								'b' => [
+									'type' => 'fields',
+									'fields' => [
+										'b' => [
+											'type' => 'text'
+										]
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+		);
+
+		$this->assertCount(2, $blueprint->fields());
+		$this->assertSame('a', $blueprint->fields()->first()->id);
+		$this->assertSame('b', $blueprint->fields()->last()->id);
+	}
+
+	/**
+	 * @covers ::sections
+	 */
+	public function testSections()
+	{
+		$blueprint = new Blueprint(
+			model: $this->model(),
+			id: 'test',
+			tabs: [
+				'content' => [
+					'columns' => [
+						[
+							'sections' => [
+								'a' => [
+									'type' => 'info'
+								]
+							]
+						]
+					]
+				],
+				'seo' => [
+					'columns' => [
+						[
+							'sections' => [
+								'b' => [
+									'type' => 'info'
+								]
+							]
+						]
+					]
+				]
+			]
+		);
+
+		$this->assertCount(2, $blueprint->sections());
+		$this->assertSame('a', $blueprint->sections()->first()->id);
+		$this->assertSame('b', $blueprint->sections()->last()->id);
+	}
 }

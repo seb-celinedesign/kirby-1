@@ -17,7 +17,7 @@ class Tabs extends Collection
 
 	public static function factory(Blueprint $blueprint, array $tabs = []): static
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($tabs as $id => $tab) {
 			$tab['blueprint'] = $blueprint;

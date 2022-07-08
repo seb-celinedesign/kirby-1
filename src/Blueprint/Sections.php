@@ -17,7 +17,7 @@ class Sections extends Collection
 
 	public static function factory(Column $column, array $sections = []): static
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($sections as $id => $section) {
 			$section['column'] = $column;

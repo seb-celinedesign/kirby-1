@@ -28,5 +28,4 @@ class FieldsSection extends Section
 
 		$this->fields = Fields::factory($this, $fields);
 	}
-
 }

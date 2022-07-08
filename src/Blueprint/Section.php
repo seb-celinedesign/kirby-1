@@ -27,5 +27,4 @@ class Section extends Node
 
 		$this->column = $column;
 	}
-
 }

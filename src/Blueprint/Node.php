@@ -3,7 +3,6 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
-use Throwable;
 
 /**
  * Base element for all blueprint features

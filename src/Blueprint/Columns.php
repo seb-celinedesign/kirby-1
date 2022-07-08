@@ -17,7 +17,7 @@ class Columns extends Collection
 
 	public static function factory(Tab $tab, array $columns = []): Columns
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($columns as $id => $column) {
 			$column['tab']  = $tab;

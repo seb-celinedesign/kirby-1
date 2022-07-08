@@ -8,7 +8,7 @@ class TableColumns extends Collection
 
 	public static function factory(Section|Field $parent, array $columns = []): static
 	{
-		$collection = new static;
+		$collection = new static();
 
 		foreach ($columns as $id => $column) {
 			$column['parent'] = $parent;

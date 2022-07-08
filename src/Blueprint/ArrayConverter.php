@@ -16,7 +16,7 @@ use Throwable;
  */
 trait ArrayConverter
 {
-	public function __debuginfo(): array
+	public function __debugInfo(): array
 	{
 		return $this->toArray();
 	}
@@ -63,7 +63,7 @@ trait ArrayConverter
 			method_exists($value, 'toArray') => $value->toArray(),
 
 			// objects with debug info method
-			method_exists($value, '__debuginfo') => $value->__debuginfo(),
+			method_exists($value, '__debuginfo') => $value->__debugInfo(),
 
 			// objects that can be at least converted to string
 			method_exists($value, '__toString') => $value->__toString(),

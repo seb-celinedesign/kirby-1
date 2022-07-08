@@ -39,10 +39,9 @@ class Tab extends Node
 
 	public function fields(): Fields
 	{
-		$fields = new Fields;
+		$fields = new Fields();
 
 		foreach ($this->sections() as $section) {
-
 			if ($section->type !== 'fields') {
 				continue;
 			}
@@ -57,7 +56,7 @@ class Tab extends Node
 
 	public function sections(): Sections
 	{
-		$sections = new Sections;
+		$sections = new Sections();
 
 		foreach ($this->columns as $column) {
 			foreach ($column->sections as $section) {
@@ -67,5 +66,4 @@ class Tab extends Node
 
 		return $sections;
 	}
-
 }

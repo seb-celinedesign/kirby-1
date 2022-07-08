@@ -25,6 +25,47 @@ class TabTest extends TestCase
 	}
 
 	/**
+	 * @covers ::fields
+	 */
+	public function testFields()
+	{
+		$tab = new Tab(
+			blueprint: $this->blueprint(),
+			id: 'test',
+			columns: [
+				[
+					'sections' => [
+						'a' => [
+							'type' => 'fields',
+							'fields' => [
+								'a' => [
+									'type' => 'text'
+								]
+							]
+						]
+					]
+				],
+				[
+					'sections' => [
+						'b' => [
+							'type' => 'fields',
+							'fields' => [
+								'b' => [
+									'type' => 'text'
+								]
+							]
+						]
+					]
+				]
+			]
+		);
+
+		$this->assertCount(2, $tab->fields());
+		$this->assertSame('a', $tab->fields()->first()->id);
+		$this->assertSame('b', $tab->fields()->last()->id);
+	}
+
+	/**
 	 * @covers ::__construct
 	 */
 	public function testIcon()
@@ -52,6 +93,37 @@ class TabTest extends TestCase
 		$this->assertSame('My Tab', $tab->label->value);
 	}
 
+	/**
+	 * @covers ::sections
+	 */
+	public function testSections()
+	{
+		$tab = new Tab(
+			blueprint: $this->blueprint(),
+			id: 'test',
+			columns: [
+				[
+					'sections' => [
+						'a' => [
+							'type' => 'info'
+						]
+					]
+				],
+				[
+					'sections' => [
+						'b' => [
+							'type' => 'info'
+						]
+					]
+				]
+			]
+		);
+
+		$this->assertCount(2, $tab->sections());
+		$this->assertSame('a', $tab->sections()->first()->id);
+		$this->assertSame('b', $tab->sections()->last()->id);
+	}
+
 	public function testToArray()
 	{
 		$tab = new Tab(
@@ -69,5 +141,4 @@ class TabTest extends TestCase
 
 		$this->assertSame($expected, $tab->toArray());
 	}
-
 }
