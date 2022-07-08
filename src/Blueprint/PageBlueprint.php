@@ -49,7 +49,7 @@ class PageBlueprint extends Blueprint
 		$this->navigation = new PageNavigation($model, ...$navigation);
 		$this->num        = $num;
 		$this->options    = new PageOptions(...$options);
-		$this->preview    = Url::factory($model, $preview);
+		$this->preview    = Url::factory($model, $preview, $model->url());
 		$this->status     = new PageStatus(...$status);
 
 		if ($model->isHomeOrErrorPage() === true) {

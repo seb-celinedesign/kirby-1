@@ -15,7 +15,13 @@ class UrlTest extends TestCase
 		$url = new Url($this->model());
 
 		$this->assertFalse($url->disabled);
-		$this->assertSame('/test', $url->value);
+		$this->assertNull($url->value);
+	}
+
+	public function testDefault()
+	{
+		$url = new Url(model: $this->model(), value: null, default: '/foo');
+		$this->assertSame('/foo', $url->value);
 	}
 
 	public function testDisabled()
@@ -54,7 +60,12 @@ class UrlTest extends TestCase
 
 	public function testFactoryWithTrue()
 	{
+		// no default
 		$url = Url::factory(model: $this->model(), value: true);
-		$this->assertSame('/test', $url->value);
+		$this->assertNull($url->value);
+
+		// with default
+		$url = Url::factory(model: $this->model(), value: true, default: '/foo');
+		$this->assertSame('/foo', $url->value);
 	}
 }

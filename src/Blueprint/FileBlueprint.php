@@ -44,6 +44,6 @@ class FileBlueprint extends Blueprint
 		$this->accept  = Accept::factory($accept);
 		$this->image   = Image::factory($image);
 		$this->options = new FileOptions(...$options);
-		$this->preview = Url::factory($model, $preview);
+		$this->preview = Url::factory($model, $preview, $model->url());
 	}
 }
