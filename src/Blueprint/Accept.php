@@ -13,10 +13,8 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Accept
+class Accept extends Component
 {
-	use Exporter;
-
 	public array $extension;
 	public int|null $maxheight;
 	public int|null $maxsize;
@@ -52,7 +50,7 @@ class Accept
 		$this->type        = Str::split($type);
 	}
 
-	public static function factory(string|array $accept = [])
+	public static function factory(string|array $accept = []): static
 	{
 		if (is_string($accept) === true) {
 			$accept = ['mime' => $accept];

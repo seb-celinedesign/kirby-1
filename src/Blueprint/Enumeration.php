@@ -13,7 +13,7 @@ use Kirby\Exception\InvalidArgumentException;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Enumeration extends StringProperty
+class Enumeration extends Property
 {
 	public array $allowed = [];
 

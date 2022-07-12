@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Setup for the prev/next buttons in the Panel
  *
@@ -11,13 +13,11 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PageNavigation
+class PageNavigation extends Component
 {
-	use Exporter;
-
 	public string|null $sortBy;
-	public array $status;
-	public array $template;
+	public array|null $status;
+	public array|null $template;
 
 	public function __construct(
 		string|null $sortBy = null,
@@ -38,7 +38,7 @@ class PageNavigation
 		// convert given option to clean array
 		return match (true) {
 			// fallback
-			$option === null => [],
+			$option === null => null,
 
 			// wildcard
 			$option === 'all', $option === '*' => ['*'],
@@ -46,8 +46,21 @@ class PageNavigation
 			// wrap single option
 			is_string($option) === true => [$option],
 
+			// convert an empty option array into null
+			empty($option) === true => null,
+
 			// array of options
 			default => $option
 		};
+	}
+
+	public function render(ModelWithContent $model): mixed
+	{
+		// fill in the defaults from the page
+		return [
+			'sortBy'   => $this->sortBy,
+			'status'   => $this->status   ?? [$model->status()],
+			'template' => $this->template ?? [$model->intendedTemplate()->name()],
+		];
 	}
 }

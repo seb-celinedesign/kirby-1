@@ -3,16 +3,16 @@
 namespace Kirby\Blueprint;
 
 /**
- * @covers \Kirby\Blueprint\PageStatus
+ * @covers \Kirby\Blueprint\PageStatusOptions
  */
-class PageStatusTest extends TestCase
+class PageStatusOptionsTest extends TestCase
 {
 	/**
 	 * @covers ::__construct
 	 */
 	public function testConstruct()
 	{
-		$status = new PageStatus();
+		$status = new PageStatusOptions();
 
 		$this->assertInstanceOf(PageStatusOption::class, $status->draft);
 		$this->assertInstanceOf(PageStatusOption::class, $status->unlisted);

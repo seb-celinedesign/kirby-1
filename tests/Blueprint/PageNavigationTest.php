@@ -15,8 +15,8 @@ class PageNavigationTest extends TestCase
 		$navigation = new PageNavigation();
 
 		$this->assertNull($navigation->sortBy);
-		$this->assertSame([], $navigation->status);
-		$this->assertSame([], $navigation->template);
+		$this->assertNull($navigation->status);
+		$this->assertNull($navigation->template);
 	}
 
 	/**

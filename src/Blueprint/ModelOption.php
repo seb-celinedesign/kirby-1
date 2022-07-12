@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Model Option
  *
@@ -11,13 +13,14 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class ModelOption
+class ModelOption extends Component
 {
-	public function __construct(public array $permissions = ['*' => null])
-	{
+	public function __construct(
+		public array $permissions = ['*' => null]
+	) {
 	}
 
-	public static function factory(array|bool|null $permissions = null)
+	public static function factory(array|bool|null $permissions = null): static
 	{
 		// sanitize permissions
 		return new static(match (true) {
@@ -32,8 +35,15 @@ class ModelOption
 		});
 	}
 
-	public function toArray(): array
+	public function render(ModelWithContent $model): bool
 	{
-		return $this->permissions;
+		// fetch the option for the current user
+		if ($user = $model->kirby()->user()) {
+			$role = $user->role()->id();
+
+			return $this->permissions[$role] ?? $this->permissions['*'];
+		}
+
+		return false;
 	}
 }

@@ -15,9 +15,9 @@ use Kirby\Cms\ModelWithContent;
  */
 class Kirbytext extends Text
 {
-	public function export(ModelWithContent $model = null)
+	public function render(ModelWithContent $model): mixed
 	{
-		$value = parent::export($model);
+		$value = parent::render($model);
 
 		if ($model && $value !== null) {
 			return $model->kirby()->kirbytext($value);

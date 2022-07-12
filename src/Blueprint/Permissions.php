@@ -11,10 +11,8 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Permissions
+class Permissions extends Component
 {
-	use Exporter;
-
 	public AccessPermissions $access;
 	public AccountPermissions $account;
 	public FilesPermissions $files;

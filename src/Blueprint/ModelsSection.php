@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 class ModelsSection extends BaseSection
 {
 	public TableColumns $columns;
@@ -48,5 +50,16 @@ class ModelsSection extends BaseSection
 		$this->parent  = $parent  ?? new Related();
 		$this->size    = $size    ?? new Size();
 		$this->text    = $text    ?? new Text();
+	}
+
+	public function render(ModelWithContent $model): array
+	{
+		return [
+			'columns' => $this->columns->render($model),
+			'empty'   => $this->empty->render($model),
+			'help'    => $this->help->render($model),
+			'layout'  => $this->layout->value,
+			'size'    => $this->size->value,
+		];
 	}
 }

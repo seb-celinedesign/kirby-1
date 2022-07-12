@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\Page;
-
 /**
  * Page blueprint
  *
@@ -20,7 +18,7 @@ class PageBlueprint extends Blueprint
 	public string|null $num;
 	public PageOptions $options;
 	public Url $preview;
-	public PageStatus $status;
+	public PageStatusOptions $status;
 	public string $type = 'page';
 
 	public function __construct(
@@ -31,7 +29,7 @@ class PageBlueprint extends Blueprint
 		string|null $num = null,
 		PageOptions $options = null,
 		Url $preview = null,
-		PageStatus $status = null,
+		PageStatusOptions $status = null,
 		Tabs $tabs = null,
 	) {
 		parent::__construct(
@@ -45,6 +43,6 @@ class PageBlueprint extends Blueprint
 		$this->num        = $num;
 		$this->options    = $options ?? new PageOptions();
 		$this->preview    = $preview ?? new Url();
-		$this->status     = $status ?? new PageStatus();
+		$this->status     = $status ?? new PageStatusOptions();
 	}
 }

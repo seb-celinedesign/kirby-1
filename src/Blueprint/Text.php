@@ -15,9 +15,9 @@ use Kirby\Cms\ModelWithContent;
  */
 class Text extends Translated
 {
-	public function export(ModelWithContent $model = null)
+	public function render(ModelWithContent $model): mixed
 	{
-		if ($model && $this->value !== null) {
+		if ($this->value !== null) {
 			return $model->toSafeString($this->value);
 		}
 

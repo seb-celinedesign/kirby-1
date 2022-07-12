@@ -24,11 +24,10 @@ class PagesSection extends ModelsSection
 		PageStatus $status = null,
 		array $templates = [],
 		...$args
-	)
-	{
+	) {
 		parent::__construct($id, ...$args);
 
-		$this->status    = $status ?? new PageStatus;
+		$this->status    = $status ?? new PageStatus();
 		$this->templates = $templates;
 	}
 
@@ -42,5 +41,4 @@ class PagesSection extends ModelsSection
 
 		return parent::polyfill($props);
 	}
-
 }

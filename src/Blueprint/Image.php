@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Image object for sections and fields
  *
@@ -11,10 +13,8 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Image
+class Image extends Component
 {
-	use Exporter;
-
 	public function __construct(
 		public string|null $back = 'black',
 		public string|null $color = null,
@@ -24,6 +24,11 @@ class Image
 		public string|null $query = null,
 		public string|null $ratio = null
 	) {
+	}
+
+	public function file(ModelWithContent $model)
+	{
+		return $model->query($this->query, 'Kirby\Cms\File');
 	}
 
 	public static function factory(array|string|bool|null $image = null): static
@@ -47,5 +52,21 @@ class Image
 		};
 
 		return new static(...$image);
+	}
+
+	public function render(ModelWithContent $model): array|false
+	{
+		if ($this->disabled === true) {
+			return false;
+		}
+
+		return [
+			'back'  => $this->back,
+			'color' => $this->color,
+			'cover' => $this->cover,
+			'icon'  => $this->icon,
+			'src'   => $this->file($model)?->url(),
+			'ratio' => $this->ratio
+		];
 	}
 }

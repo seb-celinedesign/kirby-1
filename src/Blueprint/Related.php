@@ -11,6 +11,6 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Related extends StringProperty
+class Related extends Property
 {
 }

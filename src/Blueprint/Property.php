@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Property
  *
@@ -11,16 +13,15 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-abstract class Property
+class Property extends Component
 {
-	public function __debugInfo()
-	{
-		return $this->value;
-	}
+	public string|null $default;
+	public string|null $value;
 
-	public function __toString(): string
+	public function __construct(string|null $value = null, string|null $default = null)
 	{
-		return $this->toString();
+		$this->default = $default;
+		$this->value   = $value ?? $default;
 	}
 
 	public static function factory(...$args): static
@@ -28,12 +29,7 @@ abstract class Property
 		return new static(...$args);
 	}
 
-	public function toString(): string
-	{
-		return (string)$this->value() ?? '';
-	}
-
-	public function value()
+	public function render(ModelWithContent $model): mixed
 	{
 		return $this->value;
 	}

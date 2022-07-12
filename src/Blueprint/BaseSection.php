@@ -39,5 +39,4 @@ class BaseSection extends Section
 
 		return $props;
 	}
-
 }

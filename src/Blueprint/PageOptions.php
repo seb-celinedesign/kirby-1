@@ -56,5 +56,4 @@ class PageOptions extends ModelOptions
 		$this->read           = $read ?? new ModelOption();
 		$this->update         = $update ?? new ModelOption();
 	}
-
 }

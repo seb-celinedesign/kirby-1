@@ -11,6 +11,6 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Icon extends StringProperty
+class Icon extends Property
 {
 }

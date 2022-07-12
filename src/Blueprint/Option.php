@@ -11,10 +11,8 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Option
+class Option extends Component
 {
-	use Exporter;
-
 	public Translated $text;
 	public string|int|float|null $value;
 

@@ -21,6 +21,6 @@ class PageBlueprintTest extends TestCase
 		$this->assertInstanceOf(PageNavigation::class, $blueprint->navigation);
 		$this->assertInstanceOf(PageOptions::class, $blueprint->options);
 		$this->assertInstanceOf(Url::class, $blueprint->preview);
-		$this->assertInstanceOf(PageStatus::class, $blueprint->status);
+		$this->assertInstanceOf(PageStatusOptions::class, $blueprint->status);
 	}
 }

@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\Collection as BaseCollection;
+use Kirby\Cms\ModelWithContent;
 use TypeError;
 
 /**
@@ -48,5 +49,16 @@ class Collection extends BaseCollection
 		}
 
 		return $collection;
+	}
+
+	public function render(ModelWithContent $model): array
+	{
+		$props = [];
+
+		foreach ($this->data as $key => $item) {
+			$props[$key] = $item->render($model);
+		}
+
+		return $props;
 	}
 }

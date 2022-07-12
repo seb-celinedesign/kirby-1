@@ -42,11 +42,6 @@ class Field extends Node
 		$this->width = $width ?? new Width();
 	}
 
-	public function props(ModelWithContent $model): array
-	{
-		return $this->toArray();
-	}
-
 	public function submit(ModelWithContent $model, $value)
 	{
 		return $value;
@@ -56,5 +51,4 @@ class Field extends Node
 	{
 		return true;
 	}
-
 }

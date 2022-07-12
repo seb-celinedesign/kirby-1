@@ -16,8 +16,8 @@ class PageStatusOptionTest extends TestCase
 
 		$this->assertFalse($option->disabled);
 		$this->assertSame('draft', $option->id);
-		$this->assertSame('Draft', $option->label->value);
-		$this->assertNull($option->description->value);
+		$this->assertInstanceOf(Label::class, $option->label);
+		$this->assertInstanceOf(Text::class, $option->description);
 	}
 
 	/**
@@ -34,61 +34,10 @@ class PageStatusOptionTest extends TestCase
 	/**
 	 * @covers ::factory
 	 */
-	public function testFactoryWithNull()
+	public function testFactory()
 	{
-		$option = PageStatusOption::factory('draft');
-
-		$this->assertFalse($option->disabled);
-		$this->assertSame('draft', $option->id);
-		$this->assertSame('Draft', $option->label->value);
-		$this->assertSame('The page is in draft mode and only visible for logged in editors or via secret link', $option->description->value);
-	}
-
-	/**
-	 * @covers ::factory
-	 */
-	public function testFactoryWithTrue()
-	{
-		$option = PageStatusOption::factory('draft', true);
-
-		$this->assertFalse($option->disabled);
-		$this->assertSame('draft', $option->id);
-		$this->assertSame('Draft', $option->label->value);
-		$this->assertSame('The page is in draft mode and only visible for logged in editors or via secret link', $option->description->value);
-	}
-
-	/**
-	 * @covers ::factory
-	 */
-	public function testFactoryWithFalse()
-	{
-		$option = PageStatusOption::factory('draft', false);
-
-		$this->assertTrue($option->disabled);
-		$this->assertSame('draft', $option->id);
-		$this->assertNull($option->label->value);
-		$this->assertNull($option->description->value);
-	}
-
-	/**
-	 * @covers ::factory
-	 */
-	public function testFactoryWithString()
-	{
-		$option = PageStatusOption::factory('draft', 'In draft mode');
-
-		$this->assertFalse($option->disabled);
-		$this->assertSame('draft', $option->id);
-		$this->assertSame('In draft mode', $option->label->value);
-		$this->assertNull($option->description->value);
-	}
-
-	/**
-	 * @covers ::factory
-	 */
-	public function testConstructWithArray()
-	{
-		$option = PageStatusOption::factory('draft', [
+		$option = PageStatusOption::factory([
+			'id'          => 'draft',
 			'label'       => $label = 'In draft mode',
 			'description' => $descr = 'The page is still in draft mode'
 		]);
@@ -97,5 +46,57 @@ class PageStatusOptionTest extends TestCase
 		$this->assertSame('draft', $option->id);
 		$this->assertSame($label, $option->label->value);
 		$this->assertSame($descr, $option->description->value);
+	}
+
+	/**
+	 * @covers ::prefab
+	 */
+	public function testPrefabWithFalse()
+	{
+		$option = PageStatusOption::prefab('draft', false);
+
+		$this->assertTrue($option->disabled);
+		$this->assertSame('draft', $option->id);
+		$this->assertSame('Draft', $option->label->value);
+		$this->assertSame('The page is in draft mode and only visible for logged in editors or via secret link', $option->description->value);
+	}
+
+	/**
+	 * @covers ::prefab
+	 */
+	public function testPrefabWithNull()
+	{
+		$option = PageStatusOption::prefab('draft');
+
+		$this->assertFalse($option->disabled);
+		$this->assertSame('draft', $option->id);
+		$this->assertSame('Draft', $option->label->value);
+		$this->assertSame('The page is in draft mode and only visible for logged in editors or via secret link', $option->description->value);
+	}
+
+	/**
+	 * @covers ::prefab
+	 */
+	public function testPrefabWithString()
+	{
+		$option = PageStatusOption::prefab('draft', 'In draft mode');
+
+		$this->assertFalse($option->disabled);
+		$this->assertSame('draft', $option->id);
+		$this->assertSame('In draft mode', $option->label->value);
+		$this->assertNull($option->description->value);
+	}
+
+	/**
+	 * @covers ::prefab
+	 */
+	public function testPrefabWithTrue()
+	{
+		$option = PageStatusOption::prefab('draft', true);
+
+		$this->assertFalse($option->disabled);
+		$this->assertSame('draft', $option->id);
+		$this->assertSame('Draft', $option->label->value);
+		$this->assertSame('The page is in draft mode and only visible for logged in editors or via secret link', $option->description->value);
 	}
 }

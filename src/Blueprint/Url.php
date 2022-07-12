@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Url option with query string superpowers
  *
@@ -11,7 +13,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Url extends StringProperty
+class Url extends Property
 {
 	public function __construct(
 		public string|null $value = null,
@@ -24,5 +26,18 @@ class Url extends StringProperty
 		);
 
 		$this->disabled = $disabled;
+	}
+
+	public function render(ModelWithContent $model): string|false
+	{
+		if ($this->disabled === true) {
+			return false;
+		}
+
+		if ($this->value !== null) {
+			return $model->toSafeString($this->value);
+		}
+
+		return $this->value;
 	}
 }

@@ -29,11 +29,4 @@ class UrlTest extends TestCase
 		$url = new Url(value: '/foo', disabled: true);
 		$this->assertTrue($url->disabled);
 	}
-
-	public function testToString()
-	{
-		$url = new Url(value: '/foo');
-		$this->assertSame('/foo', $url->toString());
-		$this->assertSame('/foo', (string)$url);
-	}
 }

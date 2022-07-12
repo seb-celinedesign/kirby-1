@@ -11,10 +11,8 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class ModelOptions
+class ModelOptions extends Component
 {
-	use Exporter;
-
 	public const ALIASES = [];
 
 	public static function factory(array $props): static
@@ -30,5 +28,4 @@ class ModelOptions
 
 		return new static(...$options);
 	}
-
 }

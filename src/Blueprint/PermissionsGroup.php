@@ -11,10 +11,8 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PermissionsGroup
+class PermissionsGroup extends Component
 {
-	use Exporter;
-
 	/**
 	 * Creates a new instance either from an
 	 * array or a boolean

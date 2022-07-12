@@ -50,6 +50,23 @@ class TabTest extends TestCase
 		$this->assertSame('b', $tab->fields()->last()->id);
 	}
 
+	public function testRender()
+	{
+		$tab = new Tab(
+			id: 'test',
+			label: new Label('My Tab')
+		);
+
+		$expected = [
+			'columns' => [],
+			'icon'    => null,
+			'id'      => 'test',
+			'label'   => 'My Tab'
+		];
+
+		$this->assertSame($expected, $tab->render($this->model()));
+	}
+
 	/**
 	 * @covers ::sections
 	 */
@@ -76,22 +93,5 @@ class TabTest extends TestCase
 		$this->assertCount(2, $tab->sections());
 		$this->assertSame('a', $tab->sections()->first()->id);
 		$this->assertSame('b', $tab->sections()->last()->id);
-	}
-
-	public function testToArray()
-	{
-		$tab = new Tab(
-			id: 'test',
-			label: new Label('My Tab')
-		);
-
-		$expected = [
-			'columns' => [],
-			'icon'    => null,
-			'id'      => 'test',
-			'label'   => 'My Tab'
-		];
-
-		$this->assertSame($expected, $tab->toArray());
 	}
 }

@@ -2,9 +2,9 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Toolkit\I18n;
-use Kirby\Toolkit\Str;
 
 /**
  * Page Status Option
@@ -15,20 +15,18 @@ use Kirby\Toolkit\Str;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PageStatusOption
+class PageStatusOption extends Component
 {
-	use Exporter;
-
-	public Translated $description;
+	public Text $description;
 	public bool $disabled;
 	public string $id;
-	public Translated $label;
+	public Label $label;
 
 	public function __construct(
 		string $id,
-		Translated $description = null,
+		Text $description = null,
 		bool $disabled = false,
-		Translated $label = null,
+		Label $label = null,
 	) {
 		if (in_array($id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new InvalidArgumentException('The status must be draft, unlisted or listed');
@@ -36,14 +34,12 @@ class PageStatusOption
 
 		$this->id          = $id;
 		$this->disabled    = $disabled;
-		$this->label       = $label ?? new Translated(Str::ucfirst($id));
-		$this->description = $description ?? new Translated();
+		$this->label       = $label 	  ?? new Label(I18n::translate('page.status.' . $id));
+		$this->description = $description ?? new Text(I18n::translate('page.status.' . $id . '.description'));
 	}
 
-	public static function factory(
-		string $id,
-		string|array|bool|null $option = null
-	): static {
+	public static function prefab(string $id, array|string|bool|null $option = null): static
+	{
 		$option = match (true) {
 			// disabled
 			$option === false => [
@@ -51,24 +47,32 @@ class PageStatusOption
 			],
 
 			// use default values for the status
-			$option === null, $option === true => [
-				'label'       => I18n::translate('page.status.' . $id),
-				'description' => I18n::translate('page.status.' . $id . '.description')
-			],
+			$option === null, $option === true => [],
 
-			// simple string for label
+			// simple string for label. the description will be unset
 			is_string($option) === true => [
-				'label' => $option,
+				'label' 	  => $option,
+				'description' => null
 			],
 
-			// proper array definition
+			// already defined as array definition
 			default => $option
 		};
 
-		// convert label and description to proper translated objects
-		$option['label']       = Translated::factory($option['label'] ?? null);
-		$option['description'] = Translated::factory($option['description'] ?? null);
+		$option['id'] = $id;
 
-		return new static($id, ...$option);
+		return static::factory($option);
+	}
+
+	public function render(ModelWithContent $model): array|false
+	{
+		if ($this->disabled === true) {
+			return false;
+		}
+
+		return [
+			'description' => $this->description->render($model),
+			'label'       => $this->label->render($model)
+		];
 	}
 }

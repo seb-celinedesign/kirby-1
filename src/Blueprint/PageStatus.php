@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\Page;
-
 /**
  * Page Status
  *
@@ -13,31 +11,18 @@ use Kirby\Cms\Page;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class PageStatus
+class PageStatus extends Enumeration
 {
-	use Exporter;
-
-	public PageStatusOption $draft;
-	public PageStatusOption $unlisted;
-	public PageStatusOption $listed;
-
-	public function __construct(
-		PageStatusOption $draft = null,
-		PageStatusOption $unlisted = null,
-		PageStatusOption $listed = null
-	) {
-		$this->draft    = $draft    ?? new PageStatusOption('draft');
-		$this->unlisted = $unlisted ?? new PageStatusOption('unlisted');
-		$this->listed   = $listed   ?? new PageStatusOption('listed');
-	}
-
-	public static function factory(array $props): static
+	public function __construct(string|null $value = null, string $default = 'draft')
 	{
-		foreach ($props as $id => $option) {
-			$props[$id] = PageStatusOption::factory($id, $option);
-		}
-
-		return new static(...$props);
+		parent::__construct(
+			default: $default,
+			value: $value,
+			allowed: [
+				'draft',
+				'unlisted',
+				'listed',
+			]
+		);
 	}
-
 }

@@ -62,7 +62,7 @@ class AcceptTest extends TestCase
 		$this->assertSame(['image/*', 'application/*'], $accept->mime);
 	}
 
-	public function testToArray()
+	public function testRender()
 	{
 		$accept = new Accept(
 			extension: 'jpg',
@@ -90,7 +90,7 @@ class AcceptTest extends TestCase
 			'type'        => ['image']
 		];
 
-		$this->assertSame($expected, $accept->toArray());
+		$this->assertSame($expected, $accept->render($this->model()));
 	}
 
 	public function testType()

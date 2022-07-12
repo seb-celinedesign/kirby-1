@@ -56,9 +56,9 @@ class OptionTest extends TestCase
 	}
 
 	/**
-	 * @covers ::toArray
+	 * @covers ::render
 	 */
-	public function testToArray()
+	public function testRender()
 	{
 		$option   = new Option('test', 'Test Option');
 		$expected = [
@@ -66,6 +66,6 @@ class OptionTest extends TestCase
 			'value' => 'test',
 		];
 
-		$this->assertSame($expected, $option->toArray());
+		$this->assertSame($expected, $option->render($this->model()));
 	}
 }

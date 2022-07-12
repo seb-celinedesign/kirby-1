@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
-
 /**
  * Base class for all saveable fields
  *
@@ -50,5 +48,4 @@ class InputField extends BaseField
 		$this->required  = $required;
 		$this->translate = $translate;
 	}
-
 }

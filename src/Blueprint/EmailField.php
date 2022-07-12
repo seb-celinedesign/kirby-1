@@ -2,7 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
 use Kirby\Toolkit\I18n;
 
 /**
@@ -26,5 +25,4 @@ class EmailField extends TextField
 
 		parent::__construct(...$args);
 	}
-
 }

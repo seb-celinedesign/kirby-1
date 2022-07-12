@@ -45,15 +45,4 @@ class TranslatedTest extends TestCase
 		$translated = new Translated([], 'Test');
 		$this->assertSame('Test', $translated->value);
 	}
-
-	/**
-	 * @covers ::get
-	 */
-	public function testGet()
-	{
-		$translated = new Translated(['en' => 'Test', 'de' => 'Töst']);
-
-		$this->assertSame('Töst', $translated->de);
-		$this->assertSame('Töst', $translated->get('de'));
-	}
 }
