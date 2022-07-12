@@ -13,5 +13,22 @@ namespace Kirby\Blueprint;
  */
 class ModelOptions
 {
-	use ArrayConverter;
+	use Exporter;
+
+	public const ALIASES = [];
+
+	public static function factory(array $props): static
+	{
+		$options = [];
+
+		foreach ($props as $key => $prop) {
+			// support for old option names
+			$key = static::ALIASES[$key] ?? $key;
+			// add the model option to a clean new array
+			$options[$key] = ModelOption::factory($prop);
+		}
+
+		return new static(...$options);
+	}
+
 }

@@ -13,28 +13,13 @@ class ColumnTest extends TestCase
 	public function testConstruct()
 	{
 		$column = new Column(
-			tab: $tab = $this->tab(),
-			id: 'test',
+			id: 'test'
 		);
 
-		$this->assertSame($tab, $column->tab);
-		$this->assertInstanceOf('Kirby\Blueprint\Sections', $column->sections);
+		$this->assertInstanceOf(Sections::class, $column->sections);
 		$this->assertCount(0, $column->sections);
 		$this->assertSame('test', $column->id);
+		$this->assertInstanceOf(Width::class, $column->width);
 		$this->assertSame('1/1', $column->width->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testConstructWithWidth()
-	{
-		$column = new Column(
-			tab: $this->tab(),
-			id: 'test',
-			width: '1/2'
-		);
-
-		$this->assertSame('1/2', $column->width->value);
 	}
 }

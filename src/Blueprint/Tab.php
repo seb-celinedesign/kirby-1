@@ -13,28 +13,20 @@ namespace Kirby\Blueprint;
  */
 class Tab extends Node
 {
-	public Blueprint $blueprint;
 	public Columns $columns;
-	public string|null $icon;
+	public Icon $icon;
 	public Label $label;
 
 	public function __construct(
-		Blueprint $blueprint,
 		string $id,
-		string|array|null $label = null,
-		string|null $icon = null,
-		array $columns = []
+		Label $label = null,
+		Icon $icon = null,
+		Columns $columns = null
 	) {
-		parent::__construct(
-			id: $id,
-			model: $blueprint->model,
-		);
-
-		$this->blueprint = $blueprint;
-		$this->columns   = Columns::factory($this, $columns);
-		$this->icon      = $icon;
+		$this->columns   = $columns ?? new Columns();
+		$this->icon      = $icon ?? new Icon();
 		$this->id        = $id;
-		$this->label     = new Label($this, $label);
+		$this->label     = $label ?? Label::fallback($id);
 	}
 
 	public function fields(): Fields

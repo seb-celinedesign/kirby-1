@@ -12,17 +12,15 @@ class TabsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$tabs = Tabs::factory($blueprint = $this->blueprint(), [
+		$tabs = Tabs::factory([
 			'a' => [],
 			'b' => []
 		]);
 
 		$this->assertSame('a', $tabs->first()->id);
-		$this->assertSame($blueprint, $tabs->first()->blueprint);
 		$this->assertSame('A', $tabs->first()->label->value);
 
 		$this->assertSame('b', $tabs->last()->id);
-		$this->assertSame($blueprint, $tabs->last()->blueprint);
 		$this->assertSame('B', $tabs->last()->label->value);
 	}
 
@@ -31,7 +29,7 @@ class TabsTest extends TestCase
 	 */
 	public function testConstructWithProps()
 	{
-		$tabs = Tabs::factory($this->blueprint(), [
+		$tabs = Tabs::factory([
 			'a' => [
 				'label' => 'Tab A',
 				'icon'  => 'edit'
@@ -40,6 +38,6 @@ class TabsTest extends TestCase
 
 		$this->assertSame('a', $tabs->first()->id);
 		$this->assertSame('Tab A', $tabs->first()->label->value);
-		$this->assertSame('edit', $tabs->first()->icon);
+		$this->assertSame('edit', $tabs->first()->icon->value);
 	}
 }

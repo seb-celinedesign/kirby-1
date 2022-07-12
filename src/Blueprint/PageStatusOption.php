@@ -17,7 +17,7 @@ use Kirby\Toolkit\Str;
  */
 class PageStatusOption
 {
-	use ArrayConverter;
+	use Exporter;
 
 	public Translated $description;
 	public bool $disabled;
@@ -26,9 +26,9 @@ class PageStatusOption
 
 	public function __construct(
 		string $id,
-		string|array|null $description = null,
+		Translated $description = null,
 		bool $disabled = false,
-		string|array|null $label = null,
+		Translated $label = null,
 	) {
 		if (in_array($id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new InvalidArgumentException('The status must be draft, unlisted or listed');
@@ -36,8 +36,8 @@ class PageStatusOption
 
 		$this->id          = $id;
 		$this->disabled    = $disabled;
-		$this->label       = new Translated($label ?? Str::ucfirst($id));
-		$this->description = new Translated($description);
+		$this->label       = $label ?? new Translated(Str::ucfirst($id));
+		$this->description = $description ?? new Translated();
 	}
 
 	public static function factory(
@@ -49,18 +49,25 @@ class PageStatusOption
 			$option === false => [
 				'disabled' => true
 			],
+
 			// use default values for the status
 			$option === null, $option === true => [
 				'label'       => I18n::translate('page.status.' . $id),
 				'description' => I18n::translate('page.status.' . $id . '.description')
 			],
+
 			// simple string for label
 			is_string($option) === true => [
 				'label' => $option,
 			],
+
 			// proper array definition
 			default => $option
 		};
+
+		// convert label and description to proper translated objects
+		$option['label']       = Translated::factory($option['label'] ?? null);
+		$option['description'] = Translated::factory($option['description'] ?? null);
 
 		return new static($id, ...$option);
 	}

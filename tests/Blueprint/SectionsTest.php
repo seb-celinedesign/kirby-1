@@ -12,14 +12,13 @@ class SectionsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$sections = Sections::factory($column = $this->column(), [
+		$sections = Sections::factory([
 			'a' => [
 				'type' => 'info'
 			],
 		]);
 
 		$this->assertSame('a', $sections->first()->id);
-		$this->assertSame($column, $sections->first()->column);
 		$this->assertSame('info', $sections->first()->type);
 	}
 }

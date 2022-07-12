@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Report
+ * Base Field
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,27 +11,25 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Report extends Node
+class BaseField extends Field
 {
-	public Text $info;
+	public Help $help;
 	public Label $label;
-	public Url $link;
-	public Theme $theme;
-	public Text $value;
 
 	public function __construct(
 		string $id,
-		Text $info = null,
+		Help $help = null,
 		Label $label = null,
-		Url $link = null,
-		Theme $theme = null,
-		Text $value = null,
+		When $when = null,
+		Width $width = null,
 	) {
-		$this->id    = $id;
-		$this->info  = $info  ?? new Text();
+		parent::__construct(
+			id: $id,
+			when: $when,
+			width: $width
+		);
+
+		$this->help  = $help  ?? new Help();
 		$this->label = $label ?? Label::fallback($id);
-		$this->link  = $link  ?? new Url();
-		$this->theme = $theme ?? new Theme();
-		$this->value = $value ?? new Text();
 	}
 }

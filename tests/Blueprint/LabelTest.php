@@ -12,10 +12,9 @@ class LabelTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$node  = new Node(id: 'test', model: $this->model());
-		$label = new Label($node);
+		$label = new Label();
 
-		$this->assertSame('Test', $label->value);
+		$this->assertNull($label->value);
 	}
 
 	/**
@@ -23,20 +22,18 @@ class LabelTest extends TestCase
 	 */
 	public function testConstructWithString()
 	{
-		$node  = new Node(id: 'test', model: $this->model());
-		$label = new Label($node, 'My Label');
+		$label = new Label('My Label');
 
 		$this->assertSame('My Label', $label->value);
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers ::fallback
 	 */
-	public function testConstructWithQuery()
+	public function testFallback()
 	{
-		$node  = new Node(id: 'test', model: $this->model());
-		$label = new Label($node, '{{ page.slug }}');
+		$label = Label::fallback('test');
 
-		$this->assertSame('test', $label->value);
+		$this->assertSame('Test', $label->value);
 	}
 }

@@ -21,23 +21,21 @@ class UserBlueprint extends Blueprint
 	public string $type = 'user';
 
 	public function __construct(
-		User $model,
 		string $id,
-		string|array|bool|null $image = null,
-		array $options = [],
-		array $permissions = [],
-		array $tabs = [],
-		string|array|null $title = null,
+		Image $image = null,
+		Label $label = null,
+		UserOptions $options = null,
+		Permissions $permissions = null,
+		Tabs $tabs = null,
 	) {
 		parent::__construct(
 			id: $id,
-			model: $model,
+			label: $label,
 			tabs: $tabs,
-			title: $title,
 		);
 
-		$this->image       = Image::factory($image);
-		$this->options     = new UserOptions(...$options);
-		$this->permissions = new Permissions(...$permissions);
+		$this->image       = $image ?? new Image();
+		$this->options     = $options ?? new UserOptions();
+		$this->permissions = $permissions ?? new Permissions();
 	}
 }

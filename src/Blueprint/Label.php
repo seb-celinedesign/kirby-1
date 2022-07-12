@@ -5,7 +5,7 @@ namespace Kirby\Blueprint;
 use Kirby\Toolkit\Str;
 
 /**
- * Node label
+ * Label
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -15,14 +15,8 @@ use Kirby\Toolkit\Str;
  */
 class Label extends Text
 {
-	public function __construct(
-		Node $node,
-		string|array|null $value = null
-	) {
-		parent::__construct(
-			model: $node->model,
-			value: $value,
-			default: Str::ucfirst($node->id)
-		);
+	public static function fallback(string $id): static
+	{
+		return new static(Str::ucfirst($id));
 	}
 }

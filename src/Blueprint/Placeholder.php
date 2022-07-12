@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Columns
+ * Placeholder
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,7 +11,6 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Columns extends Collection
+class Placeholder extends Text
 {
-	public const TYPE = Column::class;
 }

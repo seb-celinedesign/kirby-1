@@ -13,11 +13,9 @@ class NodeTest extends TestCase
 	public function testConstruct()
 	{
 		$node = new Node(
-			id: 'test',
-			model: $model = $this->model()
+			id: 'test'
 		);
 
 		$this->assertSame('test', $node->id);
-		$this->assertSame($model, $node->model);
 	}
 }

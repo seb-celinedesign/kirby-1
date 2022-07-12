@@ -13,18 +13,10 @@ namespace Kirby\Blueprint;
  */
 class Section extends Node
 {
-	public Column $column;
 	public string $type;
 
 	public function __construct(
-		Column $column,
-		string $id
+		public string $id
 	) {
-		parent::__construct(
-			id: $id,
-			model: $column->model
-		);
-
-		$this->column = $column;
 	}
 }

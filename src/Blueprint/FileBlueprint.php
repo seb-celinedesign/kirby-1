@@ -22,28 +22,23 @@ class FileBlueprint extends Blueprint
 	public string $type = 'file';
 
 	public function __construct(
-		/** required */
-		File $model,
 		string $id,
-
-		/** optional */
-		string|array $accept = [],
-		string|array|bool|null $image = null,
-		array $options = [],
-		string|bool|null $preview = null,
-		array $tabs = [],
-		string|array|null $title = null,
+		Accept $accept = null,
+		Image $image = null,
+		Label $label = null,
+		FileOptions $options = null,
+		Url $preview = null,
+		Tabs $tabs = null,
 	) {
 		parent::__construct(
-			model: $model,
 			id: $id,
-			title: $title,
+			label: $label,
 			tabs: $tabs
 		);
 
-		$this->accept  = Accept::factory($accept);
-		$this->image   = Image::factory($image);
-		$this->options = new FileOptions(...$options);
-		$this->preview = Url::factory($model, $preview, $model->url());
+		$this->accept  = $accept  ?? new Accept();
+		$this->image   = $image   ?? new Image();
+		$this->options = $options ?? new FileOptions();
+		$this->preview = $preview ?? new Url();
 	}
 }

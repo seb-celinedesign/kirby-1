@@ -13,9 +13,19 @@ namespace Kirby\Blueprint;
  */
 abstract class Property
 {
+	public function __debugInfo()
+	{
+		return $this->value;
+	}
+
 	public function __toString(): string
 	{
 		return $this->toString();
+	}
+
+	public static function factory(...$args): static
+	{
+		return new static(...$args);
 	}
 
 	public function toString(): string

@@ -15,6 +15,13 @@ use Kirby\Cms\Page;
  */
 class PageOptions extends ModelOptions
 {
+	public const ALIASES = [
+		'status'   => 'changeStatus',
+		'template' => 'changeTemplate',
+		'title'    => 'changeTitle',
+		'url'      => 'changeSlug',
+	];
+
 	public ModelOption $changeSlug;
 	public ModelOption $changeStatus;
 	public ModelOption $changeTemplate;
@@ -27,26 +34,27 @@ class PageOptions extends ModelOptions
 	public ModelOption $update;
 
 	public function __construct(
-		bool|array|null $changeSlug = null,
-		bool|array|null $changeStatus = null,
-		bool|array|null $changeTemplate = null,
-		bool|array|null $changeTitle = null,
-		bool|array|null $create = null,
-		bool|array|null $delete = null,
-		bool|array|null $duplicate = null,
-		bool|array|null $preview = null,
-		bool|array|null $read = null,
-		bool|array|null $update = null,
+		ModelOption $changeSlug = null,
+		ModelOption $changeStatus = null,
+		ModelOption $changeTemplate = null,
+		ModelOption $changeTitle = null,
+		ModelOption $create = null,
+		ModelOption $delete = null,
+		ModelOption $duplicate = null,
+		ModelOption $preview = null,
+		ModelOption $read = null,
+		ModelOption $update = null,
 	) {
-		$this->changeSlug     = ModelOption::factory($changeSlug);
-		$this->changeStatus   = ModelOption::factory($changeStatus);
-		$this->changeTemplate = ModelOption::factory($changeTemplate);
-		$this->changeTitle    = ModelOption::factory($changeTitle);
-		$this->create         = ModelOption::factory($create);
-		$this->delete         = ModelOption::factory($delete);
-		$this->duplicate      = ModelOption::factory($duplicate);
-		$this->preview        = ModelOption::factory($preview);
-		$this->read           = ModelOption::factory($read);
-		$this->update         = ModelOption::factory($update);
+		$this->changeSlug     = $changeSlug ?? new ModelOption();
+		$this->changeStatus   = $changeStatus ?? new ModelOption();
+		$this->changeTemplate = $changeTemplate ?? new ModelOption();
+		$this->changeTitle    = $changeTitle ?? new ModelOption();
+		$this->create         = $create ?? new ModelOption();
+		$this->delete         = $delete ?? new ModelOption();
+		$this->duplicate      = $duplicate ?? new ModelOption();
+		$this->preview        = $preview ?? new ModelOption();
+		$this->read           = $read ?? new ModelOption();
+		$this->update         = $update ?? new ModelOption();
 	}
+
 }

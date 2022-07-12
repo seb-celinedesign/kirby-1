@@ -66,7 +66,7 @@ class PageStatusOptionTest extends TestCase
 
 		$this->assertTrue($option->disabled);
 		$this->assertSame('draft', $option->id);
-		$this->assertSame('Draft', $option->label->value);
+		$this->assertNull($option->label->value);
 		$this->assertNull($option->description->value);
 	}
 

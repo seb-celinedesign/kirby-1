@@ -13,11 +13,9 @@ class UserBlueprintTest extends TestCase
 	public function testConstruct()
 	{
 		$blueprint = new UserBlueprint(
-			model: $user = $this->user(),
 			id: 'test'
 		);
 
-		$this->assertSame($user, $blueprint->model);
 		$this->assertSame('user', $blueprint->type);
 
 		$this->assertInstanceOf(Image::class, $blueprint->image);

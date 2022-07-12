@@ -11,30 +11,21 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class StatsSection extends Section
+class StatsSection extends BaseSection
 {
-	public Kirbytext $help;
-	public Label $label;
 	public Reports $reports;
 	public Size $size;
 	public string $type = 'stats';
 
 	public function __construct(
-		Column $column,
 		string $id,
-		string|array|null $help = null,
-		string|array|null $label = null,
-		string|array $reports = [],
-		string|array|null $size = 'large',
+		Reports $reports = null,
+		Size $size = null,
+		...$args
 	) {
-		parent::__construct(
-			column: $column,
-			id: $id
-		);
+		parent::__construct($id, ...$args);
 
-		$this->help    = new Kirbytext($this->model, $help);
-		$this->label   = new Label($this, $label);
-		$this->reports = Reports::factory($this->model, $reports);
-		$this->size    = new Size($size);
+		$this->reports = $reports ?? new Reports();
+		$this->size    = $size    ?? new Size();
 	}
 }

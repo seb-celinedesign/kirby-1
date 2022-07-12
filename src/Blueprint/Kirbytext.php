@@ -15,16 +15,14 @@ use Kirby\Cms\ModelWithContent;
  */
 class Kirbytext extends Text
 {
-	public function __construct(ModelWithContent $model, string|array|null $value = null)
+	public function export(ModelWithContent $model = null)
 	{
-		parent::__construct(
-			model: $model,
-			value: $value
-		);
+		$value = parent::export($model);
 
-		// parse kirbytext
-		if ($this->value !== null) {
-			$this->value = $this->model->kirby()->kirbytext($this->value);
+		if ($model && $value !== null) {
+			return $model->kirby()->kirbytext($value);
 		}
+
+		return $value;
 	}
 }

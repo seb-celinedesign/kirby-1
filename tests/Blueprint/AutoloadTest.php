@@ -10,9 +10,8 @@ class AutoloadTest extends TestCase
 	public function testBlueprint()
 	{
 		$blueprint = Autoload::blueprint([
-			'id'    => 'test',
-			'model' => $this->model(),
-			'type'  => 'page',
+			'id'   => 'test',
+			'type' => 'page',
 		]);
 
 		$this->assertInstanceOf(PageBlueprint::class, $blueprint);
@@ -21,9 +20,8 @@ class AutoloadTest extends TestCase
 	public function testField()
 	{
 		$field = Autoload::field([
-			'section' => $this->section(),
-			'id'      => 'test',
-			'type'    => 'info',
+			'id'   => 'test',
+			'type' => 'info',
 		]);
 
 		$this->assertInstanceOf(InfoField::class, $field);
@@ -32,9 +30,8 @@ class AutoloadTest extends TestCase
 	public function testSection()
 	{
 		$section = Autoload::section([
-			'column' => $this->column(),
-			'id'     => 'test',
-			'type'   => 'info',
+			'id'   => 'test',
+			'type' => 'info',
 		]);
 
 		$this->assertInstanceOf(InfoSection::class, $section);
@@ -43,9 +40,8 @@ class AutoloadTest extends TestCase
 	public function testType()
 	{
 		$section = Autoload::type('section', [
-			'column' => $this->column(),
-			'id'     => 'test',
-			'type'   => 'info',
+			'id'   => 'test',
+			'type' => 'info',
 		]);
 
 		$this->assertInstanceOf(InfoSection::class, $section);

@@ -13,15 +13,15 @@ class InputFieldTest extends TestCase
 	public function testConstruct()
 	{
 		$field = new InputField(
-			section: $this->section(),
 			id: 'test'
 		);
 
-		$this->assertInstanceOf(Label::class, $field->label);
-		$this->assertInstanceOf(Kirbytext::class, $field->help);
-
 		$this->assertFalse($field->autofocus);
+		$this->assertInstanceOf(Help::class, $field->help);
+		$this->assertInstanceOf(Label::class, $field->label);
 		$this->assertFalse($field->required);
 		$this->assertTrue($field->translate);
+		$this->assertInstanceOf(Width::class, $field->width);
+		$this->assertInstanceOf(When::class, $field->when);
 	}
 }

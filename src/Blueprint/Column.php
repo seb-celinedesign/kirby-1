@@ -14,22 +14,15 @@ namespace Kirby\Blueprint;
 class Column extends Node
 {
 	public Sections $sections;
-	public Tab $tab;
 	public Width $width;
 
 	public function __construct(
-		Tab $tab,
 		string $id,
-		string|null $width = null,
-		array $sections = []
+		Width $width = null,
+		Sections $sections = null
 	) {
-		parent::__construct(
-			id: $id,
-			model: $tab->model
-		);
-
-		$this->tab      = $tab;
-		$this->sections = Sections::factory(column: $this, sections: $sections);
-		$this->width    = new Width($width);
+		$this->id       = $id;
+		$this->sections = $sections ?? new Sections();
+		$this->width    = $width    ?? new Width();
 	}
 }

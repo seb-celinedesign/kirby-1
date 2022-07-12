@@ -12,71 +12,14 @@ class InfoFieldTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$info = new InfoField(
-			section: $this->section(),
+		$field = new InfoField(
 			id: 'test',
 		);
 
-		$this->assertSame('info', $info->type);
-		$this->assertSame('Test', $info->label->value);
-		$this->assertNull($info->text->value);
-		$this->assertSame('plain', $info->theme->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testHelp()
-	{
-		$info = new InfoField(
-			section: $this->section(),
-			id: 'test',
-			help: '{{ page.slug }}',
-		);
-
-		$this->assertSame('<p>test</p>', $info->help->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testLabel()
-	{
-		$info = new InfoField(
-			section: $this->section(),
-			id: 'test',
-			label: 'My Info Section',
-		);
-
-		$this->assertSame('My Info Section', $info->label->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testText()
-	{
-		$info = new InfoField(
-			section: $this->section(),
-			id: 'test',
-			label: 'My Info Section',
-			text: '{{ page.slug }}',
-		);
-
-		$this->assertSame('<p>test</p>', $info->text->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testTheme()
-	{
-		$info = new InfoField(
-			section: $this->section(),
-			id: 'test',
-			theme: 'negative',
-		);
-
-		$this->assertSame('negative', $info->theme->value);
+		$this->assertSame('info', $field->type);
+		$this->assertInstanceOf(Label::class, $field->label);
+		$this->assertInstanceOf(Help::class, $field->help);
+		$this->assertInstanceOf(Kirbytext::class, $field->text);
+		$this->assertInstanceOf(Theme::class, $field->theme);
 	}
 }

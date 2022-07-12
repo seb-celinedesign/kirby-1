@@ -17,10 +17,10 @@ class SiteOptions extends ModelOptions
 	public ModelOption $update;
 
 	public function __construct(
-		bool|array|null $changeTitle = null,
-		bool|array|null $update = null,
+		ModelOption $changeTitle = null,
+		ModelOption $update = null,
 	) {
-		$this->changeTitle = ModelOption::factory($changeTitle);
-		$this->update      = ModelOption::factory($update);
+		$this->changeTitle = $changeTitle ?? new ModelOption();
+		$this->update      = $update      ?? new ModelOption();
 	}
 }

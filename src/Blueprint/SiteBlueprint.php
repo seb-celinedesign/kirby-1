@@ -20,20 +20,18 @@ class SiteBlueprint extends Blueprint
 	public string $type = 'site';
 
 	public function __construct(
-		Site $model,
-		array $options = [],
-		string|bool|null $preview = null,
-		array $tabs = [],
-		string|array|null $title = null,
+		Label $label = null,
+		SiteOptions $options = null,
+		Url $preview = null,
+		Tabs $tabs = null,
 	) {
 		parent::__construct(
 			id: 'site',
-			model: $model,
+			label: $label,
 			tabs: $tabs,
-			title: $title,
 		);
 
-		$this->options = new SiteOptions(...$options);
-		$this->preview = Url::factory($model, $preview, $model->url());
+		$this->options = $options ?? new SiteOptions();
+		$this->preview = $preview ?? new Url();
 	}
 }

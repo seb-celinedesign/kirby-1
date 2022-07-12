@@ -2,7 +2,8 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
+use ReflectionProperty;
+use Throwable;
 
 /**
  * Base element for all blueprint features
@@ -15,11 +16,36 @@ use Kirby\Cms\ModelWithContent;
  */
 class Node
 {
-	use ArrayConverter;
+	use Exporter;
+
+	public string $id;
 
 	public function __construct(
-		public ModelWithContent $model,
-		public string $id
+		string $id
 	) {
+		$this->id = $id;
+	}
+
+	public static function factory(array $props): static
+	{
+		foreach ($props = static::polyfill($props) as $key => $value) {
+			if (is_object($value) === true) {
+				continue;
+			}
+
+			$reflection = new ReflectionProperty(static::class, $key);
+			$className  = $reflection->getType()->getName();
+
+			if (class_exists($className) === true && method_exists($className, 'factory') === true) {
+				$props[$key] = $className::factory($value);
+			}
+		}
+
+		return new static(...$props);
+	}
+
+	public static function polyfill(array $props): array
+	{
+		return $props;
 	}
 }

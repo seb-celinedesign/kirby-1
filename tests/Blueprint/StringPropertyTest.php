@@ -2,15 +2,10 @@
 
 namespace Kirby\Blueprint;
 
-class TestProperty extends Property
-{
-	public $value;
-}
-
 /**
- * @covers \Kirby\Blueprint\Property
+ * @covers \Kirby\Blueprint\StringProperty
  */
-class PropertyTest extends TestCase
+class StringPropertyTest extends TestCase
 {
 	/**
 	 * @covers ::__toString
@@ -18,12 +13,12 @@ class PropertyTest extends TestCase
 	 */
 	public function testToString()
 	{
-		$prop = new TestProperty();
+		$prop = new StringProperty();
 		$prop->value = 'foo';
 		$this->assertSame('foo', $prop->toString());
 		$this->assertSame('foo', $prop->__toString());
 
-		$prop = new TestProperty();
+		$prop = new StringProperty();
 		$prop->value = 1;
 		$this->assertSame('1', $prop->toString());
 		$this->assertSame('1', $prop->__toString());
@@ -34,10 +29,10 @@ class PropertyTest extends TestCase
 	 */
 	public function testValue()
 	{
-		$prop = new TestProperty();
+		$prop = new StringProperty();
 		$this->assertNull($prop->value());
 
-		$prop = new TestProperty();
+		$prop = new StringProperty();
 		$prop->value = 'foo';
 		$this->assertSame('foo', $prop->value());
 	}

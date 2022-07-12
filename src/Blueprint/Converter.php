@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Url option with query string superpowers
+ * String converter options
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,18 +11,20 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Url extends StringProperty
+class Converter extends Enumeration
 {
-	public function __construct(
-		public string|null $value = null,
-		public string|null $default = null,
-		public bool $disabled = false
-	) {
+	public function __construct(string|null $value = null, string $default = null)
+	{
 		parent::__construct(
 			default: $default,
-			value: $value
+			value: $value,
+			allowed: [
+				null,
+				'lower',
+				'slug',
+				'ucfirst',
+				'upper',
+			]
 		);
-
-		$this->disabled = $disabled;
 	}
 }

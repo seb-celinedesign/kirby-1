@@ -13,20 +13,22 @@ use Kirby\Toolkit\I18n;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Translated extends Property
+class Translated extends StringProperty
 {
 	public array $translations;
-	public string|null $default;
 
-	public function __construct(string|array|null $translations = null, string|null $default = null)
+	public function __construct(string|array|null $value = null, string|null $default = null)
 	{
-		if ($translations === null) {
-			$translations = [];
-		}
+		$translations = match (true) {
+			// nothing provided
+			$value === null => [],
 
-		if (is_string($translations) === true) {
-			$translations = ['en' => $translations];
-		}
+			// from string
+			is_string($value) === true => ['en' => $value],
+
+			// from array
+			default => $value
+		};
 
 		$this->default      = $default;
 		$this->translations = $translations;

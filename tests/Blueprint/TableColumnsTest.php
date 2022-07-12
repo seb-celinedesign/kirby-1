@@ -12,11 +12,10 @@ class TableColumnsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$columns = TableColumns::factory($parent = $this->section(), [
+		$columns = TableColumns::factory([
 			'a' => []
 		]);
 
 		$this->assertInstanceOf(TableColumn::class, $columns->first());
-		$this->assertSame($parent, $columns->first()->parent);
 	}
 }

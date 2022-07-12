@@ -15,18 +15,10 @@ class Sections extends Collection
 {
 	public const TYPE = Section::class;
 
-	public static function factory(Column $column, array $sections = []): static
+	public static function factory(array $sections = []): static
 	{
 		$collection = new static();
-
-		foreach ($sections as $id => $section) {
-			$section['column'] = $column;
-			$section['id']   ??= $id;
-
-			$section = Autoload::section($section);
-
-			$collection->__set($section->id, $section);
-		}
+		$collection->data = Autoload::collection('section', $sections);
 
 		return $collection;
 	}

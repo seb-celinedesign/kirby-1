@@ -21,18 +21,18 @@ class FileOptions extends ModelOptions
 	public ModelOption $update;
 
 	public function __construct(
-		bool|array|null $changeName = null,
-		bool|array|null $create = null,
-		bool|array|null $delete = null,
-		bool|array|null $read = null,
-		bool|array|null $replace = null,
-		bool|array|null $update = null,
+		ModelOption $changeName = null,
+		ModelOption $create = null,
+		ModelOption $delete = null,
+		ModelOption $read = null,
+		ModelOption $replace = null,
+		ModelOption $update = null,
 	) {
-		$this->changeName = ModelOption::factory($changeName);
-		$this->create     = ModelOption::factory($create);
-		$this->delete     = ModelOption::factory($delete);
-		$this->read       = ModelOption::factory($read);
-		$this->replace    = ModelOption::factory($replace);
-		$this->update     = ModelOption::factory($update);
+		$this->changeName = $changeName ?? new ModelOption();
+		$this->create     = $create ?? new ModelOption();
+		$this->delete     = $delete ?? new ModelOption();
+		$this->read       = $read ?? new ModelOption();
+		$this->replace    = $replace ?? new ModelOption();
+		$this->update     = $update ?? new ModelOption();
 	}
 }

@@ -15,7 +15,7 @@ use Kirby\Toolkit\Str;
  */
 class Accept
 {
-	use ArrayConverter;
+	use Exporter;
 
 	public array $extension;
 	public int|null $maxheight;

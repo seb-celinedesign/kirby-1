@@ -13,13 +13,11 @@ class BlueprintTest extends TestCase
 	public function testConstruct()
 	{
 		$blueprint = new Blueprint(
-			model: $model = $this->model(),
 			id: 'test'
 		);
 
-		$this->assertSame($model, $blueprint->model);
 		$this->assertSame('test', $blueprint->id);
-		$this->assertSame('Test', $blueprint->title->value);
+		$this->assertInstanceOf(Label::class, $blueprint->label);
 		$this->assertInstanceOf(Tabs::class, $blueprint->tabs);
 		$this->assertCount(0, $blueprint->tabs);
 	}
@@ -27,15 +25,14 @@ class BlueprintTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 */
-	public function testConstructWithTitle()
+	public function testConstructWithLabel()
 	{
 		$blueprint = new Blueprint(
-			model: $this->model(),
 			id: 'test',
-			title: 'My blueprint',
+			label: new Label('My blueprint'),
 		);
 
-		$this->assertSame('My blueprint', $blueprint->title->value);
+		$this->assertSame('My blueprint', $blueprint->label->value);
 	}
 
 	/**
@@ -44,20 +41,21 @@ class BlueprintTest extends TestCase
 	public function testColumns()
 	{
 		$blueprint = new Blueprint(
-			model: $this->model(),
 			id: 'test',
-			tabs: [
-				'content' => [
-					'columns' => [
-						'a' => []
-					]
-				],
-				'seo' => [
-					'columns' => [
-						'b' => []
-					]
-				]
-			]
+			tabs: new Tabs([
+				new Tab(
+					id: 'content',
+					columns: new Columns([
+						new Column(id: 'a')
+					])
+				),
+				new Tab(
+					id: 'seo',
+					columns: new Columns([
+						new Column(id: 'b')
+					])
+				)
+			])
 		);
 
 		$this->assertCount(2, $blueprint->columns());
@@ -71,42 +69,38 @@ class BlueprintTest extends TestCase
 	public function testFields()
 	{
 		$blueprint = new Blueprint(
-			model: $this->model(),
 			id: 'test',
-			tabs: [
-				'content' => [
-					'columns' => [
-						[
-							'sections' => [
-								'a' => [
-									'type' => 'fields',
-									'fields' => [
-										'a' => [
-											'type' => 'text'
-										]
-									]
-								]
-							]
-						]
-					]
-				],
-				'seo' => [
-					'columns' => [
-						[
-							'sections' => [
-								'b' => [
-									'type' => 'fields',
-									'fields' => [
-										'b' => [
-											'type' => 'text'
-										]
-									]
-								]
-							]
-						]
-					]
+			tabs: new Tabs(
+				[
+					new Tab(
+						id: 'content',
+						columns: new Columns([
+							new Column(
+								id: 'a',
+								sections: new Sections([
+									new FieldsSection(
+										id: 'a',
+										fields: new Fields([
+											new InfoField(id: 'a')
+										])
+									)
+								])
+							),
+							new Column(
+								id: 'b',
+								sections: new Sections([
+									new FieldsSection(
+										id: 'b',
+										fields: new Fields([
+											new InfoField(id: 'b')
+										])
+									)
+								])
+							)
+						])
+					)
 				]
-			]
+			)
 		);
 
 		$this->assertCount(2, $blueprint->fields());
@@ -120,32 +114,31 @@ class BlueprintTest extends TestCase
 	public function testSections()
 	{
 		$blueprint = new Blueprint(
-			model: $this->model(),
 			id: 'test',
-			tabs: [
-				'content' => [
-					'columns' => [
-						[
-							'sections' => [
-								'a' => [
-									'type' => 'info'
-								]
-							]
-						]
-					]
-				],
-				'seo' => [
-					'columns' => [
-						[
-							'sections' => [
-								'b' => [
-									'type' => 'info'
-								]
-							]
-						]
-					]
-				]
-			]
+			tabs: new Tabs([
+				new Tab(
+					id: 'content',
+					columns: new Columns([
+						new Column(
+							id: 'a',
+							sections: new Sections([
+								new InfoSection(id: 'a')
+							])
+						)
+					])
+				),
+				new Tab(
+					id: 'seo',
+					columns: new Columns([
+						new Column(
+							id: 'b',
+							sections: new Sections([
+								new InfoSection(id: 'b')
+							])
+						)
+					])
+				)
+			])
 		);
 
 		$this->assertCount(2, $blueprint->sections());

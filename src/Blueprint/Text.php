@@ -15,17 +15,12 @@ use Kirby\Cms\ModelWithContent;
  */
 class Text extends Translated
 {
-	public ModelWithContent $model;
-
-	public function __construct(ModelWithContent $model, string|array|null $value = null, string|null $default = null)
+	public function export(ModelWithContent $model = null)
 	{
-		parent::__construct($value, $default);
-
-		$this->model = $model;
-
-		// resolve template strings
-		if ($this->value !== null) {
-			$this->value = $this->model->toSafeString($this->value);
+		if ($model && $this->value !== null) {
+			return $model->toSafeString($this->value);
 		}
+
+		return $this->value;
 	}
 }

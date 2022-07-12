@@ -2,10 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Cms\ModelWithContent;
-use Kirby\Exception\InvalidArgumentException;
-use Kirby\Exception\NotFoundException;
-
 /**
  * Related model option
  *
@@ -15,32 +11,6 @@ use Kirby\Exception\NotFoundException;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Related
+class Related extends StringProperty
 {
-	public string|null $query;
-	public ModelWithContent $model;
-	public ModelWithContent $related;
-
-	public function __construct(ModelWithContent $model, string|null $query = null)
-	{
-		$this->model = $model;
-		$this->query = $query;
-
-		if ($query === null) {
-			$this->related = $model;
-			return;
-		}
-
-		$related = $this->model->query($query);
-
-		if (empty($related) === true) {
-			throw new NotFoundException('The result for the query "' . $this->query . '" is empty');
-		}
-
-		if (is_a($related, ModelWithContent::class) === false) {
-			throw new InvalidArgumentException('The result for the query "' . $this->query . '" is invalid. You must choose the site, a page, a file or a user.');
-		}
-
-		$this->related = $related;
-	}
 }

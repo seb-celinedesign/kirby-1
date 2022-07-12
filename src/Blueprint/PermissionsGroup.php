@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class PermissionsGroup
 {
-	use ArrayConverter;
+	use Exporter;
 
 	/**
 	 * Creates a new instance either from an

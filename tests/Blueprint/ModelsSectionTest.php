@@ -13,7 +13,6 @@ class ModelsSectionTest extends TestCase
 	public function testConstruct()
 	{
 		$section = new ModelsSection(
-			column: $this->column(),
 			id: 'test'
 		);
 

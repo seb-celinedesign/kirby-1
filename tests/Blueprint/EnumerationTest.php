@@ -44,7 +44,7 @@ class EnumerationTest extends TestCase
 	public function testConstructWithInvalidValue()
 	{
 		$this->expectException('Kirby\Exception\InvalidArgumentException');
-		$this->expectExceptionMessage('The given value is not allowed. Allowed values: a, b');
+		$this->expectExceptionMessage('The given value "c" is not allowed. Allowed values: a, b');
 
 		new Enumeration(
 			value: 'c',

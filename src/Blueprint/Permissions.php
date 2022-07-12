@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Permissions
 {
-	use ArrayConverter;
+	use Exporter;
 
 	public AccessPermissions $access;
 	public AccountPermissions $account;
@@ -23,18 +23,18 @@ class Permissions
 	public UsersPermissions $users;
 
 	public function __construct(
-		array|bool $access = true,
-		array|bool $account = true,
-		array|bool $files = true,
-		array|bool $pages = true,
-		array|bool $site = true,
-		array|bool $users = true,
+		AccessPermissions $access = null,
+		AccountPermissions $account = null,
+		FilesPermissions $files = null,
+		PagesPermissions $pages = null,
+		SitePermissions $site = null,
+		UsersPermissions $users = null,
 	) {
-		$this->access  = AccessPermissions::factory($access);
-		$this->account = AccountPermissions::factory($account);
-		$this->files   = FilesPermissions::factory($files);
-		$this->pages   = PagesPermissions::factory($pages);
-		$this->site    = SitePermissions::factory($site);
-		$this->users   = UsersPermissions::factory($users);
+		$this->access  = $access  ?? new AccessPermissions();
+		$this->account = $account ?? new AccountPermissions();
+		$this->files   = $files   ?? new FilesPermissions();
+		$this->pages   = $pages   ?? new PagesPermissions();
+		$this->site    = $site    ?? new SitePermissions();
+		$this->users   = $users   ?? new UsersPermissions();
 	}
 }

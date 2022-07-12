@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Text field
  *
@@ -31,7 +33,7 @@ class TextField extends InputField
 	/**
 	 * The field value will be converted with the selected converter before the value gets saved. Available converters: `lower`, `upper`, `ucfirst`, `slug`
 	 */
-	public Enumeration $converter;
+	public Converter $converter;
 
 	/**
 	 * Shows or hides the character counter in the top right corner
@@ -46,7 +48,7 @@ class TextField extends InputField
 	/**
 	 * Changes the email icon to something custom
 	 */
-	public string|null $icon;
+	public Icon $icon;
 
 	/**
 	 * Maximum number of allowed characters
@@ -84,58 +86,41 @@ class TextField extends InputField
 	public string|null $value;
 
 	public function __construct(
-		/**	required */
-		Section $section,
 		string $id,
-
-		/** optional */
-		string|array|null $after = null,
+		After $after = null,
 		string|null $autocomplete = null,
-		bool $autofocus = false,
-		string|array|null $before = null,
-		string|null $converter = null,
+		Before $before = null,
+		Converter $converter = null,
 		bool $counter = true,
 		string|null $default = null,
-		bool $disabled = false,
-		string|array|null $help = null,
-		string|null $icon = null,
-		string|array|null $label = null,
+		Icon $icon = null,
 		int|null $maxlength = null,
 		int|null $minlength = null,
 		string|null $pattern = null,
-		string|array|null $placeholder = null,
-		bool $required = false,
+		Placeholder $placeholder = null,
 		bool $spellcheck = false,
-		bool $translate = true,
 		string|null $value = null,
-		array|null $when = null,
-		string|null $width = null,
+		...$args
 	) {
-		parent::__construct(
-			autofocus: $autofocus,
-			disabled: $disabled,
-			help: $help,
-			id: $id,
-			label: $label,
-			required: $required,
-			section: $section,
-			translate: $translate,
-			when: $when,
-			width: $width
-		);
+		parent::__construct($id, ...$args);
 
-		$this->after        = new Text($this->model, $after);
+		$this->after        = $after ?? new After();
 		$this->autocomplete = $autocomplete;
-		$this->before       = new Text($this->model, $before);
-		$this->converter    = new Enumeration($converter, [null, 'lower', 'slug', 'ucfirst', 'upper']);
+		$this->before       = $before ?? new Before();
+		$this->converter    = $converter ?? new Converter();
 		$this->counter      = $counter;
 		$this->default      = $default;
-		$this->icon         = $icon;
+		$this->icon         = $icon ?? new Icon();
 		$this->maxlength    = $maxlength;
 		$this->minlength    = $minlength;
 		$this->pattern      = $pattern;
-		$this->placeholder  = new Text($this->model, $placeholder);
+		$this->placeholder  = $placeholder ?? new Placeholder();
 		$this->spellcheck   = $spellcheck;
 		$this->value        = $value;
+	}
+
+	public function validate(ModelWithContent $model, $value): bool
+	{
+		return parent::validate($model, $value);
 	}
 }

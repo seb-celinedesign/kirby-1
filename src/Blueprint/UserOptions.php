@@ -23,22 +23,22 @@ class UserOptions extends ModelOptions
 	public ModelOption $update;
 
 	public function __construct(
-		bool|array|null $changeEmail = null,
-		bool|array|null $changeLanguage = null,
-		bool|array|null $changeName = null,
-		bool|array|null $changePassword = null,
-		bool|array|null $changeRole = null,
-		bool|array|null $create = null,
-		bool|array|null $delete = null,
-		bool|array|null $update = null,
+		ModelOption $changeEmail = null,
+		ModelOption $changeLanguage = null,
+		ModelOption $changeName = null,
+		ModelOption $changePassword = null,
+		ModelOption $changeRole = null,
+		ModelOption $create = null,
+		ModelOption $delete = null,
+		ModelOption $update = null,
 	) {
-		$this->changeEmail    = ModelOption::factory($changeEmail);
-		$this->changeLanguage = ModelOption::factory($changeLanguage);
-		$this->changeName     = ModelOption::factory($changeName);
-		$this->changePassword = ModelOption::factory($changePassword);
-		$this->changeRole     = ModelOption::factory($changeRole);
-		$this->create         = ModelOption::factory($create);
-		$this->delete         = ModelOption::factory($delete);
-		$this->update         = ModelOption::factory($update);
+		$this->changeEmail    = $changeEmail ?? new ModelOption();
+		$this->changeLanguage = $changeLanguage ?? new ModelOption();
+		$this->changeName     = $changeName ?? new ModelOption();
+		$this->changePassword = $changePassword ?? new ModelOption();
+		$this->changeRole     = $changeRole ?? new ModelOption();
+		$this->create         = $create ?? new ModelOption();
+		$this->delete         = $delete ?? new ModelOption();
+		$this->update         = $update ?? new ModelOption();
 	}
 }

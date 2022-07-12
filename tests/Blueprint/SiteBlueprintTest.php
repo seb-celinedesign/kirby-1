@@ -12,11 +12,8 @@ class SiteBlueprintTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$blueprint = new SiteBlueprint(
-			model: $site = $this->site()
-		);
+		$blueprint = new SiteBlueprint();
 
-		$this->assertSame($site, $blueprint->model);
 		$this->assertSame('site', $blueprint->type);
 		$this->assertSame('site', $blueprint->id);
 

@@ -12,53 +12,16 @@ class RelatedTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$related = new Related(
-			model: $model = $this->model()
-		);
-
-		$this->assertSame($model, $related->model);
-		$this->assertSame($model, $related->related);
-		$this->assertNull($related->query);
+		$related = new Related();
+		$this->assertNull($related->value);
 	}
 
 	/**
 	 * @covers ::__construct
 	 */
-	public function testQuery()
+	public function testConstructWithQuery()
 	{
-		$related = new Related(
-			model: $this->model(),
-			query: 'page.site'
-		);
-
-		$this->assertInstanceOf('Kirby\Cms\Site', $related->related);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testQueryWithEmptyResult()
-	{
-		$this->expectException('Kirby\Exception\NotFoundException');
-		$this->expectExceptionMessage('The result for the query "page.children.first" is empty');
-
-		new Related(
-			model: $this->model(),
-			query: 'page.children.first'
-		);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testQueryWithInvalidResult()
-	{
-		$this->expectException('Kirby\Exception\InvalidArgumentException');
-		$this->expectExceptionMessage('The result for the query "kirby.languages" is invalid. You must choose the site, a page, a file or a user');
-
-		new Related(
-			model: $this->model(),
-			query: 'kirby.languages'
-		);
+		$related = new Related('page.site');
+		$this->assertSame('page.site', $related->value);
 	}
 }

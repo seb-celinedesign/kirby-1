@@ -15,19 +15,29 @@ use Kirby\Cms\Page;
  */
 class PageStatus
 {
-	use ArrayConverter;
+	use Exporter;
 
 	public PageStatusOption $draft;
 	public PageStatusOption $unlisted;
 	public PageStatusOption $listed;
 
 	public function __construct(
-		string|array|bool|null $draft = null,
-		string|array|bool|null $unlisted = null,
-		string|array|bool|null $listed = null
+		PageStatusOption $draft = null,
+		PageStatusOption $unlisted = null,
+		PageStatusOption $listed = null
 	) {
-		$this->draft    = PageStatusOption::factory('draft', $draft);
-		$this->unlisted = PageStatusOption::factory('unlisted', $unlisted);
-		$this->listed   = PageStatusOption::factory('listed', $listed);
+		$this->draft    = $draft    ?? new PageStatusOption('draft');
+		$this->unlisted = $unlisted ?? new PageStatusOption('unlisted');
+		$this->listed   = $listed   ?? new PageStatusOption('listed');
 	}
+
+	public static function factory(array $props): static
+	{
+		foreach ($props as $id => $option) {
+			$props[$id] = PageStatusOption::factory($id, $option);
+		}
+
+		return new static(...$props);
+	}
+
 }

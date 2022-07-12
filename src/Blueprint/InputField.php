@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Base class for all saveable fields
  *
@@ -11,7 +13,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class InputField extends Field
+class InputField extends BaseField
 {
 	/**
 	 * Sets the focus on this field when the form loads. Only the first field with this option gets focused
@@ -24,16 +26,6 @@ class InputField extends Field
 	public bool $disabled;
 
 	/**
-	 * The field label can be set as string or associative array with translations
-	 */
-	public Label $label;
-
-	/**
-	 * Optional help text below the field
-	 */
-	public Kirbytext $help;
-
-	/**
 	 * If true, the field has to be filled in correctly to be saved.
 	 */
 	public bool $required;
@@ -44,32 +36,19 @@ class InputField extends Field
 	public bool $translate;
 
 	public function __construct(
-		/** required */
-		Section $section,
 		string $id,
-
-		/** optional */
 		bool $autofocus = false,
 		bool $disabled = false,
-		string|array|null $label = null,
-		string|array|null $help = null,
 		bool $required = false,
 		bool $translate = true,
-		array|null $when = null,
-		string|null $width = null
+		...$args
 	) {
-		parent::__construct(
-			id: $id,
-			section: $section,
-			when: $when,
-			width: $width
-		);
+		parent::__construct($id, ...$args);
 
-		$this->autofocus  = $autofocus;
-		$this->disabled   = $disabled;
-		$this->label      = new Label($this, $label);
-		$this->help       = new Kirbytext($this->model, $help);
-		$this->required   = $required;
-		$this->translate  = $translate;
+		$this->autofocus = $autofocus;
+		$this->disabled  = $disabled;
+		$this->required  = $required;
+		$this->translate = $translate;
 	}
+
 }

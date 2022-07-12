@@ -12,14 +12,12 @@ class ColumnsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$columns = Columns::factory($tab = $this->tab(), [
+		$columns = Columns::factory([
 			'a' => [],
 			'b' => [],
 		]);
 
 		$this->assertSame('a', $columns->first()->id);
-		$this->assertSame($tab, $columns->first()->tab);
 		$this->assertSame('b', $columns->last()->id);
-		$this->assertSame($tab, $columns->last()->tab);
 	}
 }

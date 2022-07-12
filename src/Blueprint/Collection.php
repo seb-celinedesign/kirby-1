@@ -34,4 +34,19 @@ class Collection extends BaseCollection
 
 		parent::__set($key, $value);
 	}
+
+	public static function factory(array $items = []): static
+	{
+		$collection = new static();
+		$className  = static::TYPE;
+
+		foreach ($items as $id => $item) {
+			$item['id'] ??= $id;
+			$item = $className::factory($item);
+
+			$collection->__set($item->id, $item);
+		}
+
+		return $collection;
+	}
 }

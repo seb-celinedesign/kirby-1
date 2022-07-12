@@ -17,15 +17,10 @@ class FieldsSection extends Section
 	public string $type = 'fields';
 
 	public function __construct(
-		public Column $column,
-		public string $id,
-		array $fields = [],
+		string $id,
+		Fields $fields = null,
 	) {
-		parent::__construct(
-			column: $column,
-			id: $id
-		);
-
-		$this->fields = Fields::factory($this, $fields);
+		$this->id     = $id;
+		$this->fields = $fields ?? new Fields();
 	}
 }

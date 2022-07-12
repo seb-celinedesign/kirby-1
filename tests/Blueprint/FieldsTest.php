@@ -12,7 +12,7 @@ class FieldsTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$fields = Fields::factory($section = $this->section(), [
+		$fields = Fields::factory([
 			'a' => [
 				'type' => 'info'
 			],
@@ -22,11 +22,9 @@ class FieldsTest extends TestCase
 		]);
 
 		$this->assertSame('a', $fields->first()->id);
-		$this->assertSame($section, $fields->first()->section);
 		$this->assertSame('info', $fields->first()->type);
 
 		$this->assertSame('b', $fields->last()->id);
-		$this->assertSame($section, $fields->last()->section);
 		$this->assertSame('text', $fields->last()->type);
 	}
 }

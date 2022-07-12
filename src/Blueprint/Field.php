@@ -2,6 +2,8 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
  * Base field class
  *
@@ -14,11 +16,6 @@ namespace Kirby\Blueprint;
 class Field extends Node
 {
 	/**
-	 * The parent section
-	 */
-	public Section $section;
-
-	/**
 	 * The field type
 	 */
 	public string $type;
@@ -28,28 +25,36 @@ class Field extends Node
 	 *
 	 * @since 3.1.0
 	 */
-	public array|null $when;
+	public When $when;
 
 	/**
-	 * The width of the field in the field grid. Available widths: 1/1, 1/2, 1/3, 1/4, 2/3, 3/4
+	 * The width of the field in the field grid.
 	 */
 	public Width $width;
 
 	public function __construct(
-		Section $section,
 		string $id,
-		array|null $when = null,
-		string|null $width = null,
-		bool $translate = true,
+		When $when = null,
+		Width $width = null,
 	) {
-		parent::__construct(
-			id: $id,
-			model: $section->model
-		);
-
-		$this->section   = $section;
-		$this->translate = $translate;
-		$this->when      = $when;
-		$this->width     = new Width($width);
+		$this->id    = $id;
+		$this->when  = $when  ?? new When();
+		$this->width = $width ?? new Width();
 	}
+
+	public function props(ModelWithContent $model): array
+	{
+		return $this->toArray();
+	}
+
+	public function submit(ModelWithContent $model, $value)
+	{
+		return $value;
+	}
+
+	public function validate(ModelWithContent $model, $value): bool
+	{
+		return true;
+	}
+
 }

@@ -12,11 +12,11 @@ class PageNavigationTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$navigation = new PageNavigation(page: $this->model());
+		$navigation = new PageNavigation();
 
 		$this->assertNull($navigation->sortBy);
-		$this->assertSame(['unlisted'], $navigation->status);
-		$this->assertSame(['default'], $navigation->template);
+		$this->assertSame([], $navigation->status);
+		$this->assertSame([], $navigation->template);
 	}
 
 	/**
@@ -25,7 +25,6 @@ class PageNavigationTest extends TestCase
 	public function testSortBy()
 	{
 		$navigation = new PageNavigation(
-			page: $this->model(),
 			sortBy: 'title desc'
 		);
 
@@ -39,7 +38,6 @@ class PageNavigationTest extends TestCase
 	{
 		// single
 		$navigation = new PageNavigation(
-			page: $this->model(),
 			status: 'listed'
 		);
 
@@ -47,7 +45,6 @@ class PageNavigationTest extends TestCase
 
 		// wildcard
 		$navigation = new PageNavigation(
-			page: $this->model(),
 			status: 'all'
 		);
 
@@ -55,7 +52,6 @@ class PageNavigationTest extends TestCase
 
 		// array
 		$navigation = new PageNavigation(
-			page: $this->model(),
 			status: ['draft', 'listed']
 		);
 
@@ -68,15 +64,15 @@ class PageNavigationTest extends TestCase
 	public function testTemplate()
 	{
 		// single
-		$navigation = new PageNavigation(page: $this->model(), template: 'article');
+		$navigation = new PageNavigation(template: 'article');
 		$this->assertSame(['article'], $navigation->template);
 
 		// wildcard
-		$navigation = new PageNavigation(page: $this->model(), template: 'all');
+		$navigation = new PageNavigation(template: 'all');
 		$this->assertSame(['*'], $navigation->template);
 
 		// array
-		$navigation = new PageNavigation(page: $this->model(), template: ['article', 'video']);
+		$navigation = new PageNavigation(template: ['article', 'video']);
 		$this->assertSame(['article', 'video'], $navigation->template);
 	}
 }

@@ -12,7 +12,7 @@ class TextTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$text = new Text($this->model());
+		$text = new Text();
 		$this->assertNull($text->value);
 	}
 
@@ -21,17 +21,8 @@ class TextTest extends TestCase
 	 */
 	public function testConstructWithString()
 	{
-		$text = new Text($this->model(), 'Test');
+		$text = new Text('Test');
 		$this->assertSame('Test', $text->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testConstructWithQuery()
-	{
-		$text = new Text($this->model(), '{{ page.slug }}');
-		$this->assertSame('test', $text->value);
 	}
 
 	/**
@@ -39,7 +30,7 @@ class TextTest extends TestCase
 	 */
 	public function testConstructWithArray()
 	{
-		$text = new Text($this->model(), ['en' => 'Test']);
+		$text = new Text(['en' => 'Test']);
 		$this->assertSame('Test', $text->value);
 	}
 }

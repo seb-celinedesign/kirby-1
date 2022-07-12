@@ -13,7 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Option
 {
-	use ArrayConverter;
+	use Exporter;
 
 	public Translated $text;
 	public string|int|float|null $value;
