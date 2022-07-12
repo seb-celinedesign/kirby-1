@@ -102,7 +102,7 @@ class Autoload
 		return static::type('section', $props);
 	}
 
-	public static function type(string $group, string|array $props): Node
+	public static function type(string $group, string|array $props): Component
 	{
 		if (is_string($props) === true) {
 			$props = static::props($props);

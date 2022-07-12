@@ -2,9 +2,10 @@
 
 namespace Kirby\Blueprint;
 
-class TableColumn extends Node
+class TableColumn extends Component
 {
 	public TableColumnAlignment $align;
+	public string $id;
 	public Label $label;
 	public bool $mobile;
 	public string|null $type;
@@ -20,11 +21,8 @@ class TableColumn extends Node
 		string|null $value = null,
 		string|null $width = null
 	) {
-		parent::__construct(
-			id: $id
-		);
-
 		$this->align  = $align ?? new TableColumnAlignment();
+		$this->id     = $id;
 		$this->label  = $label ?? Label::fallback($id);
 		$this->mobile = $mobile;
 		$this->type   = $type;

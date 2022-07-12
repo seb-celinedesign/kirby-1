@@ -19,19 +19,32 @@ class Component
 	public static function factory(array $props): static
 	{
 		foreach ($props = static::polyfill($props) as $key => $value) {
-			if (is_object($value) === true) {
-				continue;
-			}
-
-			$reflection = new ReflectionProperty(static::class, $key);
-			$className  = $reflection->getType()->getName();
-
-			if (class_exists($className) === true && method_exists($className, 'factory') === true) {
-				$props[$key] = $className::factory($value);
-			}
+			$props[$key] = static::factoryForProperty($key, $value);
 		}
 
 		return new static(...$props);
+	}
+
+	public static function factoryForProperty(string $key, $value): mixed
+	{
+		if (is_object($value) === true) {
+			return $value;
+		}
+
+		$reflection = new ReflectionProperty(static::class, $key);
+		$className  = $reflection->getType()->getName();
+
+		if (class_exists($className) === true && method_exists($className, 'factory') === true) {
+			return $className::factory($value);
+		} else {
+			return $value;
+		}
+	}
+
+	public function set(string $key, $value): static
+	{
+		$this->$key = static::factoryForProperty($key, $value);
+		return $this;
 	}
 
 	public static function polyfill(array $props): array

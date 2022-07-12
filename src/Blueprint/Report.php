@@ -11,7 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Report extends Node
+class Report extends Component
 {
 	public Text $info;
 	public Label $label;

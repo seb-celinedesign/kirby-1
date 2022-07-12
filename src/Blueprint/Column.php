@@ -11,8 +11,9 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Column extends Node
+class Column extends Component
 {
+	public string $id;
 	public Sections $sections;
 	public Width $width;
 

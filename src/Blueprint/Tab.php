@@ -11,10 +11,11 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Tab extends Node
+class Tab extends Component
 {
 	public Columns $columns;
 	public Icon $icon;
+	public string $id;
 	public Label $label;
 
 	public function __construct(

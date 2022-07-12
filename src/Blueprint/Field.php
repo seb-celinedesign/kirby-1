@@ -13,8 +13,13 @@ use Kirby\Cms\ModelWithContent;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Field extends Node
+class Field extends Component
 {
+	/**
+	 * The unique identifier for this field in the blueprint
+	 */
+	public string $id;
+
 	/**
 	 * The field type
 	 */

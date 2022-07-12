@@ -11,8 +11,9 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Blueprint extends Node
+class Blueprint extends Component
 {
+	public string $id;
 	public Label $label;
 	public Tabs $tabs;
 	public string $type;

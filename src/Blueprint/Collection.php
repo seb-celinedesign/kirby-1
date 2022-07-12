@@ -20,7 +20,7 @@ class Collection extends BaseCollection
 	/**
 	 * The expected object type
 	 */
-	public const TYPE = Node::class;
+	public const TYPE = Component::class;
 
 	public function __construct(array $data = [])
 	{
