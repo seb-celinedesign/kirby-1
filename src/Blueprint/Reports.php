@@ -13,5 +13,7 @@ namespace Kirby\Blueprint;
  */
 class Reports extends Collection
 {
+	use Promising;
+
 	public const TYPE = Report::class;
 }

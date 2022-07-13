@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Optional text that will be shown after the input
+ * Node
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,6 +11,10 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class After extends Text
+class Node extends Component
 {
+	public function __construct(
+		public string $id
+	) {
+	}
 }

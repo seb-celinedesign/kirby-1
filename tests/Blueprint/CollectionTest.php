@@ -13,8 +13,8 @@ class CollectionTest extends TestCase
 	public function testConstruct()
 	{
 		$collection = new Collection([
-			$a = new Component,
-			$b = new Component,
+			$a = new Component(),
+			$b = new Component(),
 		]);
 
 		$this->assertCount(2, $collection);

@@ -33,4 +33,23 @@ class PropertyTest extends TestCase
 		$prop = new Property(null, 'test');
 		$this->assertSame('test', $prop->value);
 	}
+
+	/**
+	 * @covers ::factory
+	 */
+	public function testFactoryWithString()
+	{
+		$prop = Property::factory('test');
+		$this->assertSame('test', $prop->value);
+	}
+
+	/**
+	 * @covers ::factory
+	 */
+	public function testFactoryWithArray()
+	{
+		$prop = Property::factory(['default' => 'test']);
+		$this->assertSame('test', $prop->default);
+		$this->assertSame('test', $prop->value);
+	}
 }

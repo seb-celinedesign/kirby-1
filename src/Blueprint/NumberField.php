@@ -2,8 +2,10 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+
 /**
- * Optional text that will be shown after the input
+ * Number field
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,6 +13,6 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class After extends Text
+class NumberField extends InputField
 {
 }

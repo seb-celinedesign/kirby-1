@@ -29,29 +29,32 @@ class Collection extends BaseCollection
 
 	public function __set(string $key, $value): void
 	{
-		if (is_a($value, static::TYPE) === false) {
-			throw new TypeError('Each value in the collection must be an instance of ' . static::TYPE);
+		if (is_a($value, static::TYPE) === false && is_a($value, Promise::class) === false) {
+			throw new TypeError('Each value in the collection must be an instance of ' . static::TYPE . ' or a promise');
 		}
 
 		parent::__set($key, $value);
 	}
 
-	public static function factory(array $items = []): static
+	public static function factory(array $items)
 	{
 		$collection = new static();
 		$className  = static::TYPE;
 
 		foreach ($items as $id => $item) {
-			$item['id'] ??= $id;
-			$item = $className::factory($item);
-
-			$collection->__set($item->id, $item);
+			if (is_array($item) === true) {
+				$item['id'] ??= $id;
+				$item = $className::factory($item);
+				$collection->__set($item->id, $item);
+			} else {
+				$collection->__set($id, $className::factory($item));
+			}
 		}
 
 		return $collection;
 	}
 
-	public function render(ModelWithContent $model): array
+	public function render(ModelWithContent $model): mixed
 	{
 		$props = [];
 

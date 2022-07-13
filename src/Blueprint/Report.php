@@ -13,6 +13,9 @@ namespace Kirby\Blueprint;
  */
 class Report extends Component
 {
+	use Promising;
+
+	public string|null $id;
 	public Text $info;
 	public Label $label;
 	public Url $link;
@@ -20,7 +23,7 @@ class Report extends Component
 	public Text $value;
 
 	public function __construct(
-		string $id,
+		string|null $id = null,
 		Text $info = null,
 		Label $label = null,
 		Url $link = null,
@@ -29,7 +32,7 @@ class Report extends Component
 	) {
 		$this->id    = $id;
 		$this->info  = $info  ?? new Text();
-		$this->label = $label ?? Label::fallback($id);
+		$this->label = $label ?? new Label();
 		$this->link  = $link  ?? new Url();
 		$this->theme = $theme ?? new Theme();
 		$this->value = $value ?? new Text();

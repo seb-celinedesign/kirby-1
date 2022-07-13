@@ -13,28 +13,14 @@ use Kirby\Cms\ModelWithContent;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Field extends Component
+class Field extends Node
 {
-	/**
-	 * The unique identifier for this field in the blueprint
-	 */
-	public string $id;
-
 	/**
 	 * The field type
 	 */
 	public string $type;
 
-	/**
-	 * Conditions when the field will be shown
-	 *
-	 * @since 3.1.0
-	 */
 	public When $when;
-
-	/**
-	 * The width of the field in the field grid.
-	 */
 	public Width $width;
 
 	public function __construct(

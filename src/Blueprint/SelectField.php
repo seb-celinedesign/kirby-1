@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Optional text that will be shown after the input
+ * Select field
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,6 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class After extends Text
+class SelectField extends InputField
 {
+	public string $type = 'select';
 }

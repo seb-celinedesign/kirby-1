@@ -15,24 +15,14 @@ use Kirby\Cms\ModelWithContent;
  */
 class TextField extends InputField
 {
-	/**
-	 * Optional text that will be shown after the input
-	 */
-	public Text $after;
+	public After $after;
 
 	/**
 	 * Sets the HTML5 autocomplete mode for the input
 	 */
 	public string|null $autocomplete;
 
-	/**
-	 * Optional text that will be shown before the input
-	 */
-	public Text $before;
-
-	/**
-	 * The field value will be converted with the selected converter before the value gets saved. Available converters: `lower`, `upper`, `ucfirst`, `slug`
-	 */
+	public Before $before;
 	public Converter $converter;
 
 	/**
@@ -45,9 +35,6 @@ class TextField extends InputField
 	 */
 	public string|null $default;
 
-	/**
-	 * Changes the email icon to something custom
-	 */
 	public Icon $icon;
 
 	/**
@@ -65,10 +52,7 @@ class TextField extends InputField
 	 */
 	public string|null $pattern;
 
-	/**
-	 * Optional placeholder value that will be shown when the field is empty
-	 */
-	public Text $placeholder;
+	public Placeholder $placeholder;
 
 	/**
 	 * If `false`, spellcheck will be switched off

@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Help
+ * Additional help text below the field or section
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>

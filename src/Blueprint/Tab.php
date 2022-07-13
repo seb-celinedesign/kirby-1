@@ -11,7 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Tab extends Component
+class Tab extends Node
 {
 	public Columns $columns;
 	public Icon $icon;
@@ -24,15 +24,18 @@ class Tab extends Component
 		Icon $icon = null,
 		Columns $columns = null
 	) {
-		$this->columns   = $columns ?? new Columns();
-		$this->icon      = $icon ?? new Icon();
-		$this->id        = $id;
-		$this->label     = $label ?? Label::fallback($id);
+		$this->columns = $columns ?? new Columns();
+		$this->icon    = $icon    ?? new Icon();
+		$this->id      = $id;
+		$this->label   = $label   ?? Label::fallback($id);
 	}
 
+	/**
+	 * Collects all fields from all columns
+	 */
 	public function fields(): Fields
 	{
-		$fields = new Fields();
+		$fields = new Fields;
 
 		foreach ($this->sections() as $section) {
 			if ($section->type !== 'fields') {
@@ -47,9 +50,12 @@ class Tab extends Component
 		return $fields;
 	}
 
+	/**
+	 * Collects all sections from all columns
+	 */
 	public function sections(): Sections
 	{
-		$sections = new Sections();
+		$sections = new Sections;
 
 		foreach ($this->columns as $column) {
 			foreach ($column->sections as $section) {

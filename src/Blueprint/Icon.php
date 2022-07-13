@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Icon
+ * Custom emoji or icon from the Kirby iconset
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>

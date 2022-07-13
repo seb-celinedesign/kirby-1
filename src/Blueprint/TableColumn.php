@@ -2,10 +2,9 @@
 
 namespace Kirby\Blueprint;
 
-class TableColumn extends Component
+class TableColumn extends Node
 {
 	public TableColumnAlignment $align;
-	public string $id;
 	public Label $label;
 	public bool $mobile;
 	public string|null $type;

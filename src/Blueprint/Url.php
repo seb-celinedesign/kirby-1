@@ -35,9 +35,11 @@ class Url extends Property
 		}
 
 		if ($this->value !== null) {
-			return $model->toSafeString($this->value);
+			$value = $model->toSafeString($this->value);
+		} else {
+			$value = $this->value;
 		}
 
-		return $this->value;
+		return $value ?? false;
 	}
 }

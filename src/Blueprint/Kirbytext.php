@@ -17,9 +17,7 @@ class Kirbytext extends Text
 {
 	public function render(ModelWithContent $model): mixed
 	{
-		$value = parent::render($model);
-
-		if ($model && $value !== null) {
+		if ($value = parent::render($model)) {
 			return $model->kirby()->kirbytext($value);
 		}
 

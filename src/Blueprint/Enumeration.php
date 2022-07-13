@@ -30,4 +30,5 @@ class Enumeration extends Property
 			throw new InvalidArgumentException('The given value "' . $this->value . '" is not allowed. Allowed values: ' . implode(', ', $this->allowed));
 		}
 	}
+
 }

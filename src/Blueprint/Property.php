@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use Kirby\Toolkit\A;
 
 /**
  * Property
@@ -24,9 +25,9 @@ class Property extends Component
 		$this->value   = $value ?? $default;
 	}
 
-	public static function factory(...$args): static
+	public static function factory(string|array|null $props = null)
 	{
-		return new static(...$args);
+		return new static(...A::wrap($props));
 	}
 
 	public function render(ModelWithContent $model): mixed

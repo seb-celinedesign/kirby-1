@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * String converter options
+ * The field value will be converted with the selected converter before the value gets saved. Available converters: `lower`, `upper`, `ucfirst`, `slug`
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>

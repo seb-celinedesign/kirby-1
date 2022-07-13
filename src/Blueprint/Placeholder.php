@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Placeholder
+ * Optional placeholder value that will be shown when the field is empty
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>

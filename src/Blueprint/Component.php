@@ -16,7 +16,18 @@ use ReflectionProperty;
  */
 class Component
 {
-	public static function factory(array $props): static
+	/**
+	 * Dynamic getter for properties
+	 */
+	public function __call(string $name, array $args)
+	{
+		return $this->$name;
+	}
+
+	/**
+	 * Creates an instance by a set of array properties.
+	 */
+	public static function factory(array $props)
 	{
 		foreach ($props = static::polyfill($props) as $key => $value) {
 			$props[$key] = static::factoryForProperty($key, $value);
@@ -25,28 +36,43 @@ class Component
 		return new static(...$props);
 	}
 
-	public static function factoryForProperty(string $key, $value): mixed
+	public static function factoryForProperty(string $key, mixed $value): mixed
 	{
+		// instantly assign objects
+		// PHP's type system will find issues automatically
 		if (is_object($value) === true) {
 			return $value;
 		}
 
+		// get the type for the property
 		$reflection = new ReflectionProperty(static::class, $key);
 		$className  = $reflection->getType()->getName();
 
-		if (class_exists($className) === true && method_exists($className, 'factory') === true) {
+		// check if there's a factory for the value
+		if (is_subclass_of($className, Component::class) === true) {
 			return $className::factory($value);
+
+		// try to assign the value directly and trust
+		// in PHP's type system.
 		} else {
 			return $value;
 		}
 	}
 
-	public function set(string $key, $value): static
+	/**
+	 * Universal setter for properties
+	 */
+	public function set(string $key, mixed $value): static
 	{
 		$this->$key = static::factoryForProperty($key, $value);
 		return $this;
 	}
 
+	/**
+	 * Optional method that runs before static::factory sends
+	 * its properties to the instance. This is perfect to clean
+	 * up props or keep deprecated props compatible.
+	 */
 	public static function polyfill(array $props): array
 	{
 		return $props;

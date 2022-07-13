@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Width option for sections and fields
+ * The width of the field in the field grid.
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>

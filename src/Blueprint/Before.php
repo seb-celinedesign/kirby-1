@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Before
+ * Optional text that will be shown before the input
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
