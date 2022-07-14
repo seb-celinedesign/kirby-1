@@ -1,6 +1,7 @@
 /* eslint-env node */
 import fs from "fs";
 import path from "path";
+import md5 from "md5";
 import { defineConfig, splitVendorChunkPlugin } from "vite";
 import vue from "@vitejs/plugin-vue2";
 import postcssAutoprefixer from "autoprefixer";
@@ -14,6 +15,10 @@ try {
 } catch (err) {
 	custom = {};
 }
+
+let composer = fs.readFileSync("../composer.json");
+composer = JSON.parse(composer);
+let hash = md5(composer.version);
 
 export default defineConfig(({ command }) => {
 	// Tell Kirby that we are in dev mode
@@ -50,6 +55,7 @@ export default defineConfig(({ command }) => {
 			// Fix vuelidate error
 			"process.env.BUILD": JSON.stringify("production")
 		},
+		base: command === "serve" ? "./" : "/media/panel/" + hash + "/",
 		build: {
 			minify: "terser",
 			cssCodeSplit: false,
