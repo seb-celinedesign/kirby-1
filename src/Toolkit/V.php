@@ -297,7 +297,7 @@ V::$validators = [
 	/**
 	 * Checks for numbers within the given range
 	 */
-	'between' => function ($value, $min, $max): bool {
+	'between' => function ($value, int|float|null $min, int|float|null $max): bool {
 		return V::min($value, $min) === true &&
 			   V::max($value, $max) === true;
 	},
@@ -305,8 +305,8 @@ V::$validators = [
 	/**
 	 * Checks if the given string contains the given value
 	 */
-	'contains' => function ($value, $needle): bool {
-		return Str::contains($value, $needle);
+	'contains' => function ($value, string|null $needle = null): bool {
+		return $needle === null || Str::contains($value, $needle);
 	},
 
 	/**
@@ -380,11 +380,10 @@ V::$validators = [
 		if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
 			try {
 				$email = Idn::encodeEmail($value);
+				return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 			} catch (Throwable $e) {
 				return false;
 			}
-
-			return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 		}
 
 		return true;
@@ -410,8 +409,8 @@ V::$validators = [
 	/**
 	 * Checks if the given string ends with the given value
 	 */
-	'endsWith' => function (string $value, string $end): bool {
-		return Str::endsWith($value, $end);
+	'endsWith' => function (string $value, string|null $end = null): bool {
+		return $end === null || Str::endsWith($value, $end) === true;
 	},
 
 	/**
@@ -462,63 +461,63 @@ V::$validators = [
 	/**
 	 * Checks if the value is lower than the second value
 	 */
-	'less' => function ($value, float $max): bool {
+	'less' => function ($value, float|null $max = null): bool {
 		return V::size($value, $max, '<') === true;
 	},
 
 	/**
 	 * Checks if the value matches the given regular expression
 	 */
-	'match' => function ($value, string $pattern): bool {
-		return preg_match($pattern, $value) !== 0;
+	'match' => function ($value, string|null $pattern = null): bool {
+		return $pattern === null || preg_match($pattern, $value) !== 0;
 	},
 
 	/**
 	 * Checks if the value does not exceed the maximum value
 	 */
-	'max' => function ($value, float $max): bool {
+	'max' => function ($value, int|float|null $max = null): bool {
 		return V::size($value, $max, '<=') === true;
 	},
 
 	/**
 	 * Checks if the value is higher than the minimum value
 	 */
-	'min' => function ($value, float $min): bool {
+	'min' => function ($value, int|float|null $min = null): bool {
 		return V::size($value, $min, '>=') === true;
 	},
 
 	/**
 	 * Checks if the number of characters in the value equals or is below the given maximum
 	 */
-	'maxLength' => function (string $value = null, $max): bool {
-		return Str::length(trim($value)) <= $max;
+	'maxLength' => function (string $value = null, int|null $max = null): bool {
+		return V::size($value, $max, '<=') === true;
 	},
 
 	/**
 	 * Checks if the number of characters in the value equals or is greater than the given minimum
 	 */
-	'minLength' => function (string $value = null, $min): bool {
-		return Str::length(trim($value)) >= $min;
+	'minLength' => function (string $value = null, int|null $min = null): bool {
+		return V::size($value, $min, '>=') === true;
 	},
 
 	/**
 	 * Checks if the number of words in the value equals or is below the given maximum
 	 */
-	'maxWords' => function (string $value = null, $max): bool {
+	'maxWords' => function (string $value = null, int|null $max = null): bool {
 		return V::max(explode(' ', trim($value)), $max) === true;
 	},
 
 	/**
 	 * Checks if the number of words in the value equals or is below the given maximum
 	 */
-	'minWords' => function (string $value = null, $min): bool {
+	'minWords' => function (string $value = null, int|null $min = null): bool {
 		return V::min(explode(' ', trim($value)), $min) === true;
 	},
 
 	/**
 	 * Checks if the first value is higher than the second value
 	 */
-	'more' => function ($value, float $min): bool {
+	'more' => function ($value, int|float $min = null): bool {
 		return V::size($value, $min, '>') === true;
 	},
 
@@ -576,11 +575,15 @@ V::$validators = [
 	/**
 	 * Checks that the value has the given size
 	 */
-	'size' => function ($value, $size, $operator = '=='): bool {
+	'size' => function ($value, int|float|null $size = null, $operator = '=='): bool {
 		// if value is field object, first convert it to a readable value
 		// it is important to check at the beginning as the value can be string or numeric
 		if (is_a($value, '\Kirby\Cms\Field') === true) {
 			$value = $value->value();
+		}
+
+		if ($size === null) {
+			return true;
 		}
 
 		if (is_numeric($value) === true) {
@@ -618,8 +621,8 @@ V::$validators = [
 	/**
 	 * Checks that the string starts with the given start value
 	 */
-	'startsWith' => function (string $value, string $start): bool {
-		return Str::startsWith($value, $start);
+	'startsWith' => function (string $value, string|null $start = null): bool {
+		return $start === null || Str::startsWith($value, $start) === true;
 	},
 
 	/**
