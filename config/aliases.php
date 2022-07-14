@@ -63,8 +63,10 @@ return [
 	'obj'        => 'Kirby\Toolkit\Obj',
 	'str'        => 'Kirby\Toolkit\Str',
 	'tpl'        => 'Kirby\Toolkit\Tpl',
-	'v'          => 'Kirby\Toolkit\V',
 	'xml'        => 'Kirby\Toolkit\Xml',
+
+	// validation
+	'v'          => 'Kirby\Validation\V',
 
 	// TODO: remove in 4.0.0
 	'kirby\cms\asset'          => 'Kirby\Filesystem\Asset',
@@ -78,4 +80,5 @@ return [
 	'kirby\toolkit\f'          => 'Kirby\Filesystem\F',
 	'kirby\toolkit\file'       => 'Kirby\Filesystem\File',
 	'kirby\toolkit\mime'       => 'Kirby\Filesystem\Mime',
+	'kirby\toolkit\validation' => 'Kirby\Validation\V',
 ];

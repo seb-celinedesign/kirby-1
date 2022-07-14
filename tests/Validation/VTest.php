@@ -1,8 +1,9 @@
 <?php
 
-namespace Kirby\Toolkit;
+namespace Kirby\Validation;
 
 use Kirby\Cms\Field;
+use Kirby\Toolkit\Collection;
 use PHPUnit\Framework\TestCase;
 
 class CanBeCounted implements \Countable
