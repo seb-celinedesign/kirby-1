@@ -28,7 +28,7 @@ class Options extends Collection
 				}
 			}
 
-			$option = new Option(...$option);
+			$option = Option::factory($option);
 			$collection->__set($option->value, $option);
 		}
 

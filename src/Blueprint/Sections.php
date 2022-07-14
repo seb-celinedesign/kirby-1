@@ -22,4 +22,24 @@ class Sections extends Collection
 
 		return $collection;
 	}
+
+	/**
+	 * Collect all fields in all sections
+	 */
+	public function fields(): Fields
+	{
+		$fields = new Fields();
+
+		foreach ($this->data as $section) {
+			if (is_a($section, FieldsSection::class) === false) {
+				continue;
+			}
+
+			foreach ($section->fields ?? [] as $field) {
+				$fields->__set($field->id, $field);
+			}
+		}
+
+		return $fields;
+	}
 }

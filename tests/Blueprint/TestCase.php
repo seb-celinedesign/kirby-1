@@ -26,6 +26,12 @@ class TestCase extends BaseTestCase
 		], $props));
 	}
 
+	public function assertValidationError(string $message)
+	{
+		$this->expectException('Kirby\Exception\InvalidArgumentException');
+		$this->expectExceptionMessage($message);
+	}
+
 	public function blueprint(array $props = [])
 	{
 		return new Blueprint(

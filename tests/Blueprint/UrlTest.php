@@ -21,7 +21,7 @@ class UrlTest extends TestCase
 	public function testDefault()
 	{
 		$url = new Url(value: null, default: '/foo');
-		$this->assertSame('/foo', $url->value);
+		$this->assertSame('/foo', $url->default);
 	}
 
 	public function testDisabled()

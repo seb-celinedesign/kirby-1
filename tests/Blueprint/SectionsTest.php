@@ -19,6 +19,5 @@ class SectionsTest extends TestCase
 		]);
 
 		$this->assertSame('a', $sections->first()->id);
-		$this->assertSame('info', $sections->first()->type);
 	}
 }

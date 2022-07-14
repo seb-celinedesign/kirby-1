@@ -24,6 +24,11 @@ class Validation
 	public array $args;
 
 	/**
+	 * Skip this validation when it is disabled
+	 */
+	public bool $disabled = false;
+
+	/**
 	 * A validation handler can either be the name of a V class
 	 * validator or a custom handler callback
 	 */
@@ -38,10 +43,12 @@ class Validation
 		string|Closure $handler,
 		array $args = [],
 		string|null $message = null,
+		bool $disabled = false
 	) {
-		$this->args    = $args;
-		$this->handler = $handler;
-		$this->message = $message;
+		$this->args     = $args;
+		$this->disabled = $disabled;
+		$this->handler  = $handler;
+		$this->message  = $message;
 	}
 
 	/**
@@ -49,6 +56,10 @@ class Validation
 	 */
 	public function validate(mixed $value = null): bool
 	{
+		if ($this->disabled === true) {
+			return true;
+		}
+
 		$handler = $this->handler;
 
 		// V class validator

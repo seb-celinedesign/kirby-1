@@ -27,5 +27,4 @@ class TestCase extends \PHPUnit\Framework\TestCase
 	{
 		$this->app();
 	}
-
 }

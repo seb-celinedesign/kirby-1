@@ -15,23 +15,11 @@ use Kirby\Cms\Site;
  */
 class SiteBlueprint extends Blueprint
 {
-	public SiteOptions $options;
-	public Url $preview;
-	public string $type = 'site';
-
 	public function __construct(
-		Label $label = null,
-		SiteOptions $options = null,
-		Url $preview = null,
-		Tabs $tabs = null,
+		public SiteOptions|null $options = null,
+		public Url|null $preview = null,
+		...$args
 	) {
-		parent::__construct(
-			id: 'site',
-			label: $label,
-			tabs: $tabs,
-		);
-
-		$this->options = $options ?? new SiteOptions();
-		$this->preview = $preview ?? new Url();
+		parent::__construct('site', ...$args);
 	}
 }

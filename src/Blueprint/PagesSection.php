@@ -15,20 +15,13 @@ use Kirby\Toolkit\A;
  */
 class PagesSection extends ModelsSection
 {
-	public PageStatus $status;
-	public array $templates;
-	public string $type = 'pages';
-
 	public function __construct(
-		string $id,
-		PageStatus $status = null,
-		array $templates = [],
+		public string $id,
+		public PageStatus|null $status = null,
+		public array $templates = [],
 		...$args
 	) {
 		parent::__construct($id, ...$args);
-
-		$this->status    = $status ?? new PageStatus();
-		$this->templates = $templates;
 	}
 
 	public static function polyfill(array $props): array

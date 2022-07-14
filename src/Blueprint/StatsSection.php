@@ -13,19 +13,12 @@ namespace Kirby\Blueprint;
  */
 class StatsSection extends BaseSection
 {
-	public Reports|Promise $reports;
-	public Size $size;
-	public string $type = 'stats';
-
 	public function __construct(
-		string $id,
-		Reports|Promise $reports = null,
-		Size $size = null,
+		public string $id,
+		public Reports|Promise|null $reports = null,
+		public Size|null $size = null,
 		...$args
 	) {
 		parent::__construct($id, ...$args);
-
-		$this->reports = $reports ?? new Reports();
-		$this->size    = $size    ?? new Size();
 	}
 }

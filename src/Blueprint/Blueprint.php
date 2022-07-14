@@ -13,35 +13,20 @@ namespace Kirby\Blueprint;
  */
 class Blueprint extends Node
 {
-	public string $id;
-	public Label $label;
-	public Tabs $tabs;
-	public string $type;
-
 	public function __construct(
-		string $id,
-		Label $label = null,
-		Tabs $tabs = null,
+		public string $id,
+		public Label|null $label = null,
+		public Tabs|null $tabs = null,
 	) {
-		$this->id    = $id;
-		$this->label = $label ?? Label::fallback($id);
-		$this->tabs  = $tabs  ?? new Tabs();
+		$this->label ??= Label::fallback($id);
 	}
 
 	/**
 	 * Collects all columns from all tabs
 	 */
-	public function columns(): Columns
+	public function columns(): ?Columns
 	{
-		$columns = new Columns();
-
-		foreach ($this->tabs as $tab) {
-			foreach ($tab->columns as $column) {
-				$columns->__set($column->id, $column);
-			}
-		}
-
-		return $columns;
+		return $this->tabs?->columns();
 	}
 
 	public static function factory(array $props): static
@@ -52,21 +37,9 @@ class Blueprint extends Node
 	/**
 	 * Collects all fields from all tabs
 	 */
-	public function fields(): Fields
+	public function fields(): ?Fields
 	{
-		$fields = new Fields();
-
-		foreach ($this->sections() as $section) {
-			if ($section->type !== 'fields') {
-				continue;
-			}
-
-			foreach ($section->fields as $field) {
-				$fields->__set($field->id, $field);
-			}
-		}
-
-		return $fields;
+		return $this->sections()?->fields();
 	}
 
 	public static function polyfill(array $props): array
@@ -156,16 +129,8 @@ class Blueprint extends Node
 	/**
 	 * Collects all sections from all tabs
 	 */
-	public function sections(): Sections
+	public function sections(): ?Sections
 	{
-		$sections = new Sections();
-
-		foreach ($this->tabs as $tab) {
-			foreach ($tab->sections() as $section) {
-				$sections->__set($section->id, $section);
-			}
-		}
-
-		return $sections;
+		return $this->columns()?->sections();
 	}
 }

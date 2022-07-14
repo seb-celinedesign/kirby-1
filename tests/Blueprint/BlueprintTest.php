@@ -18,8 +18,7 @@ class BlueprintTest extends TestCase
 
 		$this->assertSame('test', $blueprint->id);
 		$this->assertInstanceOf(Label::class, $blueprint->label);
-		$this->assertInstanceOf(Tabs::class, $blueprint->tabs);
-		$this->assertCount(0, $blueprint->tabs);
+		$this->assertNull($blueprint->tabs);
 	}
 
 	/**
@@ -61,6 +60,15 @@ class BlueprintTest extends TestCase
 		$this->assertCount(2, $blueprint->columns());
 		$this->assertSame('a', $blueprint->columns()->first()->id);
 		$this->assertSame('b', $blueprint->columns()->last()->id);
+	}
+
+	/**
+	 * @covers ::columns
+	 */
+	public function testColumnsWithoutTabs()
+	{
+		$blueprint = new Blueprint('test');
+		$this->assertNull($blueprint->columns());
 	}
 
 	/**
@@ -109,6 +117,15 @@ class BlueprintTest extends TestCase
 	}
 
 	/**
+	 * @covers ::fields
+	 */
+	public function testFieldsWithoutTabs()
+	{
+		$blueprint = new Blueprint('test');
+		$this->assertNull($blueprint->fields());
+	}
+
+	/**
 	 * @covers ::sections
 	 */
 	public function testSections()
@@ -144,5 +161,14 @@ class BlueprintTest extends TestCase
 		$this->assertCount(2, $blueprint->sections());
 		$this->assertSame('a', $blueprint->sections()->first()->id);
 		$this->assertSame('b', $blueprint->sections()->last()->id);
+	}
+
+	/**
+	 * @covers ::sections
+	 */
+	public function testSectionsWithoutTabs()
+	{
+		$blueprint = new Blueprint('test');
+		$this->assertNull($blueprint->sections());
 	}
 }

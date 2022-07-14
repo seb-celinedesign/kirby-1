@@ -31,7 +31,7 @@ class PropertyTest extends TestCase
 	public function testConstructWithDefault()
 	{
 		$prop = new Property(null, 'test');
-		$this->assertSame('test', $prop->value);
+		$this->assertSame('test', $prop->default);
 	}
 
 	/**
@@ -50,6 +50,6 @@ class PropertyTest extends TestCase
 	{
 		$prop = Property::factory(['default' => 'test']);
 		$this->assertSame('test', $prop->default);
-		$this->assertSame('test', $prop->value);
+		$this->assertSame(null, $prop->value);
 	}
 }

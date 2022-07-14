@@ -14,11 +14,11 @@ class FileOptionsTest extends TestCase
 	{
 		$options = new FileOptions();
 
-		$this->assertInstanceOf(ModelOption::class, $options->changeName);
-		$this->assertInstanceOf(ModelOption::class, $options->create);
-		$this->assertInstanceOf(ModelOption::class, $options->delete);
-		$this->assertInstanceOf(ModelOption::class, $options->read);
-		$this->assertInstanceOf(ModelOption::class, $options->replace);
-		$this->assertInstanceOf(ModelOption::class, $options->update);
+		$this->assertNull($options->changeName);
+		$this->assertNull($options->create);
+		$this->assertNull($options->delete);
+		$this->assertNull($options->read);
+		$this->assertNull($options->replace);
+		$this->assertNull($options->update);
 	}
 }

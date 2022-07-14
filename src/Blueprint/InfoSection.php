@@ -13,19 +13,12 @@ namespace Kirby\Blueprint;
  */
 class InfoSection extends BaseSection
 {
-	public Kirbytext $text;
-	public Theme $theme;
-	public string $type = 'info';
-
 	public function __construct(
-		string $id,
-		Kirbytext $text = null,
-		Theme $theme = null,
+		public string $id,
+		public Kirbytext|null $text = null,
+		public Theme|null $theme = null,
 		...$args
 	) {
 		parent::__construct($id, ...$args);
-
-		$this->text  = $text  ?? new Kirbytext();
-		$this->theme = $theme ?? new Theme();
 	}
 }

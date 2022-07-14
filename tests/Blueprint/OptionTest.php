@@ -12,17 +12,6 @@ class OptionTest extends TestCase
 	 */
 	public function testConstruct()
 	{
-		$option = new Option();
-
-		$this->assertNull($option->value);
-		$this->assertNull($option->text->value);
-	}
-
-	/**
-	 * @covers ::__construct
-	 */
-	public function testConstructWithValue()
-	{
 		// string
 		$option = new Option('test');
 		$this->assertSame('test', $option->value);
@@ -40,17 +29,27 @@ class OptionTest extends TestCase
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers ::factory
 	 */
-	public function testConstructWithValueAndText()
+	public function testFactoryWithValueAndText()
 	{
 		// string
-		$option = new Option('test', 'Test Option');
+		$option = Option::factory([
+			'value' => 'test',
+			'text'  => 'Test Option'
+		]);
+
 		$this->assertSame('test', $option->value);
 		$this->assertSame('Test Option', $option->text->value);
 
 		// array
-		$option = new Option('test', ['en' => 'Test Option']);
+		$option = Option::factory([
+			'value' => 'test',
+			'text'  => [
+				'en' => 'Test Option'
+			]
+		]);
+
 		$this->assertSame('test', $option->value);
 		$this->assertSame('Test Option', $option->text->value);
 	}
@@ -60,7 +59,11 @@ class OptionTest extends TestCase
 	 */
 	public function testRender()
 	{
-		$option   = new Option('test', 'Test Option');
+		$option = Option::factory([
+			'value' => 'test',
+			'text'  => 'Test Option'
+		]);
+
 		$expected = [
 			'text'  => 'Test Option',
 			'value' => 'test',

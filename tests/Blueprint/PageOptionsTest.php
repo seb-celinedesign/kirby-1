@@ -14,15 +14,15 @@ class PageOptionsTest extends TestCase
 	{
 		$options = new PageOptions();
 
-		$this->assertInstanceOf(ModelOption::class, $options->changeSlug);
-		$this->assertInstanceOf(ModelOption::class, $options->changeStatus);
-		$this->assertInstanceOf(ModelOption::class, $options->changeTemplate);
-		$this->assertInstanceOf(ModelOption::class, $options->changeTitle);
-		$this->assertInstanceOf(ModelOption::class, $options->create);
-		$this->assertInstanceOf(ModelOption::class, $options->delete);
-		$this->assertInstanceOf(ModelOption::class, $options->duplicate);
-		$this->assertInstanceOf(ModelOption::class, $options->preview);
-		$this->assertInstanceOf(ModelOption::class, $options->read);
-		$this->assertInstanceOf(ModelOption::class, $options->update);
+		$this->assertNull($options->changeSlug);
+		$this->assertNull($options->changeStatus);
+		$this->assertNull($options->changeTemplate);
+		$this->assertNull($options->changeTitle);
+		$this->assertNull($options->create);
+		$this->assertNull($options->delete);
+		$this->assertNull($options->duplicate);
+		$this->assertNull($options->preview);
+		$this->assertNull($options->read);
+		$this->assertNull($options->update);
 	}
 }

@@ -4,28 +4,15 @@ namespace Kirby\Blueprint;
 
 class TableColumn extends Node
 {
-	public TableColumnAlignment $align;
-	public Label $label;
-	public bool $mobile;
-	public string|null $type;
-	public string|null $value;
-	public string|null $width;
-
 	public function __construct(
-		string $id,
-		TableColumnAlignment $align = null,
-		Label $label = null,
-		bool $mobile = false,
-		string|null $type = null,
-		string|null $value = null,
-		string|null $width = null
+		public string $id,
+		public TableColumnAlignment|null $align = null,
+		public Label|null $label = null,
+		public bool $mobile = false,
+		public string|null $type = null,
+		public string|null $value = null,
+		public string|null $width = null
 	) {
-		$this->align  = $align ?? new TableColumnAlignment();
-		$this->id     = $id;
-		$this->label  = $label ?? Label::fallback($id);
-		$this->mobile = $mobile;
-		$this->type   = $type;
-		$this->value  = $value;
-		$this->width  = $width;
+		$this->label ??= Label::fallback($id);
 	}
 }

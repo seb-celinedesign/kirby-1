@@ -14,10 +14,10 @@ class ReportTest extends TestCase
 	{
 		$report = new Report('test');
 
-		$this->assertInstanceOf(Text::class, $report->info);
+		$this->assertNull($report->info);
 		$this->assertInstanceOf(Label::class, $report->label);
-		$this->assertInstanceOf(Url::class, $report->link);
-		$this->assertInstanceOf(Theme::class, $report->theme);
-		$this->assertInstanceOf(Text::class, $report->value);
+		$this->assertNull($report->link);
+		$this->assertNull($report->theme);
+		$this->assertNull($report->value);
 	}
 }

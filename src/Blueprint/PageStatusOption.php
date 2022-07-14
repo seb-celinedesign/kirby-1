@@ -17,25 +17,18 @@ use Kirby\Toolkit\I18n;
  */
 class PageStatusOption extends Component
 {
-	public Text $description;
-	public bool $disabled;
-	public string $id;
-	public Label $label;
-
 	public function __construct(
-		string $id,
-		Text $description = null,
-		bool $disabled = false,
-		Label $label = null,
+		public string $id,
+		public Text|null $description = null,
+		public bool $disabled = false,
+		public Label|null $label = null,
 	) {
-		if (in_array($id, ['draft', 'unlisted', 'listed']) === false) {
+		if (in_array($this->id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new InvalidArgumentException('The status must be draft, unlisted or listed');
 		}
 
-		$this->id          = $id;
-		$this->disabled    = $disabled;
-		$this->label       = $label 	  ?? new Label(I18n::translate('page.status.' . $id));
-		$this->description = $description ?? new Text(I18n::translate('page.status.' . $id . '.description'));
+		$this->label       ??= new Label(I18n::translate('page.status.' . $id));
+		$this->description ??= new Text(I18n::translate('page.status.' . $id . '.description'));
 	}
 
 	public static function prefab(string $id, array|string|bool|null $option = null): static

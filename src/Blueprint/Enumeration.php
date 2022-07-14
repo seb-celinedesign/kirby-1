@@ -15,20 +15,15 @@ use Kirby\Exception\InvalidArgumentException;
  */
 class Enumeration extends Property
 {
-	public array $allowed = [];
-
-	public function __construct(string|null $value = null, array $allowed = [], string|null $default = null)
-	{
-		parent::__construct(
-			default: $default,
-			value: $value,
-		);
-
-		$this->allowed = $allowed;
+	public function __construct(
+		public string|null $value = null,
+		public array $allowed = [],
+		public string|null $default = null
+	) {
+		parent::__construct($value ?? $default, $default);
 
 		if (in_array($this->value, $this->allowed) === false) {
 			throw new InvalidArgumentException('The given value "' . $this->value . '" is not allowed. Allowed values: ' . implode(', ', $this->allowed));
 		}
 	}
-
 }

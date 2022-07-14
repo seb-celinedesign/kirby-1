@@ -13,56 +13,28 @@ namespace Kirby\Blueprint;
  */
 class Tab extends Node
 {
-	public Columns $columns;
-	public Icon $icon;
-	public string $id;
-	public Label $label;
-
 	public function __construct(
-		string $id,
-		Label $label = null,
-		Icon $icon = null,
-		Columns $columns = null
+		public string $id,
+		public Label|null $label = null,
+		public Icon|null $icon = null,
+		public Columns|null $columns = null
 	) {
-		$this->columns = $columns ?? new Columns();
-		$this->icon    = $icon    ?? new Icon();
-		$this->id      = $id;
-		$this->label   = $label   ?? Label::fallback($id);
+		$this->label ??= Label::fallback($id);
 	}
 
 	/**
 	 * Collects all fields from all columns
 	 */
-	public function fields(): Fields
+	public function fields(): ?Fields
 	{
-		$fields = new Fields;
-
-		foreach ($this->sections() as $section) {
-			if ($section->type !== 'fields') {
-				continue;
-			}
-
-			foreach ($section->fields as $field) {
-				$fields->__set($field->id, $field);
-			}
-		}
-
-		return $fields;
+		return $this->sections()?->fields();
 	}
 
 	/**
 	 * Collects all sections from all columns
 	 */
-	public function sections(): Sections
+	public function sections(): ?Sections
 	{
-		$sections = new Sections;
-
-		foreach ($this->columns as $column) {
-			foreach ($column->sections as $section) {
-				$sections->__set($section->id, $section);
-			}
-		}
-
-		return $sections;
+		return $this->columns?->sections();
 	}
 }

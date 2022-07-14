@@ -15,18 +15,14 @@ use Kirby\Cms\ModelWithContent;
  */
 class PageStatusOptions extends Component
 {
-	public PageStatusOption $draft;
-	public PageStatusOption $unlisted;
-	public PageStatusOption $listed;
-
 	public function __construct(
-		PageStatusOption $draft = null,
-		PageStatusOption $unlisted = null,
-		PageStatusOption $listed = null
+		public PageStatusOption|null $draft    = null,
+		public PageStatusOption|null $unlisted = null,
+		public PageStatusOption|null $listed   = null
 	) {
-		$this->draft    = $draft    ?? new PageStatusOption('draft');
-		$this->unlisted = $unlisted ?? new PageStatusOption('unlisted');
-		$this->listed   = $listed   ?? new PageStatusOption('listed');
+		$this->draft    ??= new PageStatusOption('draft');
+		$this->unlisted ??= new PageStatusOption('unlisted');
+		$this->listed   ??= new PageStatusOption('listed');
 	}
 
 	public static function factory(array $props): static
@@ -41,9 +37,9 @@ class PageStatusOptions extends Component
 	public function render(ModelWithContent $model): array|false
 	{
 		return array_filter([
-			'draft'    => $this->draft->render($model),
-			'unlisted' => $this->unlisted->render($model),
-			'listed'   => $this->listed->render($model),
+			'draft'    => $this->draft?->render($model),
+			'unlisted' => $this->unlisted?->render($model),
+			'listed'   => $this->listed?->render($model),
 		]);
 	}
 }

@@ -18,8 +18,8 @@ class TabTest extends TestCase
 
 		$this->assertSame('test', $tab->id);
 		$this->assertInstanceOf(Label::class, $tab->label);
-		$this->assertInstanceOf(Icon::class, $tab->icon);
-		$this->assertInstanceOf(Columns::class, $tab->columns);
+		$this->assertNull($tab->icon);
+		$this->assertNull($tab->columns);
 	}
 
 	/**
@@ -58,7 +58,7 @@ class TabTest extends TestCase
 		);
 
 		$expected = [
-			'columns' => [],
+			'columns' => null,
 			'icon'    => null,
 			'id'      => 'test',
 			'label'   => 'My Tab'

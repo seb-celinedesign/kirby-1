@@ -2,8 +2,6 @@
 
 namespace Kirby\Blueprint;
 
-use Kirby\Toolkit\I18n;
-
 /**
  * Email field
  *
@@ -17,12 +15,12 @@ class EmailField extends TextField
 {
 	public function __construct(...$args)
 	{
-		$args['autocomplete'] ??= 'email';
-		$args['icon']         ??= new Icon('email');
-		$args['placeholder']  ??= new Placeholder(
-			I18n::translate('email.placeholder')
-		);
-
 		parent::__construct(...$args);
+
+		$this->autocomplete ??= 'email';
+		$this->icon         ??= new Icon('email');
+		$this->placeholder  ??= new Placeholder(['*' => 'email.placeholder']);
+
+		$this->validations->add('email');
 	}
 }

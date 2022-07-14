@@ -147,7 +147,7 @@ class ComponentTest extends TestCase
 			'id' => 'test',
 			'label' => 'Test Page',
 			'tab' => [
-				'columns' => [],
+				'columns' => null,
 				'icon'    => null,
 				'id'      => 'content',
 				'label'   => 'Content'

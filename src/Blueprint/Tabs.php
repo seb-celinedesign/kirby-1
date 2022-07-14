@@ -14,4 +14,36 @@ namespace Kirby\Blueprint;
 class Tabs extends Collection
 {
 	public const TYPE = Tab::class;
+
+	/**
+	 * Collect all columns in all tabs
+	 */
+	public function columns(): Columns
+	{
+		$columns = new Columns();
+
+		foreach ($this->data as $tab) {
+			foreach ($tab->columns ?? [] as $column) {
+				$columns->__set($column->id, $column);
+			}
+		}
+
+		return $columns;
+	}
+
+	/**
+	 * Collect all fields in all tabs
+	 */
+	public function fields(): Fields
+	{
+		return $this->sections()->fields();
+	}
+
+	/**
+	 * Collect all sections in all tabs
+	 */
+	public function sections(): Sections
+	{
+		return $this->columns()->sections();
+	}
 }

@@ -16,13 +16,10 @@ use Kirby\Toolkit\A;
  */
 class Property extends Component
 {
-	public string|null $default;
-	public string|null $value;
-
-	public function __construct(string|null $value = null, string|null $default = null)
-	{
-		$this->default = $default;
-		$this->value   = $value ?? $default;
+	public function __construct(
+		public string|null $value = null,
+		public string|null $default = null
+	) {
 	}
 
 	public static function factory(string|array|null $props = null)
@@ -32,6 +29,6 @@ class Property extends Component
 
 	public function render(ModelWithContent $model): mixed
 	{
-		return $this->value;
+		return $this->value ?? $this->default;
 	}
 }

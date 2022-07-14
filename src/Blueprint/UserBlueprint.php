@@ -15,27 +15,15 @@ use Kirby\Cms\User;
  */
 class UserBlueprint extends Blueprint
 {
-	public Image $image;
-	public UserOptions $options;
-	public Permissions $permissions;
-	public string $type = 'user';
-
 	public function __construct(
-		string $id,
-		Image $image = null,
-		Label $label = null,
-		UserOptions $options = null,
-		Permissions $permissions = null,
-		Tabs $tabs = null,
+		public string $id,
+		public Image|null $image = null,
+		public Label|null $label = null,
+		public UserOptions|null $options = null,
+		public Permissions|null $permissions = null,
+		public Tabs|null $tabs = null,
+		...$args
 	) {
-		parent::__construct(
-			id: $id,
-			label: $label,
-			tabs: $tabs,
-		);
-
-		$this->image       = $image ?? new Image();
-		$this->options     = $options ?? new UserOptions();
-		$this->permissions = $permissions ?? new Permissions();
+		parent::__construct($id, ...$args);
 	}
 }

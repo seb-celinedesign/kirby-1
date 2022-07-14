@@ -16,11 +16,11 @@ class PageBlueprintTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertInstanceOf(Image::class, $blueprint->image);
+		$this->assertNull($blueprint->image);
 		$this->assertNull($blueprint->num);
-		$this->assertInstanceOf(PageNavigation::class, $blueprint->navigation);
-		$this->assertInstanceOf(PageOptions::class, $blueprint->options);
-		$this->assertInstanceOf(Url::class, $blueprint->preview);
-		$this->assertInstanceOf(PageStatusOptions::class, $blueprint->status);
+		$this->assertNull($blueprint->navigation);
+		$this->assertNull($blueprint->options);
+		$this->assertNull($blueprint->preview);
+		$this->assertNull($blueprint->status);
 	}
 }

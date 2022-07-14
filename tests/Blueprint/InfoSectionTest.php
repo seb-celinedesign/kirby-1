@@ -16,10 +16,9 @@ class InfoSectionTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertSame('info', $section->type);
 		$this->assertInstanceOf(Label::class, $section->label);
-		$this->assertInstanceOf(Help::class, $section->help);
-		$this->assertInstanceOf(Kirbytext::class, $section->text);
-		$this->assertInstanceOf(Theme::class, $section->theme);
+		$this->assertNull($section->help);
+		$this->assertNull($section->text);
+		$this->assertNull($section->theme);
 	}
 }

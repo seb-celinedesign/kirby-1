@@ -13,26 +13,13 @@ namespace Kirby\Blueprint;
  */
 class FileOptions extends ModelOptions
 {
-	public ModelOption $changeName;
-	public ModelOption $create;
-	public ModelOption $delete;
-	public ModelOption $read;
-	public ModelOption $replace;
-	public ModelOption $update;
-
 	public function __construct(
-		ModelOption $changeName = null,
-		ModelOption $create = null,
-		ModelOption $delete = null,
-		ModelOption $read = null,
-		ModelOption $replace = null,
-		ModelOption $update = null,
+		public ModelOption|null $changeName = null,
+		public ModelOption|null $create = null,
+		public ModelOption|null $delete = null,
+		public ModelOption|null $read = null,
+		public ModelOption|null $replace = null,
+		public ModelOption|null $update = null,
 	) {
-		$this->changeName = $changeName ?? new ModelOption();
-		$this->create     = $create ?? new ModelOption();
-		$this->delete     = $delete ?? new ModelOption();
-		$this->read       = $read ?? new ModelOption();
-		$this->replace    = $replace ?? new ModelOption();
-		$this->update     = $update ?? new ModelOption();
 	}
 }

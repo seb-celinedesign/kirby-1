@@ -13,36 +13,16 @@ namespace Kirby\Blueprint;
  */
 class PageBlueprint extends Blueprint
 {
-	public Image $image;
-	public PageNavigation $navigation;
-	public string|null $num;
-	public PageOptions $options;
-	public Url $preview;
-	public PageStatusOptions $status;
-	public string $type = 'page';
-
 	public function __construct(
-		string $id,
-		Image $image = null,
-		Label $label = null,
-		PageNavigation $navigation = null,
-		string|null $num = null,
-		PageOptions $options = null,
-		Url $preview = null,
-		PageStatusOptions $status = null,
-		Tabs $tabs = null,
+		public string $id,
+		public Image|null $image = null,
+		public PageNavigation|null $navigation = null,
+		public string|null $num = null,
+		public PageOptions|null $options = null,
+		public Url|null $preview = null,
+		public PageStatusOptions|null $status = null,
+		...$args
 	) {
-		parent::__construct(
-			id: $id,
-			label: $label,
-			tabs: $tabs
-		);
-
-		$this->image      = $image ?? new Image();
-		$this->navigation = $navigation ?? new PageNavigation();
-		$this->num        = $num;
-		$this->options    = $options ?? new PageOptions();
-		$this->preview    = $preview ?? new Url();
-		$this->status     = $status ?? new PageStatusOptions();
+		parent::__construct($id, ...$args);
 	}
 }

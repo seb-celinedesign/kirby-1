@@ -4,6 +4,7 @@ namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
 use ReflectionProperty;
+use ReflectionUnionType;
 
 /**
  * Base component for everything in blueprints
@@ -46,7 +47,16 @@ class Component
 
 		// get the type for the property
 		$reflection = new ReflectionProperty(static::class, $key);
-		$className  = $reflection->getType()->getName();
+		$propType   = $reflection->getType();
+
+		// union types
+		if (is_a($propType, ReflectionUnionType::class) === true) {
+			// let the type system take over
+			return $value;
+		}
+
+		// get the class name for the single type
+		$className = $propType->getName();
 
 		// check if there's a factory for the value
 		if (is_subclass_of($className, Component::class) === true) {

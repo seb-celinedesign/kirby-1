@@ -13,14 +13,9 @@ namespace Kirby\Blueprint;
  */
 class SiteOptions extends ModelOptions
 {
-	public ModelOption $changeTitle;
-	public ModelOption $update;
-
 	public function __construct(
-		ModelOption $changeTitle = null,
-		ModelOption $update = null,
+		public ModelOption|null $changeTitle = null,
+		public ModelOption|null $update = null,
 	) {
-		$this->changeTitle = $changeTitle ?? new ModelOption();
-		$this->update      = $update      ?? new ModelOption();
 	}
 }

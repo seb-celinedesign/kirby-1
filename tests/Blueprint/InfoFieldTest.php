@@ -16,10 +16,9 @@ class InfoFieldTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertSame('info', $field->type);
 		$this->assertInstanceOf(Label::class, $field->label);
-		$this->assertInstanceOf(Help::class, $field->help);
-		$this->assertInstanceOf(Kirbytext::class, $field->text);
-		$this->assertInstanceOf(Theme::class, $field->theme);
+		$this->assertNull($field->help);
+		$this->assertNull($field->text);
+		$this->assertNull($field->theme);
 	}
 }

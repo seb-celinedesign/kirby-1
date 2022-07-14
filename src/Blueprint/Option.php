@@ -13,12 +13,21 @@ namespace Kirby\Blueprint;
  */
 class Option extends Component
 {
-	public Translated $text;
-	public string|int|float|null $value;
+	public function __construct(
+		public string|int|float $value,
+		public Translated|null $text = null
+	) {
+		$this->text ??= new Translated($value);
+	}
 
-	public function __construct(string|int|float|null $value = null, string|array|null $text = null)
+	public static function factory(array $props): static
 	{
-		$this->value = $value;
-		$this->text  = new Translated($text ?? $value);
+		return new static(
+			// passing null will create an empty option
+			value: $props['value'] ?? '',
+
+			// only add the text if it's passed in the array
+			text: isset($props['text']) ? new Translated($props['text']) : null
+		);
 	}
 }

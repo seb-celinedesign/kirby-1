@@ -13,18 +13,14 @@ namespace Kirby\Blueprint;
  */
 class BaseSection extends Section
 {
-	public Help $help;
-	public Label $label;
-
 	public function __construct(
-		string $id,
-		Help $help = null,
-		Label $label = null
+		public string $id,
+		public Help|null $help = null,
+		public Label|null $label = null
 	) {
 		parent::__construct($id);
 
-		$this->help  = $help  ?? new Help();
-		$this->label = $label ?? Label::fallback($id);
+		$this->label ??= Label::fallback($id);
 	}
 
 	public static function polyfill(array $props): array

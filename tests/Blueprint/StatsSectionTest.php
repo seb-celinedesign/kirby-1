@@ -16,8 +16,7 @@ class StatsSectionTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertSame('stats', $section->type);
-		$this->assertInstanceOf(Reports::class, $section->reports);
-		$this->assertInstanceOf(Size::class, $section->size);
+		$this->assertNull($section->reports);
+		$this->assertNull($section->size);
 	}
 }

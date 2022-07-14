@@ -16,11 +16,9 @@ class FileBlueprintTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertSame('file', $blueprint->type);
-
-		$this->assertInstanceOf(Accept::class, $blueprint->accept);
-		$this->assertInstanceOf(Image::class, $blueprint->image);
-		$this->assertInstanceOf(FileOptions::class, $blueprint->options);
-		$this->assertInstanceOf(Url::class, $blueprint->preview);
+		$this->assertNull($blueprint->accept);
+		$this->assertNull($blueprint->image);
+		$this->assertNull($blueprint->options);
+		$this->assertNull($blueprint->preview);
 	}
 }

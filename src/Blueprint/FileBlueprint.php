@@ -15,30 +15,15 @@ use Kirby\Cms\File;
  */
 class FileBlueprint extends Blueprint
 {
-	public Accept $accept;
-	public Image $image;
-	public FileOptions $options;
-	public Url $preview;
-	public string $type = 'file';
-
 	public function __construct(
-		string $id,
-		Accept $accept = null,
-		Image $image = null,
-		Label $label = null,
-		FileOptions $options = null,
-		Url $preview = null,
-		Tabs $tabs = null,
+		public string $id,
+		public Accept|null $accept = null,
+		public Image|null $image = null,
+		public FileOptions|null $options = null,
+		public Url|null $preview = null,
+		public Tabs|null $tabs = null,
+		...$args
 	) {
-		parent::__construct(
-			id: $id,
-			label: $label,
-			tabs: $tabs
-		);
-
-		$this->accept  = $accept  ?? new Accept();
-		$this->image   = $image   ?? new Image();
-		$this->options = $options ?? new FileOptions();
-		$this->preview = $preview ?? new Url();
+		parent::__construct($id, ...$args);
 	}
 }

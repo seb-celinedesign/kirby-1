@@ -22,9 +22,8 @@ class FieldsTest extends TestCase
 		]);
 
 		$this->assertSame('a', $fields->first()->id);
-		$this->assertSame('info', $fields->first()->type);
-
+		$this->assertInstanceOf(InfoField::class, $fields->first());
 		$this->assertSame('b', $fields->last()->id);
-		$this->assertSame('text', $fields->last()->type);
+		$this->assertInstanceOf(TextField::class, $fields->last());
 	}
 }

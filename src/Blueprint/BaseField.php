@@ -13,23 +13,13 @@ namespace Kirby\Blueprint;
  */
 class BaseField extends Field
 {
-	public Help $help;
-	public Label $label;
-
 	public function __construct(
-		string $id,
-		Help $help = null,
-		Label $label = null,
-		When $when = null,
-		Width $width = null,
+		public string $id,
+		public Help|null $help = null,
+		public Label|null $label = null,
+		...$args,
 	) {
-		parent::__construct(
-			id: $id,
-			when: $when,
-			width: $width
-		);
-
-		$this->help  = $help  ?? new Help();
-		$this->label = $label ?? Label::fallback($id);
+		parent::__construct($id, ...$args);
+		$this->label ??= Label::fallback($id);
 	}
 }

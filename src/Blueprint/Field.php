@@ -15,30 +15,19 @@ use Kirby\Cms\ModelWithContent;
  */
 class Field extends Node
 {
-	/**
-	 * The field type
-	 */
-	public string $type;
-
-	public When $when;
-	public Width $width;
-
 	public function __construct(
-		string $id,
-		When $when = null,
-		Width $width = null,
+		public string $id,
+		public When|null $when = null,
+		public Width|null $width = null,
 	) {
-		$this->id    = $id;
-		$this->when  = $when  ?? new When();
-		$this->width = $width ?? new Width();
 	}
 
-	public function submit(ModelWithContent $model, $value)
+	public function submit(ModelWithContent $model, mixed $value = null): mixed
 	{
 		return $value;
 	}
 
-	public function validate(ModelWithContent $model, $value): bool
+	public function validate(ModelWithContent $model, mixed $value = null): bool
 	{
 		return true;
 	}

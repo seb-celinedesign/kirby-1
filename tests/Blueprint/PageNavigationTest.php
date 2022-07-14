@@ -32,28 +32,28 @@ class PageNavigationTest extends TestCase
 	}
 
 	/**
-	 * @covers ::__construct
+	 * @covers ::factory
 	 */
-	public function testStatus()
+	public function testFactoryWithStatus()
 	{
 		// single
-		$navigation = new PageNavigation(
-			status: 'listed'
-		);
+		$navigation = PageNavigation::factory([
+			'status' => 'listed'
+		]);
 
 		$this->assertSame(['listed'], $navigation->status);
 
 		// wildcard
-		$navigation = new PageNavigation(
-			status: 'all'
-		);
+		$navigation = PageNavigation::factory([
+			'status' => 'all'
+		]);
 
 		$this->assertSame(['*'], $navigation->status);
 
 		// array
-		$navigation = new PageNavigation(
-			status: ['draft', 'listed']
-		);
+		$navigation = PageNavigation::factory([
+			'status' => ['draft', 'listed']
+		]);
 
 		$this->assertSame(['draft', 'listed'], $navigation->status);
 	}
@@ -64,15 +64,24 @@ class PageNavigationTest extends TestCase
 	public function testTemplate()
 	{
 		// single
-		$navigation = new PageNavigation(template: 'article');
+		$navigation = PageNavigation::factory([
+			'template' => 'article'
+		]);
+
 		$this->assertSame(['article'], $navigation->template);
 
 		// wildcard
-		$navigation = new PageNavigation(template: 'all');
+		$navigation = PageNavigation::factory([
+			'template' => 'all'
+		]);
+
 		$this->assertSame(['*'], $navigation->template);
 
 		// array
-		$navigation = new PageNavigation(template: ['article', 'video']);
+		$navigation = PageNavigation::factory([
+			'template' => ['article', 'video']
+		]);
+
 		$this->assertSame(['article', 'video'], $navigation->template);
 	}
 }

@@ -13,5 +13,4 @@ namespace Kirby\Blueprint;
  */
 class SelectField extends InputField
 {
-	public string $type = 'select';
 }

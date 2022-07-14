@@ -13,14 +13,9 @@ namespace Kirby\Blueprint;
  */
 class FieldsSection extends Section
 {
-	public Fields $fields;
-	public string $type = 'fields';
-
 	public function __construct(
-		string $id,
-		Fields $fields = null,
+		public string $id,
+		public Fields|null $fields = null,
 	) {
-		$this->id     = $id;
-		$this->fields = $fields ?? new Fields();
 	}
 }

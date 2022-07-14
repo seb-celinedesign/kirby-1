@@ -14,7 +14,7 @@ class SiteOptionsTest extends TestCase
 	{
 		$options = new SiteOptions();
 
-		$this->assertInstanceOf(ModelOption::class, $options->changeTitle);
-		$this->assertInstanceOf(ModelOption::class, $options->update);
+		$this->assertNull($options->changeTitle);
+		$this->assertNull($options->update);
 	}
 }

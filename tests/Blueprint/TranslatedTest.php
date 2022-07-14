@@ -40,6 +40,15 @@ class TranslatedTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 */
+	public function testConstructWithGlobal()
+	{
+		$translated = new Translated(['*' => 'avatar']);
+		$this->assertSame('Profile picture', $translated->value);
+	}
+
+	/**
+	 * @covers ::__construct
+	 */
 	public function testConstructWithFallback()
 	{
 		$translated = new Translated([], 'Test');

@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Toggle field
+ * Headline field
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,6 +11,13 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class ToggleField extends InputField
+class HeadlineField extends BaseField
 {
+	public function __construct(
+		public string $id,
+		public bool $numbered = true,
+		...$args
+	) {
+		parent::__construct($id, ...$args);
+	}
 }

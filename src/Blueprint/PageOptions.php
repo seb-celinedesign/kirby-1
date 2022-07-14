@@ -22,38 +22,17 @@ class PageOptions extends ModelOptions
 		'url'      => 'changeSlug',
 	];
 
-	public ModelOption $changeSlug;
-	public ModelOption $changeStatus;
-	public ModelOption $changeTemplate;
-	public ModelOption $changeTitle;
-	public ModelOption $create;
-	public ModelOption $delete;
-	public ModelOption $duplicate;
-	public ModelOption $preview;
-	public ModelOption $read;
-	public ModelOption $update;
-
 	public function __construct(
-		ModelOption $changeSlug = null,
-		ModelOption $changeStatus = null,
-		ModelOption $changeTemplate = null,
-		ModelOption $changeTitle = null,
-		ModelOption $create = null,
-		ModelOption $delete = null,
-		ModelOption $duplicate = null,
-		ModelOption $preview = null,
-		ModelOption $read = null,
-		ModelOption $update = null,
+		public ModelOption|null $changeSlug = null,
+		public ModelOption|null $changeStatus = null,
+		public ModelOption|null $changeTemplate = null,
+		public ModelOption|null $changeTitle = null,
+		public ModelOption|null $create = null,
+		public ModelOption|null $delete = null,
+		public ModelOption|null $duplicate = null,
+		public ModelOption|null $preview = null,
+		public ModelOption|null $read = null,
+		public ModelOption|null $update = null,
 	) {
-		$this->changeSlug     = $changeSlug ?? new ModelOption();
-		$this->changeStatus   = $changeStatus ?? new ModelOption();
-		$this->changeTemplate = $changeTemplate ?? new ModelOption();
-		$this->changeTitle    = $changeTitle ?? new ModelOption();
-		$this->create         = $create ?? new ModelOption();
-		$this->delete         = $delete ?? new ModelOption();
-		$this->duplicate      = $duplicate ?? new ModelOption();
-		$this->preview        = $preview ?? new ModelOption();
-		$this->read           = $read ?? new ModelOption();
-		$this->update         = $update ?? new ModelOption();
 	}
 }

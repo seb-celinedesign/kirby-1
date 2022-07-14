@@ -15,25 +15,27 @@ use Kirby\Cms\ModelWithContent;
  */
 class PageNavigation extends Component
 {
-	public string|null $sortBy;
-	public array|null $status;
-	public array|null $template;
-
 	public function __construct(
-		string|null $sortBy = null,
-		string|array|null $status = null,
-		string|array|null $template = null
+		public string|null $sortBy = null,
+		public array|null $status = null,
+		public array|null $template = null
 	) {
-		$this->sortBy   = $sortBy;
-		$this->status   = $this->option($status);
-		$this->template = $this->option($template);
+	}
+
+	public static function factory(array $props): static
+	{
+		return new static(
+			sortBy:   $props['sortBy'] ?? null,
+			status:   static::factoryForOption($props['status']   ?? null),
+			template: static::factoryForOption($props['template'] ?? null),
+		);
 	}
 
 	/**
 	 * Converts multiple ways to write an option (string, wildcard, array)
 	 * into a clean final array of options.
 	 */
-	public function option(array|string|null $option)
+	public static function factoryForOption(array|string|null $option): array|null
 	{
 		// convert given option to clean array
 		return match (true) {

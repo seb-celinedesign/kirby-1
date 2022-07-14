@@ -17,6 +17,7 @@ class ValidationTest extends TestCase
 		$this->assertSame('minlength', $v->handler);
 		$this->assertSame([], $v->args);
 		$this->assertNull($v->message);
+		$this->assertFalse($v->disabled);
 	}
 
 	/**
@@ -38,10 +39,25 @@ class ValidationTest extends TestCase
 		$this->assertSame('Too short', $v->message);
 	}
 
+	/**
+	 * @covers ::__construct
+	 */
+	public function testConstructDisabled()
+	{
+		$v = new Validation('minlength', disabled: true);
+		$this->assertTrue($v->disabled);
+	}
+
 	public function testValidate()
 	{
 		$v = new Validation('email');
 		$this->assertTrue($v->validate('test@getkirby.com'));
+	}
+
+	public function testValidateWhenDisabled()
+	{
+		$v = new Validation('email', disabled: true);
+		$this->assertTrue($v->validate('foo'));
 	}
 
 	public function testValidateWithInvalidResult()

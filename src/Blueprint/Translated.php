@@ -30,9 +30,19 @@ class Translated extends Property
 			default => $value
 		};
 
+		// current language
+		$locale = I18n::locale();
+
+		// inject language from translation file
+		if (isset($this->translations['*']) === true) {
+			$this->translations = [
+				$locale => I18n::translate($this->translations['*'])
+			];
+		}
+
 		$this->default = $default;
 		$this->value   =
-			$this->translations[I18n::locale()] ??
+			$this->translations[$locale] ??
 			$this->translations['en'] ??
 			$this->default;
 	}

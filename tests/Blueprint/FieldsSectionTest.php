@@ -16,7 +16,6 @@ class FieldsSectionTest extends TestCase
 			id: 'test',
 		);
 
-		$this->assertSame('fields', $section->type);
-		$this->assertInstanceOf(Fields::class, $section->fields);
+		$this->assertNull($section->fields);
 	}
 }

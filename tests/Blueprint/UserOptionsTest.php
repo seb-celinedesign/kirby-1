@@ -14,13 +14,13 @@ class UserOptionsTest extends TestCase
 	{
 		$options = new UserOptions();
 
-		$this->assertInstanceOf(ModelOption::class, $options->changeEmail);
-		$this->assertInstanceOf(ModelOption::class, $options->changeLanguage);
-		$this->assertInstanceOf(ModelOption::class, $options->changeName);
-		$this->assertInstanceOf(ModelOption::class, $options->changePassword);
-		$this->assertInstanceOf(ModelOption::class, $options->changeRole);
-		$this->assertInstanceOf(ModelOption::class, $options->create);
-		$this->assertInstanceOf(ModelOption::class, $options->delete);
-		$this->assertInstanceOf(ModelOption::class, $options->update);
+		$this->assertNull($options->changeEmail);
+		$this->assertNull($options->changeLanguage);
+		$this->assertNull($options->changeName);
+		$this->assertNull($options->changePassword);
+		$this->assertNull($options->changeRole);
+		$this->assertNull($options->create);
+		$this->assertNull($options->delete);
+		$this->assertNull($options->update);
 	}
 }

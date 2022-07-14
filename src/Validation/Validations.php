@@ -25,14 +25,28 @@ class Validations
 	public function add(string $id, mixed $args = [], string|null $message = null, bool $skipOnEmpty = true): Validation
 	{
 		return $this->validations[$id] = match (true) {
+			// deactivated handler
+			$args === false, $args === null => new Validation(
+				disabled: true,
+				handler: $id,
+				message: $message,
+			),
+
 			// custom handler
-			is_a($args, Closure::class) => new Validation($args, [], $message, $skipOnEmpty),
+			is_a($args, Closure::class) => new Validation(
+				handler: $args,
+				message: $message
+			),
 
 			// validation object
 			is_a($args, Validation::class) => $args,
 
 			// basic validation
-			default => new Validation($id, A::wrap($args), $message, $skipOnEmpty)
+			default => new Validation(
+				handler: $id,
+				args: A::wrap($args),
+				message: $message
+			)
 		};
 	}
 

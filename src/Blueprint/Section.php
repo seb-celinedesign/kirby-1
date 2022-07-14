@@ -13,8 +13,6 @@ namespace Kirby\Blueprint;
  */
 class Section extends Node
 {
-	public string $type;
-
 	public function __construct(
 		public string $id
 	) {

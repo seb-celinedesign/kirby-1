@@ -13,32 +13,15 @@ namespace Kirby\Blueprint;
  */
 class UserOptions extends ModelOptions
 {
-	public ModelOption $changeEmail;
-	public ModelOption $changeLanguage;
-	public ModelOption $changeName;
-	public ModelOption $changePassword;
-	public ModelOption $changeRole;
-	public ModelOption $create;
-	public ModelOption $delete;
-	public ModelOption $update;
-
 	public function __construct(
-		ModelOption $changeEmail = null,
-		ModelOption $changeLanguage = null,
-		ModelOption $changeName = null,
-		ModelOption $changePassword = null,
-		ModelOption $changeRole = null,
-		ModelOption $create = null,
-		ModelOption $delete = null,
-		ModelOption $update = null,
+		public ModelOption|null $changeEmail = null,
+		public ModelOption|null $changeLanguage = null,
+		public ModelOption|null $changeName = null,
+		public ModelOption|null $changePassword = null,
+		public ModelOption|null $changeRole = null,
+		public ModelOption|null $create = null,
+		public ModelOption|null $delete = null,
+		public ModelOption|null $update = null,
 	) {
-		$this->changeEmail    = $changeEmail ?? new ModelOption();
-		$this->changeLanguage = $changeLanguage ?? new ModelOption();
-		$this->changeName     = $changeName ?? new ModelOption();
-		$this->changePassword = $changePassword ?? new ModelOption();
-		$this->changeRole     = $changeRole ?? new ModelOption();
-		$this->create         = $create ?? new ModelOption();
-		$this->delete         = $delete ?? new ModelOption();
-		$this->update         = $update ?? new ModelOption();
 	}
 }

@@ -13,16 +13,15 @@ namespace Kirby\Blueprint;
  */
 class Column extends Node
 {
-	public Sections $sections;
-	public Width $width;
-
 	public function __construct(
-		string $id,
-		Width $width = null,
-		Sections $sections = null
+		public string $id,
+		public Width|null $width = null,
+		public Sections|null $sections = null
 	) {
-		$this->id       = $id;
-		$this->sections = $sections ?? new Sections();
-		$this->width    = $width    ?? new Width();
+	}
+
+	public function fields(): ?Fields
+	{
+		return $this->sections?->fields();
 	}
 }
