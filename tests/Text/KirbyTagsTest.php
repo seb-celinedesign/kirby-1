@@ -275,6 +275,39 @@ class KirbyTagsTest extends TestCase
 		$this->assertEquals($expected, $page->text()->kt()->value());
 	}
 
+	public function testImageWithFileUUID()
+	{
+		$kirby = new App([
+			'roots' => [
+				'index' => '/dev/null',
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'a',
+						'content' => [
+							'text' => '(image: file://image-uuid)',
+							'uuid' => 'page-uuid' // this is just to make sure that the test doesn't try to create a content file for this page with a generated UUID
+						],
+						'files' => [
+							[
+								'filename' => 'image.jpg',
+								'content' => ['uuid' => 'image-uuid']
+							]
+						]
+					]
+				]
+			]
+		]);
+
+		$page  = $kirby->page('a');
+		$image = $page->file('image.jpg');
+
+		$expected = '<figure><img alt="" src="' . $image->url() . '"></figure>';
+
+		$this->assertEquals($expected, $page->text()->kt()->value());
+	}
+
 	public function testFile()
 	{
 		$kirby = new App([
@@ -291,6 +324,39 @@ class KirbyTagsTest extends TestCase
 						'files' => [
 							[
 								'filename' => 'a.jpg',
+							]
+						]
+					]
+				]
+			]
+		]);
+
+		$page = $kirby->page('a');
+		$file = $page->file('a.jpg');
+
+		$expected = '<p><a download href="' . $file->url() . '">a.jpg</a></p>';
+
+		$this->assertEquals($expected, $page->text()->kt()->value());
+	}
+
+	public function testFileWithUUID()
+	{
+		$kirby = new App([
+			'roots' => [
+				'index' => '/dev/null',
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'a',
+						'content' => [
+							'text' => '(file: file://file-a)',
+							'uuid' => 'page-uuid' // this is just to make sure that the test doesn't try to create a content file for this page with a generated UUID
+						],
+						'files' => [
+							[
+								'filename' => 'a.jpg',
+								'content'  => ['uuid' => 'file-a']
 							]
 						]
 					]
@@ -426,6 +492,35 @@ class KirbyTagsTest extends TestCase
 		$this->assertEquals('<a href="https://getkirby.com/de/a">getkirby.com/de/a</a>', $app->kirbytags('(link: a lang: de)'));
 		$this->assertEquals('<a href="https://getkirby.com/en/a#anchor">getkirby.com/en/a</a>', $app->kirbytags('(link: a#anchor lang: en)'));
 		$this->assertEquals('<a href="https://getkirby.com/de/a#anchor">getkirby.com/de/a</a>', $app->kirbytags('(link: a#anchor lang: de)'));
+	}
+
+	public function testLinkWithUuid()
+	{
+		$app = new App([
+			'roots' => [
+				'index' => '/dev/null'
+			],
+			'urls' => [
+				'index' => 'https://getkirby.com'
+			],
+			'site' => [
+				'children' => [
+					[
+						'slug'    => 'a',
+						'content' => ['uuid' => 'page-uuid'],
+						'files'   => [
+							[
+								'filename' => 'foo.jpg',
+								'content' => ['uuid' => 'file-uuid'],
+							]
+						]
+					]
+				]
+			]
+		]);
+
+		$this->assertEquals('<a href="https://getkirby.com/a">getkirby.com/a</a>', $app->kirbytags('(link: page://page-uuid)'));
+		$this->assertEquals('<a href="' . $app->file('a/foo.jpg')->url() . '">file</a>', $app->kirbytags('(link: file://file-uuid text: file)'));
 	}
 
 	public function testHooks()

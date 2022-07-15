@@ -2,6 +2,7 @@
 
 use Kirby\Cms\Html;
 use Kirby\Cms\Url;
+use Kirby\Cms\Uuid;
 use Kirby\Toolkit\Str;
 
 /**
@@ -171,6 +172,15 @@ return [
 		'html' => function ($tag) {
 			if (empty($tag->lang) === false) {
 				$tag->value = Url::to($tag->value, $tag->lang);
+			}
+
+			// if value is a UUID, resolve to page/file model
+			// and use the URL as value
+			if (
+				Uuid::is($tag->value, 'page') === true ||
+				Uuid::is($tag->value, 'file') === true
+			) {
+				$tag->value = Uuid::for($tag->value)->toModel()->url();
 			}
 
 			return Html::a($tag->value, $tag->text, [

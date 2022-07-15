@@ -9,7 +9,7 @@ use Kirby\Filesystem\Dir;
 use Kirby\Toolkit\Str;
 
 /**
- * @coversDefaultClass \Kirby\Cms\Binding
+ * @coversDefaultClass \Kirby\Cms\Uuid
  */
 class UuidTest extends TestCase
 {
@@ -50,17 +50,16 @@ class UuidTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 * @covers ::for
-	 * @covers ::id
 	 * @covers ::type
-	 * @covers ::uuid
+	 * @covers ::toString
 	 *
 	 * @dataProvider constructProvider
 	 */
-	public function testConstruct($seed, string $type, string $id, string $uuid)
+	public function testConstruct($seed, string $type, string $host, string $result)
 	{
-		$binding = Uuid::for($seed);
-		$this->assertSame($type, $binding->type());
-		$this->assertSame($uuid, $binding->toString());
+		$uuid = Uuid::for($seed);
+		$this->assertSame($type, $uuid->type());
+		$this->assertSame($result, $uuid->toString());
 	}
 
 	/**
@@ -133,11 +132,11 @@ class UuidTest extends TestCase
 		]);
 
 		$page = $app->page('a/b');
-		$binding = Uuid::for($page);
+		$uuid = Uuid::for($page);
 
-		$this->assertSame('page/te/st-b', $key = $binding->key());
-		$this->assertSame('a/b', $value = $binding->value());
-		$this->assertTrue($binding->populate());
+		$this->assertSame('page/te/st-b', $key = $uuid->key());
+		$this->assertSame('a/b', $value = $uuid->value());
+		$this->assertTrue($uuid->populate());
 		$this->assertTrue(Uuid::cache()->exists($key));
 		$this->assertSame($value, Uuid::cache()->get($key));
 		$this->assertSame($page, Uuid::for('page://test-b')->toModel());
@@ -183,11 +182,11 @@ class UuidTest extends TestCase
 		]);
 
 		$file = $app->user('test')->file('test.jpg');
-		$binding = Uuid::for($file);
+		$uuid = Uuid::for($file);
 
-		$this->assertSame('file/fi/le-a', $key = $binding->key());
-		$this->assertSame('user://test/test.jpg', $value = $binding->value());
-		$this->assertTrue($binding->populate());
+		$this->assertSame('file/fi/le-a', $key = $uuid->key());
+		$this->assertSame('user://test/test.jpg', $value = $uuid->value());
+		$this->assertTrue($uuid->populate());
 		$this->assertTrue(Uuid::cache()->exists($key));
 		$this->assertSame($value, Uuid::cache()->get($key));
 		$this->assertSame($file, Uuid::for('file://file-a')->toModel());
@@ -195,17 +194,15 @@ class UuidTest extends TestCase
 
 	/**
 	 * @covers ::create
-	 * @covers ::id
 	 */
 	public function testCreate()
 	{
 		$this->app->impersonate('kirby');
 
 		$page = new Page(['slug' => 'a']);
-		$binding = Uuid::for($page);
-		$id = $binding->create();
-
-		$this->assertIsString($id);
+		$this->assertTrue($page->content()->get('uuid')->isEmpty());
+		$page = Uuid::for($page)->toModel();
+		$this->assertFalse($page->content()->get('uuid')->isEmpty());
 	}
 
 	/**
@@ -231,21 +228,21 @@ class UuidTest extends TestCase
 		]);
 
 		$page = $app->page('a');
-		$binding = Uuid::for($page);
+		$uuid = Uuid::for($page);
 
-		$class = new \ReflectionClass($binding);
+		$class = new \ReflectionClass($uuid);
 		$method = $class->getMethod('findFromCache');
 		$method->setAccessible(true);
 
-		$model = $method->invokeArgs($binding, []);
+		$model = $method->invokeArgs($uuid, []);
 		$this->assertNull($model);
 
-		$binding->populate();
+		$uuid->populate();
 
-		$model = $method->invokeArgs($binding, []);
+		$model = $method->invokeArgs($uuid, []);
 		$this->assertSame($page, $model);
 
-		$model = $binding->toModel();
+		$model = $uuid->toModel();
 		$this->assertSame($page, $model);
 	}
 

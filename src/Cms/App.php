@@ -1182,7 +1182,7 @@ class App
 
 		// find by global UUID
 		if (Uuid::is($id, 'page') === true) {
-			return Uuid::for($id)->toModel();
+			return Uuid::for($id, $parent?->childrenAndDrafts())->toModel();
 		}
 
 		$parent = $parent ?? $this->site();

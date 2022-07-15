@@ -60,7 +60,7 @@ class Uuid
 			$this->id = new UuidProtocol($uuid);
 		}
 
-		// if object is provided to create binding,
+		// if object is provided to create instance
 		if ($model) {
 			$scheme = match (true) {
 				$model instanceof Site => 'site',
@@ -293,11 +293,13 @@ class Uuid
 		string $string,
 		string|null $type = null
 	): bool {
-		if ($type === null) {
-			return Str::contains($string, '://');
+		if ($type !== null) {
+			return Str::startsWith($string, $type . '://');
 		}
 
-		return Str::startsWith($string, $type . '://');
+		// try to match any of the supported schemes
+		$pattern = sprintf('/%s():\/\//', implode('|', UuidProtocol::$schemes));
+		return preg_match($pattern, $string) === 1;
 	}
 
 	/**
@@ -315,7 +317,7 @@ class Uuid
 	}
 
 	/**
-	 * Write UUID binding to cache
+	 * Write UUID relation to cache
 	 *
 	 * @return bool
 	 */

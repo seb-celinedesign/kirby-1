@@ -15,9 +15,6 @@ use Kirby\Toolkit\Str;
  * file://12345678-90ab-cdef-1234-567890abcdef
  * block://12345678-90ab-cdef-1234-567890abcdef
  * struct://12345678-90ab-cdef-1234-567890abcdef
- *
- * // reference to a specific language of a page
- * page://12345678-90ab-cdef-1234-567890abcdef?lang=de
  * ```
  *
  * @package   Kirby Cms
@@ -31,7 +28,7 @@ class UuidProtocol extends Uri
 	/**
 	 * supported schemes
 	 */
-	protected static array $schemes = [
+	public static array $schemes = [
 		'site',
 		'page',
 		'file',
