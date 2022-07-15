@@ -72,9 +72,12 @@ class Uuid
 			};
 
 			$id = match ($scheme) {
-				'site' 		    => '',
-				'user', 'block' => $model->id(),
-				'page', 'file'  => $model->content()->get('uuid')->value()
+				'site'	 => '',
+				'user',
+				'block'  => $model->id(),
+				'page',
+				'file',
+				'struct' => $model->content()->get('uuid')->value()
 			};
 
 			// if not id exist yet,
