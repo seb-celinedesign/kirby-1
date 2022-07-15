@@ -122,7 +122,7 @@ class Uuid
 			'file'  => $site->index(true)->files()
 				->add($site->files())
 				->add($kirby->users()->files()),
-			'block' => Blocks::index(),
+			// 'block' => Blocks::index(),
 			// 'structure' => $site->index(true)->content()
 		};
 
@@ -232,14 +232,17 @@ class Uuid
 								$find($this->collection());
 
 		if ($type === 'block') {
-			return $try(fn ($models) => $models?->get($id));
+			return $try(
+				fn ($models) => $models?->get($id)
+			);
 		}
 
 		if ($type === 'page' || $type === 'file') {
-			$models = $try(fn ($models) => $models?->filter(
-				fn ($model) => $model->content()->get('uuid')->value() === $id
-			));
-			return $models->first();
+			return $try(
+				fn ($models) => $models?->filter(
+					fn ($model) => $model->content()->get('uuid')->value() === $id
+				)->first()
+			);
 		}
 	}
 
