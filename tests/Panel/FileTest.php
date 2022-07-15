@@ -569,7 +569,10 @@ class FileTest extends TestCase
 		$page = new ModelPage([
 			'slug'  => 'test',
 			'files' => [
-				['filename' => 'test.jpg']
+				[
+					'filename' => 'test.jpg',
+					'content' => ['uuid' => 'file-uuid'],
+				]
 			]
 		]);
 
@@ -577,7 +580,7 @@ class FileTest extends TestCase
 		$data  = $panel->pickerData();
 		$this->assertSame('test.jpg', $data['filename']);
 		$this->assertSame('(image: test.jpg)', $data['dragText']);
-		$this->assertSame('test/test.jpg', $data['id']);
+		$this->assertSame('file://file-uuid', $data['id']);
 		$this->assertSame('3/2', $data['image']['ratio']);
 		$this->assertSame('image', $data['image']['icon']);
 		$this->assertSame('/pages/test/files/test.jpg', $data['link']);
@@ -595,7 +598,8 @@ class FileTest extends TestCase
 				[
 					'filename' => 'test.jpg',
 					'content' => [
-						'alt' => 'From foo to the bar'
+						'alt'  => 'From foo to the bar',
+						'uuid' => 'file-uuid'
 					]
 				]
 			]
@@ -609,7 +613,7 @@ class FileTest extends TestCase
 			'text' => '{{ file.alt }}'
 		]);
 
-		$this->assertSame('test/test.jpg', $data['id']);
+		$this->assertSame('file://file-uuid', $data['id']);
 		$this->assertSame('1/1', $data['image']['ratio']);
 		$this->assertSame('From foo to the bar', $data['text']);
 	}

@@ -36,9 +36,18 @@ class PagePickerMixinTest extends TestCase
 		$app = $this->app->clone([
 			'site' => [
 				'children' => [
-					['slug' => 'a'],
-					['slug' => 'b'],
-					['slug' => 'c'],
+					[
+						'slug' => 'a',
+						'content' => ['uuid' => 'uuid-page-a'],
+					],
+					[
+						'slug' => 'b',
+						'content' => ['uuid' => 'uuid-page-b'],
+					],
+					[
+						'slug' => 'c',
+						'content' => ['uuid' => 'uuid-page-c'],
+					],
 				],
 				'content' => [
 					'title' => 'Test'
@@ -61,9 +70,9 @@ class PagePickerMixinTest extends TestCase
 		$this->assertNull($model['parent']);
 
 		$this->assertCount(3, $pages);
-		$this->assertEquals('a', $pages[0]['id']);
-		$this->assertEquals('b', $pages[1]['id']);
-		$this->assertEquals('c', $pages[2]['id']);
+		$this->assertEquals('page://uuid-page-a', $pages[0]['id']);
+		$this->assertEquals('page://uuid-page-b', $pages[1]['id']);
+		$this->assertEquals('page://uuid-page-c', $pages[2]['id']);
 	}
 
 	public function testPagesWithParent()
@@ -87,7 +96,10 @@ class PagePickerMixinTest extends TestCase
 					[
 						'slug' => 'a',
 						'children' => [
-							['slug' => 'aa']
+							[
+								'slug' => 'aa',
+								'content' => ['uuid' => 'uuid-page-aa'],
+							]
 						]
 					],
 					['slug' => 'b'],
@@ -114,7 +126,7 @@ class PagePickerMixinTest extends TestCase
 		$this->assertNull($model['parent']);
 
 		$this->assertCount(1, $pages);
-		$this->assertEquals('a/aa', $pages[0]['id']);
+		$this->assertEquals('page://uuid-page-aa', $pages[0]['id']);
 	}
 
 	public function testPageChildren()
@@ -137,14 +149,21 @@ class PagePickerMixinTest extends TestCase
 			'children' => [
 				[
 					'slug' => 'a',
+					'content' => ['uuid' => 'uuid-page-a'],
 					'children' => [
 						['slug' => 'aa'],
 						['slug' => 'ab'],
 						['slug' => 'ac'],
 					]
 				],
-				['slug' => 'b'],
-				['slug' => 'c'],
+				[
+					'slug' => 'b',
+					'content' => ['uuid' => 'uuid-page-b'],
+				],
+				[
+					'slug' => 'c',
+					'content' => ['uuid' => 'uuid-page-c'],
+				],
 			]
 		]);
 
@@ -162,9 +181,9 @@ class PagePickerMixinTest extends TestCase
 		$this->assertSame('test', $model['title']);
 
 		$this->assertCount(3, $pages);
-		$this->assertSame('test/a', $pages[0]['id']);
-		$this->assertSame('test/b', $pages[1]['id']);
-		$this->assertSame('test/c', $pages[2]['id']);
+		$this->assertSame('page://uuid-page-a', $pages[0]['id']);
+		$this->assertSame('page://uuid-page-b', $pages[1]['id']);
+		$this->assertSame('page://uuid-page-c', $pages[2]['id']);
 	}
 
 	public function testPageChildrenWithoutSubpages()
@@ -188,14 +207,21 @@ class PagePickerMixinTest extends TestCase
 			'children' => [
 				[
 					'slug' => 'a',
+					'content' => ['uuid' => 'uuid-page-a'],
 					'children' => [
 						['slug' => 'aa'],
 						['slug' => 'ab'],
 						['slug' => 'ac'],
 					]
 				],
-				['slug' => 'b'],
-				['slug' => 'c'],
+				[
+					'slug' => 'b',
+					'content' => ['uuid' => 'uuid-page-b']
+				],
+				[
+					'slug' => 'c',
+					'content' => ['uuid' => 'uuid-page-c']
+				],
 			]
 		]);
 
@@ -209,9 +235,9 @@ class PagePickerMixinTest extends TestCase
 
 		$this->assertNull($model);
 		$this->assertCount(3, $pages);
-		$this->assertEquals('test/a', $pages[0]['id']);
-		$this->assertEquals('test/b', $pages[1]['id']);
-		$this->assertEquals('test/c', $pages[2]['id']);
+		$this->assertEquals('page://uuid-page-a', $pages[0]['id']);
+		$this->assertEquals('page://uuid-page-b', $pages[1]['id']);
+		$this->assertEquals('page://uuid-page-c', $pages[2]['id']);
 	}
 
 	public function testMap()

@@ -17,17 +17,21 @@ class PagesFieldTest extends TestCase
 				'children' => [
 					[
 						'slug' => 'a',
+						'content' => ['uuid' => 'uuid-page-a'],
 						'children' => [
 							[
 								'slug' => 'aa',
+								'content' => ['uuid' => 'uuid-page-aa']
 							],
 							[
 								'slug' => 'ab',
+								'content' => ['uuid' => 'uuid-page-ab']
 							]
 						]
 					],
 					[
 						'slug' => 'b',
+						'content' => ['uuid' => 'uuid-page-b']
 					]
 				]
 			]
@@ -69,8 +73,8 @@ class PagesFieldTest extends TestCase
 		$ids   = array_column($value, 'id');
 
 		$expected = [
-			'a/aa',
-			'a/ab'
+			'page://uuid-page-aa',
+			'page://uuid-page-ab'
 		];
 
 		$this->assertEquals($expected, $ids);
@@ -188,9 +192,18 @@ class PagesFieldTest extends TestCase
 							]
 						]
 					],
-					['slug' => 'a'],
-					['slug' => 'b'],
-					['slug' => 'c'],
+					[
+						'slug' => 'a',
+						'content' => ['uuid' => 'uuid-page-a'],
+					],
+					[
+						'slug' => 'b',
+						'content' => ['uuid' => 'uuid-page-b'],
+					],
+					[
+						'slug' => 'c',
+						'content' => ['uuid' => 'uuid-page-c'],
+					],
 				]
 			]
 		]);
@@ -203,9 +216,9 @@ class PagesFieldTest extends TestCase
 		$this->assertArrayHasKey('pagination', $api);
 		$this->assertArrayHasKey('model', $api);
 		$this->assertCount(4, $api['data']);
-		$this->assertSame('test', $api['data'][0]['id']);
+		$this->assertSame('page://test-page-uuid', $api['data'][0]['id']);
 		$this->assertSame([
-			'id' => 'test',
+			'id' => 'page://test-page-uuid',
 			'image' => [
 				'back' => 'pattern',
 				'color' => 'gray-500',
@@ -221,8 +234,8 @@ class PagesFieldTest extends TestCase
 			'hasChildren' => false,
 			'url' => '/test',
 		], $api['data'][0]);
-		$this->assertSame('a', $api['data'][1]['id']);
-		$this->assertSame('b', $api['data'][2]['id']);
-		$this->assertSame('c', $api['data'][3]['id']);
+		$this->assertSame('page://uuid-page-a', $api['data'][1]['id']);
+		$this->assertSame('page://uuid-page-b', $api['data'][2]['id']);
+		$this->assertSame('page://uuid-page-c', $api['data'][3]['id']);
 	}
 }

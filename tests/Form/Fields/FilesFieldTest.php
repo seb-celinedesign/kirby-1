@@ -21,13 +21,16 @@ class FilesFieldTest extends TestCase
 						'slug' => 'test',
 						'files' => [
 							[
-								'filename' => 'a.jpg'
+								'filename' => 'a.jpg',
+								'content' => ['uuid' => 'uuid-file-a'],
 							],
 							[
-								'filename' => 'b.jpg'
+								'filename' => 'b.jpg',
+								'content' => ['uuid' => 'uuid-file-b'],
 							],
 							[
-								'filename' => 'c.jpg'
+								'filename' => 'c.jpg',
+								'content' => ['uuid' => 'uuid-file-c'],
 							]
 						]
 					],
@@ -37,13 +40,16 @@ class FilesFieldTest extends TestCase
 						'slug'  => 'test-draft',
 						'files' => [
 							[
-								'filename' => 'a.jpg'
+								'filename' => 'a.jpg',
+								'content' => ['uuid' => 'uuid-file-da'],
 							],
 							[
-								'filename' => 'b.jpg'
+								'filename' => 'b.jpg',
+								'content' => ['uuid' => 'uuid-file-db'],
 							],
 							[
-								'filename' => 'c.jpg'
+								'filename' => 'c.jpg',
+								'content' => ['uuid' => 'uuid-file-dc'],
 							]
 						]
 					]
@@ -88,8 +94,8 @@ class FilesFieldTest extends TestCase
 		$ids   = array_column($value, 'id');
 
 		$expected = [
-			'test/a.jpg',
-			'test/b.jpg'
+			'file://uuid-file-a',
+			'file://uuid-file-b'
 		];
 
 		$this->assertEquals($expected, $ids);
@@ -143,8 +149,8 @@ class FilesFieldTest extends TestCase
 		$ids   = array_column($value, 'id');
 
 		$expected = [
-			'test-draft/a.jpg',
-			'test-draft/b.jpg'
+			'file://uuid-file-da',
+			'file://uuid-file-db'
 		];
 
 		$this->assertEquals($expected, $ids);
@@ -243,9 +249,18 @@ class FilesFieldTest extends TestCase
 					[
 						'slug' => 'test',
 						'files' => [
-							['filename' => 'a.jpg'],
-							['filename' => 'b.jpg'],
-							['filename' => 'c.jpg'],
+							[
+								'filename' => 'a.jpg',
+								'content' => ['uuid' => 'uuid-file-a'],
+							],
+							[
+								'filename' => 'b.jpg',
+								'content' => ['uuid' => 'uuid-file-b'],
+							],
+							[
+								'filename' => 'c.jpg',
+								'content' => ['uuid' => 'uuid-file-c'],
+							],
 						],
 						'blueprint' => [
 							'title' => 'Test',
@@ -268,8 +283,8 @@ class FilesFieldTest extends TestCase
 		$this->assertArrayHasKey('data', $api);
 		$this->assertArrayHasKey('pagination', $api);
 		$this->assertCount(3, $api['data']);
-		$this->assertSame('test/a.jpg', $api['data'][0]['id']);
-		$this->assertSame('test/b.jpg', $api['data'][1]['id']);
-		$this->assertSame('test/c.jpg', $api['data'][2]['id']);
+		$this->assertSame('file://uuid-file-a', $api['data'][0]['id']);
+		$this->assertSame('file://uuid-file-b', $api['data'][1]['id']);
+		$this->assertSame('file://uuid-file-c', $api['data'][2]['id']);
 	}
 }

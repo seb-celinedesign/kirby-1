@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Kirby\Cache\Cache;
 use Kirby\Toolkit\Str;
+use Throwable;
 
 /**
  * The `Uuid` class provides an interface to connect
@@ -45,7 +46,6 @@ class Uuid
 	 * Model instance
 	 */
 	protected Site|User|Page|File|null $model;
-
 
 	public function __construct(
 		string|null $uuid = null,
@@ -157,7 +157,17 @@ class Uuid
 		$kirby = App::instance();
 		$user  = $kirby->auth()->currentUserFromImpersonation();
 		$kirby->impersonate('kirby');
-		$this->model = $this->model->update(['uuid' => $id]);
+
+		try {
+			$this->model = $this->model->update(['uuid' => $id]);
+		} catch (Throwable $e) {
+			// TODO: needs probably a better solution
+			if ($e->getMessage() !== 'The directory "/dev/null" cannot be created') {
+				throw $e;
+			}
+		}
+
+
 		$kirby->impersonate($user);
 
 		// TODO: replace the above in 3.9.0 with
