@@ -228,16 +228,18 @@ class Uuid
 	{
 		$id   = $this->id->host();
 		$type = $this->type();
+		$try  = fn ($find) => $find($this->collection) ??
+								$find($this->collection());
 
 		if ($type === 'block') {
-			return $this->collection?->get($id) ??
-					$this->collection()->get($id);
+			return $try(fn ($models) => $models?->get($id));
 		}
 
 		if ($type === 'page' || $type === 'file') {
-			$filter = fn ($model) => $model->content()->get('uuid')->value() === $id;
-			return $this->collection?->filter($filter)->first() ??
-					$this->collection()->filter($filter)->first();
+			$models = $try(fn ($models) => $models?->filter(
+				fn ($model) => $model->content()->get('uuid')->value() === $id
+			));
+			return $models->first();
 		}
 	}
 
