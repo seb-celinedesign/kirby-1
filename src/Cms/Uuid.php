@@ -35,7 +35,7 @@ class Uuid
 	 * Local collection for more performant
 	 * limited/local index to look up model
 	 */
-	protected Models|null $collection;
+	protected Models|Blocks|null $collection;
 
 	/**
 	 * UUID string as uri protocol instance
@@ -45,11 +45,11 @@ class Uuid
 	/**
 	 * Model instance
 	 */
-	protected Site|User|Page|File|null $model;
+	protected Site|User|Page|File|Block|null $model;
 
 	public function __construct(
 		string|null $uuid = null,
-		Site|User|Page|File|null $model = null,
+		Site|User|Page|File|Block|null $model = null,
 		Models|null $collection = null
 	) {
 		$this->model      = $model;
@@ -67,8 +67,8 @@ class Uuid
 				$model instanceof User => 'user',
 				$model instanceof Page => 'page',
 				$model instanceof File => 'file',
-				// @codeCoverageIgnoreStart
 				$model instanceof Block => 'block',
+				// @codeCoverageIgnoreStart
 				$model instanceof StructureObject => 'struct'
 				// @codeCoverageIgnoreEnd
 			};
@@ -112,7 +112,7 @@ class Uuid
 	 * Returns global index collection
 	 * for traversing content files
 	 */
-	protected function collection(): Models
+	protected function collection(): Models|Blocks
 	{
 		$kirby = App::instance();
 		$site  = $kirby->site();
@@ -122,8 +122,7 @@ class Uuid
 			'file'  => $site->index(true)->files()
 				->add($site->files())
 				->add($kirby->users()->files()),
-			// TODO: indexes for content fields
-			// 'block'     => null,
+			'block' => Blocks::index(),
 			// 'structure' => $site->index(true)->content()
 		};
 
@@ -150,7 +149,6 @@ class Uuid
 		$kirby = App::instance();
 		$user  = $kirby->auth()->currentUserFromImpersonation();
 		$kirby->impersonate('kirby');
-
 		try {
 			$this->model = $this->model->update(['uuid' => $id]);
 
@@ -162,7 +160,6 @@ class Uuid
 			}
 		}
 		// @codeCoverageIgnoreEnd
-
 		$kirby->impersonate($user);
 
 		// TODO: replace the above in 3.9.0 with
@@ -171,9 +168,6 @@ class Uuid
 		// 	fn () => $this->model = $this->model->update(['uuid' => $id])
 		// );
 
-
-		// TODO: updating block/structure would work different
-
 		return $id;
 	}
 
@@ -181,7 +175,7 @@ class Uuid
 	 * Look up UUID in cache and
 	 * resolve to page or file object
 	 */
-	protected function findFromCache(): Page|File|null
+	protected function findFromCache(): Page|File|Block|null
 	{
 		// get page/file id from cache
 		$key   = $this->key();
@@ -200,7 +194,7 @@ class Uuid
 
 			case 'file':
 				// value is itself another UUID protocol string
-				// e.g. page://a-page-uuid/filename.jpg
+				// e.g. page://page-uuid/filename.jpg
 				$uuid = new UuidProtocol($value);
 
 				// we need to resolve the parent UUID to its model
@@ -210,12 +204,17 @@ class Uuid
 				$model    = $parent->file($filename);
 				break;
 
-				// TODO: resolving values for blocks and structure
-				// schema://$parent→uuid()/$fieldName/$block→id()
-				// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toBlocks()->get($lastPart),
+			case 'block':
+				// value is itself another UUID protocol string
+				// e.g. page://page-uuid/myField/block-uuid
+				$uuid = new UuidProtocol($value);
 
-				// schema://$parent→uuid()/$fieldName/$structureItem→id()
-				// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toStructure()->findBy('uuid', $lastPart)
+				// resolve e.g. page://page-uuid
+				$parent = static::for($uuid->base())->toModel();
+				$field  = $uuid->path()->first();
+				$block  = $uuid->path()->last();
+				$model  = $parent->$field()->toBlocks()->get($block);
+				break;
 		}
 
 		return $model;
@@ -225,26 +224,21 @@ class Uuid
 	 * Look up model by traversing through local/global
 	 * index and finding the matching UUID in content file
 	 */
-	protected function findFromIndex(): Page|File|null
+	protected function findFromIndex(): Page|File|Block|null
 	{
-		$uuid = $this->id->host();
+		$id   = $this->id->host();
+		$type = $this->type();
 
-		$filter = match ($this->type()) {
-			'page',
-			'file'  => fn ($model) => $model->content()->get('uuid')->value() === $uuid
-			// TODO: this would likely work differently for block and structure
-		};
-
-		// use local, more restrictive collection as index
-		if ($this->collection !== null) {
-			// if found a match already, return it
-			if ($match = $this->collection->filter($filter)->first()) {
-				return $match;
-			}
+		if ($type === 'block') {
+			return $this->collection?->get($id) ??
+					$this->collection()->get($id);
 		}
 
-		// otherwise, get global index and try to find a match
-		return $this->collection()->filter($filter)->first();
+		if ($type === 'page' || $type === 'file') {
+			$filter = fn ($model) => $model->content()->get('uuid')->value() === $id;
+			return $this->collection?->filter($filter)->first() ??
+					$this->collection()->filter($filter)->first();
+		}
 	}
 
 	/**
@@ -252,7 +246,7 @@ class Uuid
 	 * by passing either UUID or model
 	 */
 	public static function for(
-		string|Page|File|User|Site $seed,
+		string|Page|File|User|Site|Block $seed,
 		Models|null $collection = null
 	): static {
 		if (is_string($seed) === true) {
@@ -266,8 +260,10 @@ class Uuid
 	 * Retrieves the id/host from a model,
 	 * e.g. from its content file
 	 */
-	protected function id(string $type, Page|File|User|Site $model): string|null
-	{
+	protected function id(
+		string $type,
+		Page|File|User|Site|Block $model
+	): string|null {
 		return match ($type) {
 			'site'	 => '',
 			'user',
@@ -307,8 +303,11 @@ class Uuid
 			static::for($file)->populate();
 		}
 
-		// TODO: finding all structure fields and adding UUIDs
-		// blocks already have a UUID id
+		// blocks
+		// TODO: activate once functional
+		// foreach (Blocks::index() as $block) {
+		// 	static::for($block)->populate();
+		// }
 	}
 
 	/**
@@ -352,7 +351,7 @@ class Uuid
 	}
 
 
-	public function toModel(): Site|User|Page|File|null
+	public function toModel(): Site|User|Page|File|Block|null
 	{
 		if ($this->model !== null) {
 			return $this->model;
@@ -413,16 +412,17 @@ class Uuid
 		}
 
 		if ($this->type() === 'file') {
-			// for files, use parent's UUID as part of the file path
+			// for files, use parent's UUID as part of the path
 			$parent = static::for($this->model->parent());
 			return $parent->toString() . '/' . $this->model->filename();
 		}
 
-		// TODO: implement the following
-		// if ($this->type() === 'block' || $this->type() === 'structure') {
-		// 	$field  = $this->model->parent();
-		// 	$parent = static::for($field->parent());
-		// 	return $parent->uuid() . '/' . $field->name() . '/' . $this->model->id();
-		// }
+		if ($this->type() === 'block' || $this->type() === 'struct') {
+			// for blocks, use parent's UUID and field name
+			// as part of the path
+			$parent = static::for($this->model->parent());
+			$field  = $this->model->field();
+			return $parent->toString() . '/' . $field->name() . '/' . $this->model->filename();
+		}
 	}
 }

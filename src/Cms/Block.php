@@ -262,4 +262,15 @@ class Block extends Item
 			return '';
 		}
 	}
+
+	/**
+	 * Returns the block's unique global ID
+	 * (and add it to the cache directly)
+	 */
+	public function uuid(): string
+	{
+		$uuid = Uuid::for($this);
+		$uuid->populate();
+		return $uuid->toString();
+	}
 }
