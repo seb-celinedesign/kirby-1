@@ -67,8 +67,10 @@ class Uuid
 				$model instanceof User => 'user',
 				$model instanceof Page => 'page',
 				$model instanceof File => 'file',
+				// @codeCoverageIgnoreStart
 				$model instanceof Block => 'block',
 				$model instanceof StructureObject => 'struct'
+				// @codeCoverageIgnoreEnd
 			};
 
 			$id = match ($scheme) {
@@ -160,13 +162,15 @@ class Uuid
 
 		try {
 			$this->model = $this->model->update(['uuid' => $id]);
+
+			// @codeCoverageIgnoreStart
 		} catch (Throwable $e) {
 			// TODO: needs probably a better solution
 			if ($e->getMessage() !== 'The directory "/dev/null" cannot be created') {
 				throw $e;
 			}
 		}
-
+		// @codeCoverageIgnoreEnd
 
 		$kirby->impersonate($user);
 
@@ -308,7 +312,7 @@ class Uuid
 		}
 
 		// try to match any of the supported schemes
-		$pattern = sprintf('/%s():\/\//', implode('|', UuidProtocol::$schemes));
+		$pattern = sprintf('/(%s):\/\//', implode('|', UuidProtocol::$schemes));
 		return preg_match($pattern, $string) === 1;
 	}
 

@@ -106,6 +106,7 @@ class UuidTest extends TestCase
 	 * @covers ::key
 	 * @covers ::populate
 	 * @covers ::value
+	 * @covers ::toModel
 	 */
 	public function testCacheForPage()
 	{
@@ -190,6 +191,27 @@ class UuidTest extends TestCase
 		$this->assertTrue(Uuid::cache()->exists($key));
 		$this->assertSame($value, Uuid::cache()->get($key));
 		$this->assertSame($file, Uuid::for('file://file-a')->toModel());
+	}
+
+	/**
+	 * @covers ::collection
+	 */
+	public function testCollectionWithLocalCollection()
+	{
+		$app = $this->app->clone([
+			'site' => [
+				'children' => [
+					[
+						'slug' => 'a',
+						'content' => ['uuid' => 'test-a']
+					]
+				]
+			]
+		]);
+
+		$page  = $app->page('a');
+		$model = Uuid::for('page://test-a', new Pages([]))->toModel();
+		$this->assertSame($page, $model);
 	}
 
 	/**
@@ -304,6 +326,36 @@ class UuidTest extends TestCase
 		$this->assertTrue($cache->exists('file/fi/le-a'));
 		$this->assertTrue($cache->exists('file/fi/le-site-a'));
 		$this->assertTrue($cache->exists('file/fi/le-user-a'));
+	}
+
+	/**
+	 * @covers ::is
+	 */
+	public function testIs()
+	{
+		$this->assertTrue(Uuid::is('site://'));
+		$this->assertTrue(Uuid::is('page://something'));
+		$this->assertTrue(Uuid::is('user://something'));
+		$this->assertTrue(Uuid::is('file://something'));
+		$this->assertTrue(Uuid::is('file://something/else'));
+		$this->assertTrue(Uuid::is('struct://something'));
+		$this->assertTrue(Uuid::is('block://something'));
+		$this->assertTrue(Uuid::is('block://something/else'));
+
+		$this->assertTrue(Uuid::is('site://', 'site'));
+		$this->assertTrue(Uuid::is('page://something', 'page'));
+		$this->assertTrue(Uuid::is('user://something', 'user'));
+		$this->assertTrue(Uuid::is('file://something', 'file'));
+
+		$this->assertFalse(Uuid::is('site://', 'block'));
+		$this->assertFalse(Uuid::is('page://something', 'block'));
+		$this->assertFalse(Uuid::is('user://something', 'block'));
+		$this->assertFalse(Uuid::is('file://something', 'block'));
+
+		$this->assertFalse(Uuid::is('file:/something'));
+		$this->assertFalse(Uuid::is('foo://something'));
+		$this->assertFalse(Uuid::is('page//something'));
+		$this->assertFalse(Uuid::is('page//something', 'page'));
 	}
 
 	public function keyProvider()

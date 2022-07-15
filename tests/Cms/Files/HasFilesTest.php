@@ -122,4 +122,21 @@ class HasFilesTest extends TestCase
 
 		$this->assertTrue($parent->hasFiles());
 	}
+
+	public function testFileWithUUID()
+	{
+		$page = new Page([
+			'slug' => 'test'
+		]);
+
+		$parent = new HasFileTraitUser([
+			new File([
+				'filename' => 'test.jpg',
+				'content'  => ['uuid' => 'file-test'],
+				'parent'   => $page
+			])
+		]);
+
+		$this->assertSame('test.jpg', $parent->file('file://file-test')->filename());
+	}
 }
