@@ -2,17 +2,20 @@
 
 namespace Kirby\Form\Fields;
 
+use Kirby\Cms\Page;
+use Kirby\Form\Field;
+
 class SelectFieldTest extends TestCase
 {
 	public function testDefaultProps()
 	{
 		$field = $this->field('select');
 
-		$this->assertEquals('select', $field->type());
-		$this->assertEquals('select', $field->name());
-		$this->assertEquals(null, $field->value());
-		$this->assertEquals(null, $field->icon());
-		$this->assertEquals([], $field->options());
+		$this->assertSame('select', $field->type());
+		$this->assertSame('select', $field->name());
+		$this->assertSame('', $field->value());
+		$this->assertSame(null, $field->icon());
+		$this->assertSame([], $field->options());
 		$this->assertTrue($field->save());
 	}
 
@@ -41,5 +44,37 @@ class SelectFieldTest extends TestCase
 		]);
 
 		$this->assertTrue($expected === $field->value());
+	}
+
+	public function testOptionsUuid()
+	{
+		$page  = new Page([
+			'slug' => 'test',
+			'content' => ['uuid' => 'page-test'],
+			'files' => [
+				[
+					'filename' => 'a.jpg',
+					'content' => ['uuid' => 'file-a'],
+				],
+				[
+					'filename' => 'b.jpg',
+					'content' => ['uuid' => 'file-b'],
+				]
+			]
+		]);
+		$field = Field::factory('select', [
+			'model'   => $page,
+			'options' => 'query',
+			'query'   => [
+				'fetch' => 'page.files',
+				'text'  => '{{ file.filename }}',
+				'value' => '{{ file.uuid }}'
+			]
+		]);
+
+		$this->assertSame([
+			['text' => 'a.jpg', 'value' => 'file://file-a'],
+			['text' => 'b.jpg', 'value' => 'file://file-b']
+		], $field->options());
 	}
 }
