@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import Editor from "./Editor";
+
 // Dialogs
 import LinkDialog from "./Dialogs/LinkDialog.vue";
 import EmailDialog from "./Dialogs/EmailDialog.vue";
@@ -147,9 +149,7 @@ export default {
 			}
 		}
 	},
-	async mounted() {
-		const { default: Editor } = await import("./Editor.js");
-
+	mounted() {
 		this.editor = new Editor({
 			autofocus: this.autofocus,
 			content: this.value,
@@ -160,8 +160,8 @@ export default {
 				link: (editor) => {
 					this.$refs.linkDialog.open(editor.getMarkAttrs("link"));
 				},
-				email: () => {
-					this.$refs.emailDialog.open(this.editor.getMarkAttrs("email"));
+				email: (editor) => {
+					this.$refs.emailDialog.open(editor.getMarkAttrs("email"));
 				},
 				paste: this.paste,
 				toolbar: (toolbar) => {
@@ -174,13 +174,13 @@ export default {
 					}
 				},
 				update: (payload) => {
-					if (!this.editor) {
+					if (!payload.editor) {
 						return;
 					}
 
 					// compare documents to avoid minor HTML differences
 					// to cause unwanted updates
-					const jsonNew = JSON.stringify(this.editor.getJSON());
+					const jsonNew = JSON.stringify(payload.editor.getJSON());
 					const jsonOld = JSON.stringify(this.json);
 
 					if (jsonNew === jsonOld) {
