@@ -102,7 +102,6 @@ class KirbyTag
 	{
 		$parent = $this->parent();
 
-
 		// check first for UUID
 		if (Uuid::is($path, 'file') === true) {
 			$collection = is_object($parent) && method_exists($parent, 'files') ? $parent->files() : null;

@@ -2,6 +2,8 @@
 
 namespace Kirby\Cms;
 
+use Kirby\Filesystem\Dir;
+
 class HasFileTraitUser
 {
 	use HasFiles;
@@ -23,14 +25,22 @@ class HasFileTraitUser
 class HasFilesTest extends TestCase
 {
 	protected $app;
+	protected $tmp;
 
 	public function setUp(): void
 	{
 		$this->app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp = __DIR__ . '/tmp'
 			]
 		]);
+
+		Dir::make($this->tmp);
+	}
+
+	public function tearDown(): void
+	{
+		Dir::remove($this->tmp);
 	}
 
 	public function fileProvider()

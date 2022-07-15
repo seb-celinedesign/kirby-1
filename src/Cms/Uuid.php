@@ -62,7 +62,7 @@ class Uuid
 
 		// if object is provided to create instance
 		if ($model) {
-			$scheme = match (true) {
+			$type = match (true) {
 				$model instanceof Site => 'site',
 				$model instanceof User => 'user',
 				$model instanceof Page => 'page',
@@ -73,21 +73,12 @@ class Uuid
 				// @codeCoverageIgnoreEnd
 			};
 
-			$id = match ($scheme) {
-				'site'	 => '',
-				'user',
-				'block'  => $model->id(),
-				'page',
-				'file',
-				'struct' => $model->content()->get('uuid')->value()
-			};
-
 			// if not id exist yet,
 			// create a new one right away
-			$id ??= $this->create();
+			$id = static::id($type, $model) ?? $this->create();
 
 			$this->id = new UuidProtocol([
-				'scheme' => $scheme,
+				'scheme' => $type,
 				'host'   => $id
 			]);
 		}
@@ -193,37 +184,41 @@ class Uuid
 	protected function findFromCache(): Page|File|null
 	{
 		// get page/file id from cache
-		$id = static::cache()->get($this->key());
+		$key   = $this->key();
+		$value = static::cache()->get($key);
 
-		if ($id === null) {
+		if ($value === null) {
 			return null;
 		}
 
-		// type: page
-		if ($this->type() === 'page') {
-			return App::instance()->page($id);
+		$type = $this->type();
+
+		switch ($type) {
+			case 'page':
+				$model = App::instance()->page($value);
+				break;
+
+			case 'file':
+				// value is itself another UUID protocol string
+				// e.g. page://a-page-uuid/filename.jpg
+				$uuid = new UuidProtocol($value);
+
+				// we need to resolve the parent UUID to its model
+				// and then query for the file by filename
+				$parent   = static::for($uuid->base())->toModel();
+				$filename = $uuid->path()->toString();
+				$model    = $parent->file($filename);
+				break;
+
+				// TODO: resolving values for blocks and structure
+				// schema://$parent→uuid()/$fieldName/$block→id()
+				// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toBlocks()->get($lastPart),
+
+				// schema://$parent→uuid()/$fieldName/$structureItem→id()
+				// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toStructure()->findBy('uuid', $lastPart)
 		}
 
-		// type: file, block or struct
-		// value is itself another UUID protocol string
-		// e.g. page://a-page-uuid/filename.jpg
-		$uuid = new UuidProtocol($id);
-
-		// type: file
-		// we need to resolve the parent UUID to its model
-		// and then query for the file by filename
-		if ($this->type() === 'file') {
-			$parent   = static::for($uuid->base())->toModel();
-			$filename = $uuid->path()->toString();
-			return $parent->file($filename);
-		}
-
-		// TODO: resolving values for blocks and structure
-		// schema://$parent→uuid()/$fieldName/$block→id()
-		// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toBlocks()->get($lastPart),
-
-		// schema://$parent→uuid()/$fieldName/$structureItem→id()
-		// 'block' => Uuid::for($firstPart)->model()->$fieldPart()->toStructure()->findBy('uuid', $lastPart)
+		return $model;
 	}
 
 	/**
@@ -265,6 +260,22 @@ class Uuid
 		}
 
 		return new static(model: $seed, collection: $collection);
+	}
+
+	/**
+	 * Retrieves the id/host from a model,
+	 * e.g. from its content file
+	 */
+	protected function id(string $type, Page|File|User|Site $model): string|null
+	{
+		return match ($type) {
+			'site'	 => '',
+			'user',
+			'block'  => $model->id(),
+			'page',
+			'file',
+			'struct' => $model->content()->get('uuid')->value()
+		};
 	}
 
 	/**
@@ -359,7 +370,6 @@ class Uuid
 		if ($this->model = $this->findFromCache()) {
 			return $this->model;
 		}
-
 
 		if ($this->model = $this->findFromIndex()) {
 			// lazily fill cache by writing UUID to cache

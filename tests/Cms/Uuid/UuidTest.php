@@ -50,6 +50,7 @@ class UuidTest extends TestCase
 	/**
 	 * @covers ::__construct
 	 * @covers ::for
+	 * @covers ::id
 	 * @covers ::type
 	 * @covers ::toString
 	 *
@@ -111,11 +112,6 @@ class UuidTest extends TestCase
 	public function testCacheForPage()
 	{
 		$app = $this->app->clone([
-			'options' => [
-				'cache' => [
-					'uuid' => true
-				]
-			],
 			'site' => [
 				'children' => [
 					[
@@ -163,11 +159,6 @@ class UuidTest extends TestCase
 	public function testCacheForFileFromUser()
 	{
 		$app = $this->app->clone([
-			'options' => [
-				'cache' => [
-					'uuid' => true
-				]
-			],
 			'users' => [
 				[
 					'id'    => 'test',
@@ -234,11 +225,6 @@ class UuidTest extends TestCase
 	public function testFindFromCache()
 	{
 		$app = $this->app->clone([
-			'options' => [
-				'cache' => [
-					'uuid' => true
-				]
-			],
 			'site' => [
 				'children' => [
 					[
@@ -274,11 +260,6 @@ class UuidTest extends TestCase
 	public function testIndex()
 	{
 		$app = $this->app->clone([
-			'options' => [
-				'cache' => [
-					'uuid' => true
-				]
-			],
 			'site' => [
 				'children' => [
 					[

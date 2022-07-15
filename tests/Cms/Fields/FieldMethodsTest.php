@@ -4,7 +4,7 @@ namespace Kirby\Cms;
 
 use Kirby\Data\Json;
 use Kirby\Data\Yaml;
-use Kirby\Toolkit\Dir;
+use Kirby\Filesystem\Dir;
 
 class FieldMethodsTest extends TestCase
 {
@@ -12,12 +12,21 @@ class FieldMethodsTest extends TestCase
 	{
 		parent::setUp();
 
+
 		new App([
 			'roots' => [
-				'index'   => '/dev/null',
+				'index'   => $this->tmp = __DIR__ . '/tmp',
 				'content' => __DIR__ . '/fixtures'
 			]
 		]);
+
+		Dir::make($this->tmp);
+	}
+
+	public function tearDown(): void
+	{
+		parent::tearDown();
+		Dir::remove($this->tmp);
 	}
 
 	public function field($value = '')
@@ -109,7 +118,7 @@ class FieldMethodsTest extends TestCase
 	{
 		new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'options' => [
 				'date.handler' => 'strftime'
@@ -180,7 +189,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'site' => [
 				'children' => [
@@ -287,7 +296,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'site' => [
 				'children' => [
@@ -315,7 +324,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'site' => [
 				'children' => [
@@ -402,7 +411,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'urls' => [
 				'index' => 'https://getkirby.com'
@@ -419,7 +428,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'users' => [
 				['email' => 'a@company.com'],
@@ -444,7 +453,7 @@ class FieldMethodsTest extends TestCase
 	{
 		$app = new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'users' => [
 				['email' => 'a@company.com'],
@@ -654,7 +663,7 @@ class FieldMethodsTest extends TestCase
 	{
 		new App([
 			'roots' => [
-				'index' => '/dev/null'
+				'index' => $this->tmp
 			],
 			'options' => [
 				'smartypants' => true
