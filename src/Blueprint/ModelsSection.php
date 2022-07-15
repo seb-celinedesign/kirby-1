@@ -6,6 +6,8 @@ use Kirby\Cms\ModelWithContent;
 
 class ModelsSection extends BaseSection
 {
+	public const TYPE = 'models';
+
 	public function __construct(
 		public string $id,
 		public TableColumns|null $columns = null,
@@ -32,11 +34,8 @@ class ModelsSection extends BaseSection
 	public function render(ModelWithContent $model): array
 	{
 		return [
-			'columns' => $this->columns?->render($model),
-			'empty'   => $this->empty?->render($model),
-			'help'    => $this->help?->render($model),
-			'layout'  => $this->layout?->value,
-			'size'    => $this->size?->value,
+			'help'  => $this->help?->render($model),
+			'label' => $this->label->render($model),
 		];
 	}
 }

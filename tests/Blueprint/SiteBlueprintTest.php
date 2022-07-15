@@ -18,4 +18,14 @@ class SiteBlueprintTest extends TestCase
 		$this->assertNull($blueprint->options);
 		$this->assertNull($blueprint->preview);
 	}
+
+	/**
+	 * @covers ::polyfill
+	 */
+	public function testPolyfill()
+	{
+		$props = SiteBlueprint::polyfill(['id' => 'test']);
+
+		$this->assertArrayNotHasKey('id', $props);
+	}
 }

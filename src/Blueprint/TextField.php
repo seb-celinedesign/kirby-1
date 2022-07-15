@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class TextField extends InputField
 {
+	public const TYPE = 'text';
+
 	public function __construct(
 		string $id,
 		public After|null $after = null,

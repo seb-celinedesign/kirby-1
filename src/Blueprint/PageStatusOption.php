@@ -19,16 +19,16 @@ class PageStatusOption extends Component
 {
 	public function __construct(
 		public string $id,
-		public Text|null $description = null,
 		public bool $disabled = false,
 		public Label|null $label = null,
+		public Text|null $text = null,
 	) {
 		if (in_array($this->id, ['draft', 'unlisted', 'listed']) === false) {
 			throw new InvalidArgumentException('The status must be draft, unlisted or listed');
 		}
 
-		$this->label       ??= new Label(I18n::translate('page.status.' . $id));
-		$this->description ??= new Text(I18n::translate('page.status.' . $id . '.description'));
+		$this->label ??= new Label(I18n::translate('page.status.' . $id));
+		$this->text  ??= new Text(I18n::translate('page.status.' . $id . '.description'));
 	}
 
 	public static function prefab(string $id, array|string|bool|null $option = null): static
@@ -42,10 +42,10 @@ class PageStatusOption extends Component
 			// use default values for the status
 			$option === null, $option === true => [],
 
-			// simple string for label. the description will be unset
+			// simple string for label. the text will be unset
 			is_string($option) === true => [
-				'label' 	  => $option,
-				'description' => null
+				'label' => $option,
+				'text'  => null
 			],
 
 			// already defined as array definition
@@ -64,8 +64,8 @@ class PageStatusOption extends Component
 		}
 
 		return [
-			'description' => $this->description->render($model),
-			'label'       => $this->label->render($model)
+			'label' => $this->label->render($model),
+			'text'  => $this->text->render($model),
 		];
 	}
 }

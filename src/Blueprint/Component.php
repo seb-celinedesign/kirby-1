@@ -3,6 +3,7 @@
 namespace Kirby\Blueprint;
 
 use Kirby\Cms\ModelWithContent;
+use ReflectionNamedType;
 use ReflectionProperty;
 use ReflectionUnionType;
 
@@ -37,6 +38,21 @@ class Component
 		return new static(...$props);
 	}
 
+	public static function factoryForNamedType(ReflectionNamedType $type, mixed $value): mixed
+	{
+		// get the class name for the single type
+		$className = $type->getName();
+
+		// check if there's a factory for the value
+		if (is_subclass_of($className, Component::class) === true || is_subclass_of($className, Collection::class) === true) {
+			return $className::factory($value);
+		}
+
+		// try to assign the value directly and trust
+		// in PHP's type system.
+		return $value;
+	}
+
 	public static function factoryForProperty(string $key, mixed $value): mixed
 	{
 		// instantly assign objects
@@ -51,22 +67,20 @@ class Component
 
 		// union types
 		if (is_a($propType, ReflectionUnionType::class) === true) {
-			// let the type system take over
-			return $value;
+			return static::factoryForUnionType($propType, $value);
 		}
 
-		// get the class name for the single type
-		$className = $propType->getName();
+		return static::factoryForNamedType($propType, $value);
+	}
 
-		// check if there's a factory for the value
-		if (is_subclass_of($className, Component::class) === true) {
-			return $className::factory($value);
-
-		// try to assign the value directly and trust
-		// in PHP's type system.
-		} else {
-			return $value;
-		}
+	/**
+	 * For properties with union types,
+	 * the first named type is used to create
+	 * the factory or pass a built-in value
+	 */
+	public static function factoryForUnionType(ReflectionUnionType $type, mixed $value): mixed
+	{
+		return static::factoryForNamedType($type->getTypes()[0], $value);
 	}
 
 	/**

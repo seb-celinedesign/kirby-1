@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class FieldsSection extends Section
 {
+	public const TYPE = 'fields';
+
 	public function __construct(
 		public string $id,
 		public Fields|null $fields = null,

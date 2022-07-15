@@ -11,10 +11,7 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Section extends Node
+class Section extends NodeWithType
 {
-	public function __construct(
-		public string $id
-	) {
-	}
+	public const TYPE = 'section';
 }

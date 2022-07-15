@@ -15,6 +15,8 @@ use Kirby\Toolkit\A;
  */
 class PagesSection extends ModelsSection
 {
+	public const TYPE = 'pages';
+
 	public function __construct(
 		public string $id,
 		public PageStatus|null $status = null,

@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class NumberField extends InputField
 {
+	public const TYPE = 'number';
+
 	public function __construct(
 		public string $id,
 		public After|null $after = null,

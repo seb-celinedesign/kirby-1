@@ -27,6 +27,24 @@ class Collection extends BaseCollection
 		$this->set($data);
 	}
 
+	/**
+	 * The Kirby Collection class only shows the key to
+	 * avoid huge tress with dump, but for the blueprint
+	 * collections this is really not useful
+	 */
+	public function __debugInfo(): array
+	{
+		return array_map(function ($item) {
+			return (array)$item;
+		}, $this->data);
+	}
+
+	/**
+	 * Validate the type of every item that is being
+	 * added to the collection. They can either have
+	 * the class defined by static::TYPE or be a
+	 * promise that gets resolved later.
+	 */
 	public function __set(string $key, $value): void
 	{
 		if (is_a($value, static::TYPE) === false && is_a($value, Promise::class) === false) {

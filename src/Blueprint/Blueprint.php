@@ -2,6 +2,9 @@
 
 namespace Kirby\Blueprint;
 
+use Kirby\Cms\ModelWithContent;
+use Kirby\Exception\NotFoundException;
+
 /**
  * The main blueprint class
  *
@@ -11,8 +14,10 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class Blueprint extends Node
+class Blueprint extends NodeWithType
 {
+	public const TYPE = 'blueprint';
+
 	public function __construct(
 		public string $id,
 		public Label|null $label = null,
@@ -126,11 +131,43 @@ class Blueprint extends Node
 		return $props;
 	}
 
+	public function render(ModelWithContent $model, string $tab = null): array
+	{
+		return [
+			'label' => $this->label->render($model),
+			'tabs'  => $this->tabs?->render($model),
+			'tab'   => $this->tab($tab)?->render($model, true)
+		];
+	}
+
 	/**
 	 * Collects all sections from all tabs
 	 */
 	public function sections(): ?Sections
 	{
 		return $this->columns()?->sections();
+	}
+
+	/**
+	 * Get the current tab by id
+	 */
+	public function tab(string $id = null): ?Tab
+	{
+		// the blueprint might not have any tabs
+		if ($this->tabs === null || $this->tabs->count() === 0) {
+			return null;
+		}
+
+		// no tab id -> take first tab
+		if ($id === null) {
+			return $this->tabs->first();
+		}
+
+		// find tab by id
+		if ($tab = $this->tabs?->$id) {
+			return $tab;
+		}
+
+		throw new NotFoundException('The tab could not be found');
 	}
 }

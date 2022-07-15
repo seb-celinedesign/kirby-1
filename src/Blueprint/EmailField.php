@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class EmailField extends TextField
 {
+	public const TYPE = 'email';
+
 	public function __construct(...$args)
 	{
 		parent::__construct(...$args);

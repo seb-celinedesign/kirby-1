@@ -50,6 +50,9 @@ class TabTest extends TestCase
 		$this->assertSame('b', $tab->fields()->last()->id);
 	}
 
+	/**
+	 * @covers ::render
+	 */
 	public function testRender()
 	{
 		$tab = new Tab(
@@ -58,13 +61,30 @@ class TabTest extends TestCase
 		);
 
 		$expected = [
-			'columns' => null,
 			'icon'    => null,
 			'id'      => 'test',
 			'label'   => 'My Tab'
 		];
 
 		$this->assertSame($expected, $tab->render($this->model()));
+	}
+
+	/**
+	 * @covers ::render
+	 */
+	public function testRenderActive()
+	{
+		$tab = new Tab(
+			id: 'test',
+			label: new Label('My Tab')
+		);
+
+		$expected = [
+			'columns' => null,
+			'id'      => 'test',
+		];
+
+		$this->assertSame($expected, $tab->render($this->model(), true));
 	}
 
 	/**

@@ -15,11 +15,24 @@ use Kirby\Cms\Site;
  */
 class SiteBlueprint extends Blueprint
 {
+	public const TYPE = 'site';
+
 	public function __construct(
 		public SiteOptions|null $options = null,
 		public Url|null $preview = null,
 		...$args
 	) {
 		parent::__construct('site', ...$args);
+	}
+
+	/**
+	 * The id is fixed and not available
+	 * as property
+	 */
+	public static function polyfill(array $props): array
+	{
+		unset($props['id']);
+
+		return parent::polyfill($props);
 	}
 }

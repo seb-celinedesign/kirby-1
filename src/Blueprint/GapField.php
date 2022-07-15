@@ -13,4 +13,5 @@ namespace Kirby\Blueprint;
  */
 class GapField extends Field
 {
+	public const TYPE = 'gap';
 }

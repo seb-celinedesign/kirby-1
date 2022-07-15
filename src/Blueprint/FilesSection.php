@@ -3,7 +3,7 @@
 namespace Kirby\Blueprint;
 
 /**
- * Toggle field
+ * Files section
  *
  * @package   Kirby Blueprint
  * @author    Bastian Allgeier <bastian@getkirby.com>
@@ -11,7 +11,15 @@ namespace Kirby\Blueprint;
  * @copyright Bastian Allgeier
  * @license   https://opensource.org/licenses/MIT
  */
-class ToggleField extends InputField
+class FilesSection extends ModelsSection
 {
-	public const TYPE = 'toggle';
+	public const TYPE = 'files';
+
+	public function __construct(
+		public string $id,
+		public string|null $template,
+		...$args
+	) {
+		parent::__construct($id, ...$args);
+	}
 }

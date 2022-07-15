@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class InfoSection extends BaseSection
 {
+	public const TYPE = 'info';
+
 	public function __construct(
 		public string $id,
 		public Kirbytext|null $text = null,

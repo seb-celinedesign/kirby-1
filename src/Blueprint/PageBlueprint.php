@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class PageBlueprint extends Blueprint
 {
+	public const TYPE = 'page';
+
 	public function __construct(
 		public string $id,
 		public Image|null $image = null,

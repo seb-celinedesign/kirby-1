@@ -13,4 +13,5 @@ namespace Kirby\Blueprint;
  */
 class LineField extends Field
 {
+	public const TYPE = 'line';
 }

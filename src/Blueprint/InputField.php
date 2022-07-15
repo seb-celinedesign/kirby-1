@@ -16,6 +16,8 @@ use Kirby\Validation\Validations;
  */
 class InputField extends BaseField
 {
+	public const TYPE = 'input';
+
 	public function __construct(
 		public string $id,
 		public bool $autofocus = false,

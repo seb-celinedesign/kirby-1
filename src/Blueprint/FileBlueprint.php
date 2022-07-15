@@ -15,6 +15,8 @@ use Kirby\Cms\File;
  */
 class FileBlueprint extends Blueprint
 {
+	public const TYPE = 'file';
+
 	public function __construct(
 		public string $id,
 		public Accept|null $accept = null,

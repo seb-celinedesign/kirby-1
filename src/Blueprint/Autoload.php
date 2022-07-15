@@ -41,7 +41,12 @@ class Autoload
 
 		foreach ($items as $id => $item) {
 			$item['id'] ??= $id;
-			$collection[$id] = Autoload::type($type, $item);
+
+			try {
+				$collection[$id] = Autoload::$type($item);
+			} catch (TypeError $e) {
+				// TODO: don't simply ignore them.
+			}
 		}
 
 		return $collection;

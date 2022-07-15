@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class TelField extends TextField
 {
+	public const TYPE = 'tel';
+
 	public function __construct(...$args)
 	{
 		parent::__construct(...$args);

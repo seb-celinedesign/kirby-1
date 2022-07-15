@@ -13,6 +13,8 @@ namespace Kirby\Blueprint;
  */
 class HeadlineField extends BaseField
 {
+	public const TYPE = 'headline';
+
 	public function __construct(
 		public string $id,
 		public bool $numbered = true,
