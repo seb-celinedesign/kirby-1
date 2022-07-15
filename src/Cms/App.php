@@ -634,14 +634,15 @@ class App
 	 */
 	public function file(string $path, $parent = null, bool $drafts = true)
 	{
+		// find by global UUID
+		if (Uuid::is($path, 'file') === true) {
+			// prefer files of parent, when parent given
+			return Uuid::for($path, $parent?->files())->toModel();
+		}
+
 		$parent   = $parent ?? $this->site();
 		$id       = dirname($path);
 		$filename = basename($path);
-
-		// find by global UUID
-		if (Uuid::is($path, 'file') === true) {
-			return Uuid::for($path)->toModel();
-		}
 
 		if (is_a($parent, 'Kirby\Cms\User') === true) {
 			return $parent->file($filename);

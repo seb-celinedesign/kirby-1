@@ -4,6 +4,7 @@ namespace Kirby\Cms;
 
 use Kirby\Data\Json;
 use Kirby\Data\Yaml;
+use Kirby\Toolkit\Dir;
 
 class FieldMethodsTest extends TestCase
 {
@@ -142,15 +143,21 @@ class FieldMethodsTest extends TestCase
 	{
 		$page = new Page([
 			'content' => [
-				'cover' => 'cover.jpg'
+				'cover'   => 'cover.jpg',
+				'coverid' => 'file://file-cover-uuid'
 			],
 			'files' => [
-				['filename' => 'cover.jpg']
+				[
+					'filename' => 'cover.jpg',
+					'content'  => ['uuid' => 'file-cover-uuid']
+				]
 			],
 			'slug' => 'test'
 		]);
 
 		$this->assertSame('cover.jpg', $page->cover()->toFile()->filename());
+		$this->assertSame('cover.jpg', $page->coverid()->toFile()->filename());
+		Dir::remove(__DIR__ . '/fixtures/test');
 	}
 
 	public function testToFiles()
@@ -285,19 +292,23 @@ class FieldMethodsTest extends TestCase
 			'site' => [
 				'children' => [
 					['slug' => 'a'],
-					['slug' => 'b']
+					['slug' => 'b'],
+					['slug' => 'c', 'content' => ['uuid' => 'uuid-c']]
 				]
 			]
 		]);
 
 		$a = $app->page('a');
 		$b = $app->page('b');
+		$c = $app->page('c');
 
 		$this->assertSame($a, $this->field('a')->toPage());
 		$this->assertSame($b, $this->field('b')->toPage());
+		$this->assertSame($c, $this->field('page://uuid-c')->toPage());
 
 		$this->assertSame($a, $this->field(Yaml::encode(['a']))->toPage());
 		$this->assertSame($b, $this->field(Yaml::encode(['b', 'a']))->toPage());
+		$this->assertSame($c, $this->field(Yaml::encode(['page://uuid-c', 'b', 'a']))->toPage());
 	}
 
 	public function testToPages()
@@ -412,15 +423,18 @@ class FieldMethodsTest extends TestCase
 			],
 			'users' => [
 				['email' => 'a@company.com'],
-				['email' => 'b@company.com']
+				['email' => 'b@company.com'],
+				['email' => 'c@company.com', 'id' => 'my-user']
 			]
 		]);
 
 		$a = $app->user('a@company.com');
 		$b = $app->user('b@company.com');
+		$c = $app->user('c@company.com');
 
 		$this->assertSame($a, $this->field('a@company.com')->toUser());
 		$this->assertSame($b, $this->field('b@company.com')->toUser());
+		$this->assertSame($c, $this->field('user://my-user')->toUser());
 
 		$this->assertSame($a, $this->field(Yaml::encode(['a@company.com']))->toUser());
 		$this->assertSame($b, $this->field(Yaml::encode(['b@company.com', 'a@company.com']))->toUser());

@@ -344,6 +344,7 @@ class Uuid
 			return $this->model;
 		}
 
+
 		if ($this->model = $this->findFromIndex()) {
 			// lazily fill cache by writing UUID to cache
 			// whenever looked up from index
