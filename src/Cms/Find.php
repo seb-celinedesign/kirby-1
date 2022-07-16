@@ -73,7 +73,7 @@ class Find
 	 * @return \Kirby\Cms\Page|null
 	 * @throws \Kirby\Exception\NotFoundException if the page cannot be found
 	 */
-	public static function page(string $id)
+	public static function page(string $id): Page|null
 	{
 		$id   = str_replace(['+', ' '], '/', $id);
 		$page = App::instance()->page($id);

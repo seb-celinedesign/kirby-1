@@ -509,6 +509,48 @@ return [
 		}
 	],
 
+	// page UUID
+	'page.uuid' => [
+		'pattern' => 'pages/(:any)/uuid',
+		'load' => function (string $id) {
+			$page = Find::page($id);
+
+			$fields = [
+				'uuid' => [
+					'label'     => 'Unique ID',
+					'type'      => 'uuid',
+					'required'  => true,
+					'permalink' => $page->permalink(),
+					'uuid'      => $page->uuid()
+				],
+				'info' => [
+					'type'  => 'info',
+					'text'  => '<strong>Important:</strong><br>When you change the UUID, all references to the old UUID will not work anymore. So please treat with caution.',
+					'theme' => 'notice'
+				],
+			];
+
+			return [
+				'component' => 'k-form-dialog',
+				'props' => [
+					'fields'       => $fields,
+					'submitButton' => I18n::translate('save'),
+					'value' => [
+						'uuid' => $page->content()->get('uuid')->value()
+					]
+				]
+			];
+		},
+		'submit' => function (string $id) {
+			$request = App::instance()->request();
+			$id      = $request->get('uuid');
+
+			return [
+				'event'    => 'page.uuid'
+			];
+		}
+	],
+
 	// change filename
 	'page.file.changeName' => [
 		'pattern' => '(pages/.*?)/files/(:any)/changeName',

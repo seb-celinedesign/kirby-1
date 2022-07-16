@@ -86,8 +86,15 @@ class Page extends Model
 				'text'     => I18n::translate('open'),
 				'disabled' => $this->isDisabledDropdownOption('preview', $options, $permissions)
 			];
-			$result[] = '-';
 		}
+
+		$result['uuid'] = [
+			'dialog'   => $url . '/uuid',
+			'icon'     => 'circle-nested',
+			'text'     => 'Permalink'
+		];
+
+		$result[] = '-';
 
 		$result['changeTitle'] = [
 			'dialog' => [

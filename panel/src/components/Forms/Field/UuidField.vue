@@ -1,12 +1,17 @@
 <template>
-	<k-field :input="_uid" v-bind="$props" class="k-uuid-field">
+	<k-field
+		:input="_uid"
+		v-bind="$props"
+		:help="'&rarr; ' + updatedPermalink"
+		class="k-uuid-field"
+	>
 		<template #options>
 			<k-options-dropdown
 				:text="$t('copy')"
-				icon="blank"
+				icon="copy"
 				:options="[
-					{ text: 'UUID', option: 'uuid' },
-					{ text: 'Permalink', option: 'permalink' }
+					{ text: 'UUID', click: 'uuid' },
+					{ text: 'Permalink', click: 'permalink' }
 				]"
 				@action="onCopy"
 			/>
@@ -16,6 +21,7 @@
 			:id="_uid"
 			ref="input"
 			v-bind="$props"
+			:before="scheme + '://'"
 			theme="field"
 			type="text"
 			v-on="$listeners"
@@ -34,12 +40,24 @@ export default {
 	mixins: [Field, Input],
 	inheritAttrs: false,
 	props: {
-		icon: {
-			type: String,
-			default: "badge"
-		},
-		copy: {
+		permalink: {
 			type: String
+		},
+		uuid: {
+			type: String
+		}
+	},
+	computed: {
+		scheme() {
+			return this.uuid.split("://")[0];
+		},
+		updatedPermalink() {
+			const link = this.permalink.split("/");
+			link.splice(-1, 1, this.value);
+			return link.join("/");
+		},
+		updatedUuid() {
+			return this.scheme + "://" + this.value;
 		}
 	},
 	methods: {
@@ -47,17 +65,20 @@ export default {
 			this.$refs.input.focus();
 		},
 		onCopy(action) {
-			console.log(action);
+			let value, message;
 			switch (action) {
 				case "uuid":
-					this.$helper.clipboard.write("uuid");
-					this.$store.dispatch("notification/success", "UUID copied!");
+					value = this.updatedUuid;
+					message = "UUID copied!";
 					break;
 				case "permalink":
-					this.$helper.clipboard.write("permalink");
-					this.$store.dispatch("notification/success", "Permalink copied!");
+					value = this.updatedPermalink;
+					message = "Permalink copied!";
 					break;
 			}
+
+			this.$helper.clipboard.write(value);
+			this.$store.dispatch("notification/success", message);
 		}
 	}
 };
