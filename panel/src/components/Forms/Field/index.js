@@ -29,6 +29,7 @@ import ToggleField from "./ToggleField.vue";
 import TogglesField from "./TogglesField.vue";
 import UrlField from "./UrlField.vue";
 import UsersField from "./UsersField.vue";
+import UuidField from "./UuidField.vue";
 import WriterField from "./WriterField.vue";
 
 Vue.component("k-blocks-field", BlocksField);
@@ -60,4 +61,5 @@ Vue.component("k-toggle-field", ToggleField);
 Vue.component("k-toggles-field", TogglesField);
 Vue.component("k-url-field", UrlField);
 Vue.component("k-users-field", UsersField);
+Vue.component("k-uuid-field", UuidField);
 Vue.component("k-writer-field", WriterField);
