@@ -90,7 +90,7 @@ class LayoutField extends BlocksField
 					'attrs'   => $attrs,
 					'columns' => array_map(fn ($width) => [
 						'blocks' => [],
-						'id'     => (Uuid::$generator)(),
+						'id'     => Uuid::generate(),
 						'width'  => $width,
 					], $columns)
 				])->toArray();

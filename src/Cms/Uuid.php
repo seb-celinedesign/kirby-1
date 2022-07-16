@@ -41,7 +41,7 @@ class Uuid
 	/**
 	 * Function used to generator new UUIDs
 	 */
-	public static Closure $generator;
+	public static Closure|null $generator = null;
 
 	/**
 	 * UUID string as uri protocol instance
@@ -145,9 +145,9 @@ class Uuid
 	 * Create a new UUID hash and update
 	 * the model's content file to include it
 	 */
-	public function create(): string
+	protected function create(): string
 	{
-		$id = (static::$generator)();
+		$id = static::generate();
 
 		// update content file with generated id:
 		// make sure Kirby has the required permissions
@@ -265,6 +265,15 @@ class Uuid
 		}
 
 		return new static(model: $seed, collection: $collection);
+	}
+
+	public static function generate(): string
+	{
+		if (static::$generator !== null) {
+			return (static::$generator)();
+		}
+
+		return Str::uuid();
 	}
 
 	/**
@@ -442,6 +451,3 @@ class Uuid
 		}
 	}
 }
-
-// default generator
-Uuid::$generator = fn () => Str::uuid();

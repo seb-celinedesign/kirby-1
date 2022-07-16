@@ -55,7 +55,7 @@ class Item
 	{
 		$siblingsClass = static::ITEMS_CLASS;
 
-		$this->id       = $params['id']       ?? (Uuid::$generator)();
+		$this->id       = $params['id']       ?? Uuid::generate();
 		$this->params   = $params;
 		$this->parent   = $params['parent']   ?? App::instance()->site();
 		$this->siblings = $params['siblings'] ?? new $siblingsClass();
