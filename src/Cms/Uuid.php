@@ -2,6 +2,7 @@
 
 namespace Kirby\Cms;
 
+use Closure;
 use Kirby\Cache\Cache;
 use Kirby\Toolkit\Str;
 use Throwable;
@@ -36,6 +37,11 @@ class Uuid
 	 * limited/local index to look up model
 	 */
 	protected Models|Blocks|null $collection;
+
+	/**
+	 * Function used to generator new UUIDs
+	 */
+	public static Closure $generator;
 
 	/**
 	 * UUID string as uri protocol instance
@@ -141,7 +147,7 @@ class Uuid
 	 */
 	public function create(): string
 	{
-		$id = Str::uuid();
+		$id = (static::$generator)();
 
 		// update content file with generated id:
 		// make sure Kirby has the required permissions
@@ -431,3 +437,6 @@ class Uuid
 		}
 	}
 }
+
+// default generator
+Uuid::$generator = fn () => Str::uuid();
