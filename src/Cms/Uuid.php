@@ -3,6 +3,7 @@
 namespace Kirby\Cms;
 
 use Closure;
+use Hidehalo\Nanoid\Client as Nanoid;
 use Kirby\Cache\Cache;
 use Kirby\Toolkit\Str;
 use Throwable;
@@ -16,7 +17,7 @@ use Throwable;
  * ```
  * // general usage
  * Uuid::for($model)->toString();
- * Uuid::for('page://12345678-90ab-cdef-1234-567890abcdef')->toModel();
+ * Uuid::for('page://HhX1YtRR2ImG6h4')->toModel();
  *
  * // cache actions
  * Uuid::for($model)->populate();
@@ -267,13 +268,13 @@ class Uuid
 		return new static(model: $seed, collection: $collection);
 	}
 
-	public static function generate(): string
+	public static function generate(int $size = 15): string
 	{
 		if (static::$generator !== null) {
-			return (static::$generator)();
+			return (static::$generator)($size);
 		}
 
-		return Str::uuid();
+		return (new Nanoid)->generateId($size);
 	}
 
 	/**

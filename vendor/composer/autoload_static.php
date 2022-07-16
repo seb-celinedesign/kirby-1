@@ -38,6 +38,10 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         array (
             'Kirby\\' => 6,
         ),
+        'H' => 
+        array (
+            'Hidehalo\\Nanoid\\' => 16,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -74,6 +78,10 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
             0 => __DIR__ . '/../..' . '/src',
             1 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
         ),
+        'Hidehalo\\Nanoid\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hidehalo/nanoid-php/src',
+        ),
     );
 
     public static $fallbackDirsPsr4 = array (
@@ -99,6 +107,11 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Hidehalo\\Nanoid\\Client' => __DIR__ . '/..' . '/hidehalo/nanoid-php/src/Client.php',
+        'Hidehalo\\Nanoid\\Core' => __DIR__ . '/..' . '/hidehalo/nanoid-php/src/Core.php',
+        'Hidehalo\\Nanoid\\CoreInterface' => __DIR__ . '/..' . '/hidehalo/nanoid-php/src/CoreInterface.php',
+        'Hidehalo\\Nanoid\\Generator' => __DIR__ . '/..' . '/hidehalo/nanoid-php/src/Generator.php',
+        'Hidehalo\\Nanoid\\GeneratorInterface' => __DIR__ . '/..' . '/hidehalo/nanoid-php/src/GeneratorInterface.php',
         'Kirby\\Api\\Api' => __DIR__ . '/../..' . '/src/Api/Api.php',
         'Kirby\\Api\\Collection' => __DIR__ . '/../..' . '/src/Api/Collection.php',
         'Kirby\\Api\\Model' => __DIR__ . '/../..' . '/src/Api/Model.php',
@@ -116,6 +129,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\AppPlugins' => __DIR__ . '/../..' . '/src/Cms/AppPlugins.php',
         'Kirby\\Cms\\AppTranslations' => __DIR__ . '/../..' . '/src/Cms/AppTranslations.php',
         'Kirby\\Cms\\AppUsers' => __DIR__ . '/../..' . '/src/Cms/AppUsers.php',
+        'Kirby\\Cms\\AppUsersImpersonateProxy' => __DIR__ . '/../..' . '/src/Cms/AppUsersImpersonateProxy.php',
         'Kirby\\Cms\\Auth' => __DIR__ . '/../..' . '/src/Cms/Auth.php',
         'Kirby\\Cms\\Auth\\Challenge' => __DIR__ . '/../..' . '/src/Cms/Auth/Challenge.php',
         'Kirby\\Cms\\Auth\\EmailChallenge' => __DIR__ . '/../..' . '/src/Cms/Auth/EmailChallenge.php',
@@ -168,6 +182,7 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\Model' => __DIR__ . '/../..' . '/src/Cms/Model.php',
         'Kirby\\Cms\\ModelPermissions' => __DIR__ . '/../..' . '/src/Cms/ModelPermissions.php',
         'Kirby\\Cms\\ModelWithContent' => __DIR__ . '/../..' . '/src/Cms/ModelWithContent.php',
+        'Kirby\\Cms\\Models' => __DIR__ . '/../..' . '/src/Cms/Models.php',
         'Kirby\\Cms\\Nest' => __DIR__ . '/../..' . '/src/Cms/Nest.php',
         'Kirby\\Cms\\NestCollection' => __DIR__ . '/../..' . '/src/Cms/NestCollection.php',
         'Kirby\\Cms\\NestObject' => __DIR__ . '/../..' . '/src/Cms/NestObject.php',
@@ -211,6 +226,8 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Cms\\UserPicker' => __DIR__ . '/../..' . '/src/Cms/UserPicker.php',
         'Kirby\\Cms\\UserRules' => __DIR__ . '/../..' . '/src/Cms/UserRules.php',
         'Kirby\\Cms\\Users' => __DIR__ . '/../..' . '/src/Cms/Users.php',
+        'Kirby\\Cms\\Uuid' => __DIR__ . '/../..' . '/src/Cms/Uuid.php',
+        'Kirby\\Cms\\UuidProtocol' => __DIR__ . '/../..' . '/src/Cms/UuidProtocol.php',
         'Kirby\\Cms\\Visitor' => __DIR__ . '/../..' . '/src/Cms/Visitor.php',
         'Kirby\\Data\\Data' => __DIR__ . '/../..' . '/src/Data/Data.php',
         'Kirby\\Data\\Handler' => __DIR__ . '/../..' . '/src/Data/Handler.php',
@@ -277,7 +294,6 @@ class ComposerStaticInita8011b477bb239488e5d139cdeb7b31e
         'Kirby\\Http\\Response' => __DIR__ . '/../..' . '/src/Http/Response.php',
         'Kirby\\Http\\Route' => __DIR__ . '/../..' . '/src/Http/Route.php',
         'Kirby\\Http\\Router' => __DIR__ . '/../..' . '/src/Http/Router.php',
-        'Kirby\\Http\\Server' => __DIR__ . '/../..' . '/src/Http/Server.php',
         'Kirby\\Http\\Uri' => __DIR__ . '/../..' . '/src/Http/Uri.php',
         'Kirby\\Http\\Url' => __DIR__ . '/../..' . '/src/Http/Url.php',
         'Kirby\\Http\\Visitor' => __DIR__ . '/../..' . '/src/Http/Visitor.php',

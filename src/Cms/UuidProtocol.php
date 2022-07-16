@@ -9,12 +9,17 @@ use Kirby\Toolkit\Str;
  * Represents the uri protocol for an UUID
  *
  * ```
+ * // pure UUIDs
  * site://
  * user://user-id
- * page://12345678-90ab-cdef-1234-567890abcdef
- * file://12345678-90ab-cdef-1234-567890abcdef
- * block://12345678-90ab-cdef-1234-567890abcdef
- * struct://12345678-90ab-cdef-1234-567890abcdef
+ * page://HhX1YtRR2ImG6h4
+ * file://HhX1YtRR2ImG6h4
+ * block://HhX1YtRR2ImG6h4
+ * struct://HhX1YtRR2ImG6h4
+ *
+ * // mixed UUIDs for caching
+ * page://HhX1YtRR2ImG6h4/filename.jpg
+ * page://HhX1YtRR2ImG6h4/myField/AzX1YtTY2ImGh23
  * ```
  *
  * @package   Kirby Cms
