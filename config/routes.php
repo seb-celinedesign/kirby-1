@@ -3,6 +3,7 @@
 use Kirby\Cms\LanguageRoutes;
 use Kirby\Cms\Media;
 use Kirby\Cms\PluginAssets;
+use Kirby\Cms\Uuid;
 use Kirby\Panel\Panel;
 use Kirby\Panel\Plugins;
 use Kirby\Toolkit\Str;
@@ -99,6 +100,18 @@ return function ($kirby) {
 			'env'     => 'panel',
 			'action'  => function ($path = null) {
 				return Panel::router($path);
+			}
+		],
+		// permalinks for page/file UUIDs
+		[
+			'pattern' => '@/(page|file)/(:all)',
+			'method'  => 'ALL',
+			'env'     => 'site',
+			'action'  => function (string $type, string $id) use ($kirby) {
+				$model = Uuid::for($type . '://' . $id)->toModel();
+				return $kirby
+					->response()
+					->redirect($model?->url() ?? 'error');
 			}
 		],
 	];
