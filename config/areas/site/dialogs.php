@@ -2,6 +2,7 @@
 
 use Kirby\Cms\App;
 use Kirby\Cms\Find;
+use Kirby\Cms\Uuid;
 use Kirby\Exception\Exception;
 use Kirby\Exception\InvalidArgumentException;
 use Kirby\Exception\PermissionException;
@@ -520,8 +521,7 @@ return [
 					'label'     => 'Unique ID',
 					'type'      => 'uuid',
 					'required'  => true,
-					'permalink' => $page->permalink(),
-					'uuid'      => $page->uuid()
+					'before'    => 'page://'
 				],
 				'info' => [
 					'type'  => 'info',
@@ -542,8 +542,12 @@ return [
 			];
 		},
 		'submit' => function (string $id) {
+			$page    = Find::page($id);
 			$request = App::instance()->request();
 			$id      = $request->get('uuid');
+			$page    = $page->update(['uuid' => $id]);
+			Uuid::for($page)->clear();
+
 
 			return [
 				'event'    => 'page.uuid'

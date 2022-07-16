@@ -2,7 +2,7 @@
 	<k-field
 		:input="_uid"
 		v-bind="$props"
-		:help="'&rarr; ' + updatedPermalink"
+		:help="'&rarr; ' + permalink"
 		class="k-uuid-field"
 	>
 		<template #options>
@@ -21,7 +21,6 @@
 			:id="_uid"
 			ref="input"
 			v-bind="$props"
-			:before="scheme + '://'"
 			theme="field"
 			type="text"
 			v-on="$listeners"
@@ -39,25 +38,12 @@ import { props as Input } from "../Input.vue";
 export default {
 	mixins: [Field, Input],
 	inheritAttrs: false,
-	props: {
-		permalink: {
-			type: String
-		},
-		uuid: {
-			type: String
-		}
-	},
 	computed: {
-		scheme() {
-			return this.uuid.split("://")[0];
+		permalink() {
+			return this.$urls.site + "/@/" + this.uuid.replace("://", "/");
 		},
-		updatedPermalink() {
-			const link = this.permalink.split("/");
-			link.splice(-1, 1, this.value);
-			return link.join("/");
-		},
-		updatedUuid() {
-			return this.scheme + "://" + this.value;
+		uuid() {
+			return this.before + this.value;
 		}
 	},
 	methods: {
@@ -68,11 +54,11 @@ export default {
 			let value, message;
 			switch (action) {
 				case "uuid":
-					value = this.updatedUuid;
+					value = this.uuid;
 					message = "UUID copied!";
 					break;
 				case "permalink":
-					value = this.updatedPermalink;
+					value = this.permalink;
 					message = "Permalink copied!";
 					break;
 			}
