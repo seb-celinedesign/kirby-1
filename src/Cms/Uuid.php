@@ -342,7 +342,7 @@ class Uuid
 		}
 
 		// try to match any of the supported schemes
-		$pattern = sprintf('/(%s):\/\//', implode('|', UuidProtocol::$schemes));
+		$pattern = sprintf('/^(%s):\/\//', implode('|', UuidProtocol::$schemes));
 		return preg_match($pattern, $string) === 1;
 	}
 

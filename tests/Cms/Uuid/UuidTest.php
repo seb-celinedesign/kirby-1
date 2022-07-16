@@ -337,6 +337,7 @@ class UuidTest extends TestCase
 		$this->assertFalse(Uuid::is('foo://something'));
 		$this->assertFalse(Uuid::is('page//something'));
 		$this->assertFalse(Uuid::is('page//something', 'page'));
+		$this->assertFalse(Uuid::is('not a page://something'));
 	}
 
 	public function keyProvider()
