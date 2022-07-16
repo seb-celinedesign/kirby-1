@@ -409,6 +409,11 @@ class Uuid
 		return $this->id->type();
 	}
 
+	public function url(): string
+	{
+		return App::instance()->site()->url() . '/@/' . $this->type() . '/' . $this->id->host();
+	}
+
 	/**
 	 * Returns the value that will be stored in cache
 	 */

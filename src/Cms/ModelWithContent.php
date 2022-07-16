@@ -593,6 +593,11 @@ abstract class ModelWithContent extends Model
 		return $this->translations;
 	}
 
+	public function permalink(): string
+	{
+		return Uuid::for($this)->url();
+	}
+
 	/**
 	 * Returns the model's unique global ID
 	 */
