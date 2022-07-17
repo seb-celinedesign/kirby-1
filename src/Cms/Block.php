@@ -206,6 +206,48 @@ class Block extends Item
 	}
 
 	/**
+	 * Returns the next hidden block
+	 * @since 3.7.2
+	 *
+	 * @param \Kirby\Cms\Collection|null $collection
+	 *
+	 * @return \Kirby\Cms\Block
+	 */
+	public function nextHidden($collection = null)
+	{
+		return $this
+			->nextAll($collection ?? $this->siblings)
+			->filter('isHidden', true)
+			->first();
+	}
+
+	/**
+	 * Returns the previous hidden block
+	 * @since 3.7.2
+	 *
+	 * @param \Kirby\Cms\Collection|null $collection
+	 *
+	 * @return \Kirby\Cms\Block
+	 */
+	public function prevHidden($collection = null)
+	{
+		return $this
+			->prevAll($collection ?? $this->siblings)
+			->filter('isHidden', true)
+			->last();
+	}
+
+	/**
+	 * Returns the sibling collection that filtered by block status
+	 *
+	 * @return \Kirby\Cms\Collection
+	 */
+	protected function siblingsCollection()
+	{
+		return $this->siblings->filter('isHidden', $this->isHidden());
+	}
+
+	/**
 	 * Returns the block type
 	 *
 	 * @return string
